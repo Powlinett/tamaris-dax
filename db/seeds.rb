@@ -10,7 +10,7 @@ Product.destroy_all
 test_shoe = Product.create(
   reference: "1-1-22426-24-428",
   model: "escarpin",
-  category: "shoe",
+  category: "chaussures",
   price: 49.95,
   size: 36,
   stock: 4

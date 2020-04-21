@@ -1,33 +1,67 @@
 class ProductsController < ApplicationController
+  require 'nokogiri'
+  require 'open-uri'
 
-  # def scrap_data_for_reference(model, reference)
-  #   require 'nokogiri'
-  #   require 'open-uri'
+  before_action :set_product, only: [:show]
 
-  #   @model = model_for_url(model)
-  #   @reference = reference_for_url(reference)
+  def all_shoes
+    @shoes = Product.where(category: 'chaussures')
+  end
 
-  #   url = "https://tamaris.com/fr-FR/#{@model}/#{@reference}"
-  #   product_page_html = Nokogiri::HTML(open(url))
-  # end
+  def show
+    @product
+  end
+
+  def new
+    @product = Product.new
+  end
+
+  def create
+    @reference = params[:reference]
+
+    scrap_product_page(@reference)
+
+    @product = Product.create(
+      reference: @reference,
+      category:
+      )
+  end
+
+  def update
+
+  end
+
+
   private
 
-  def mechanize_scrap_by_ref(reference)
-    require 'nokogiri'
-    require 'open-uri'
+  def set_product
+    @product = Product.find(params[:reference])
+  end
 
+  def page_for_reference(reference)
     reference = "1-1-22494-24-341"
 
-    main_url = 'https://tamaris.com/fr-FR/'
+    main_url = 'https://tamaris.com'
     tamaris_data = Mechanize.new
-
     tamaris_data.get(main_url)
     tamaris_data.page.forms[0].field_with(id: 'q').value = reference
-    product_url = tamaris_data.page.forms[0].submit
 
-    # description = product_url.search('.information-wrapper').text
-    # category = product_url.search('.breadcrumb-element')[1].text.strip
+    product_page = tamaris_data.page.forms[0].submit
 
-    # photos_urls = []
-    # product_url.search('.productthumbnail').attribute('src').value
+    open(main_url + product_page.uri.path).read
+  end
+
+  def scrap_product_page(reference)
+    product_html = Nokogiri::HTML(page_for_reference(reference))
+
+    @reference = reference
+    @category = product_html.search('.breadcrumb-element')[1].text.strip
+    @description = product_html.search('.information-wrapper')[0].text.strip
+
+    @photos = []
+    product_html.search('.productthumbnail').each do |element|
+      @photos << element.attribute('src').value.split('?')[0]
+    end
+    @photos
+  end
 end
