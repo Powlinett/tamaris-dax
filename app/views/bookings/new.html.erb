@@ -1,0 +1,7 @@
+<%= simple_form_for @booking do |f| %>
+  <%= f.input :last_name, label: 'Nom' %>
+  <%= f.input :first_name, label: 'Prénom' %>
+  <%= f.input :email, label: 'E-mail' %>
+  <%= f.number :phone_number, label: 'Téléphone' %>
+  <%= submit %>
+<% end %>
