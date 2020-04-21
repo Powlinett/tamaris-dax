@@ -1,0 +1,15 @@
+<%= @product_model.model %>
+<%= @product_model.reference %>
+
+<% @product_model.photos.each do |photo| %>
+  <%= image_tag photo.url, width: '200' %>
+<% end %>
+
+<ul>
+  <% @all_sizes.each do |product| %>
+    <li>
+      <%= link_to product.size, new_booking_path %> (<%= product.stock %> en stock)
+    </li>
+  <% end %>
+</ul>
+

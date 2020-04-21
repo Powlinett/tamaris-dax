@@ -1,8 +1,11 @@
 <ul>
   <% @shoes.each do |shoe| %>
     <li>
-      <%= shoe.reference %>
-      <%= shoe.category %>
+      <%= link_to shoe.reference, product_path(shoe) %>
+      <%= shoe.model %>
+      <% if shoe.photos.exists? %>
+        <%= image_tag shoe.photos.first.url, width: '150' %>
+      <% end %>
     </li>
   <% end %>
 </ul>

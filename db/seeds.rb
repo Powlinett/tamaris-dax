@@ -9,12 +9,21 @@ PhotoAttachment.destroy_all
 Product.destroy_all
 Photo.destroy_all
 
-test_shoe = Product.create(
+test_shoe1 = Product.create(
   reference: "1-1-22426-24-428",
   model: "escarpin",
   category: "chaussures",
   price: 49.95,
   size: 36,
+  stock: 4
+  )
+
+test_shoe2 = Product.create(
+  reference: "1-1-22426-24-428",
+  model: "escarpin",
+  category: "chaussures",
+  price: 49.95,
+  size: 37,
   stock: 4
   )
 
@@ -27,8 +36,8 @@ test_photo3 = Photo.create(
 test_photo4 = Photo.create(
   url: 'https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw9dc8bd39/product-images/dw_001-19-22107-24-602_04.jpg')
 
-test_attachment1 = PhotoAttachment.create(product: test_shoe, photo: test_photo1)
-test_attachment2 = PhotoAttachment.create(product: test_shoe, photo: test_photo2)
-test_attachment3 = PhotoAttachment.create(product: test_shoe, photo: test_photo3)
-test_attachment4 = PhotoAttachment.create(product: test_shoe, photo: test_photo4)
+test_attachment1 = PhotoAttachment.create(product: test_shoe1, photo: test_photo1)
+test_attachment2 = PhotoAttachment.create(product: test_shoe1, photo: test_photo2)
+test_attachment3 = PhotoAttachment.create(product: test_shoe1, photo: test_photo3)
+test_attachment4 = PhotoAttachment.create(product: test_shoe1, photo: test_photo4)
 

@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  require 'nokogiri'
   require 'open-uri'
 
   before_action :set_product, only: [:show]
@@ -9,7 +8,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product
+    @product_model = @product
+    @all_sizes = Product.where(reference: params[:reference])
   end
 
   def new
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find(params[:reference])
+    @product = Product.where(reference: params[:reference]).first
   end
 
   def product_params
