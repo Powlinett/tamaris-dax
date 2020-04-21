@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'pages#home'
+
+  get 'products/all_shoes', to: 'products#all_shoes', as: :all_shoes
+  get 'products/new', to: 'products#new', as: :new_product
+  get 'products/:reference', to: 'products#show', as: :product
+  post 'products', to: 'products#create', as: :products
+
 end

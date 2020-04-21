@@ -17,20 +17,14 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @reference = params[:reference]
+    @reference = product_params
 
     scrap_product_page(@reference)
 
-    @product = Product.create(
-      reference: @reference,
-      category:
-      )
+    @product = Product.create(reference: @reference)
+
+    redirect_to product_path(@product)
   end
-
-  def update
-
-  end
-
 
   private
 
@@ -38,9 +32,11 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:reference])
   end
 
-  def page_for_reference(reference)
-    reference = "1-1-22494-24-341"
+  def product_params
+    params.require(:product).permit(:reference)
+  end
 
+  def page_for_reference(reference)
     main_url = 'https://tamaris.com'
     tamaris_data = Mechanize.new
     tamaris_data.get(main_url)
@@ -48,20 +44,20 @@ class ProductsController < ApplicationController
 
     product_page = tamaris_data.page.forms[0].submit
 
-    open(main_url + product_page.uri.path).read
+    open(main_url + product_page.uri.path)
   end
 
   def scrap_product_page(reference)
-    product_html = Nokogiri::HTML(page_for_reference(reference))
+    product_html = Nokogiri::HTML.parse(page_for_reference(reference))
 
     @reference = reference
-    @category = product_html.search('.breadcrumb-element')[1].text.strip
-    @description = product_html.search('.information-wrapper')[0].text.strip
+    # @category = product_html.search('.breadcrumb').children[5].text.strip
+    # @description = product_html.search('.information-wrapper')[0].text.strip
 
-    @photos = []
-    product_html.search('.productthumbnail').each do |element|
-      @photos << element.attribute('src').value.split('?')[0]
-    end
-    @photos
+    # @photos = []
+    # product_html.search('.productthumbnail').each do |element|
+    #   @photos << element.attribute('src').value.split('?')[0]
+    # end
+    # @photos
   end
 end

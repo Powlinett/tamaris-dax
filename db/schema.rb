@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_211942) do
+ActiveRecord::Schema.define(version: 2020_04_21_140446) do
 
   create_table "bookings", force: :cascade do |t|
     t.date "starting_date"
@@ -24,24 +24,31 @@ ActiveRecord::Schema.define(version: 2020_04_20_211942) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "photos", force: :cascade do |t|
-    t.string "url"
-    t.string "description"
+  create_table "photo_attachments", force: :cascade do |t|
+    t.integer "photo_id"
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_photos_on_product_id"
+    t.index ["photo_id"], name: "index_photo_attachments_on_photo_id"
+    t.index ["product_id"], name: "index_photo_attachments_on_product_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "url"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
     t.string "reference"
     t.string "model"
     t.string "category"
+    t.float "price"
     t.integer "size"
     t.integer "stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "price"
   end
 
   create_table "users", force: :cascade do |t|
