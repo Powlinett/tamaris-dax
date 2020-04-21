@@ -1,3 +1,4 @@
 class Photo < ApplicationRecord
-  belongs_to :product
+  has_many :photo_attachments
+  has_many :products, through: :photo_attachments
 end
