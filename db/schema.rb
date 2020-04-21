@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_190714) do
+ActiveRecord::Schema.define(version: 2020_04_20_211942) do
 
   create_table "bookings", force: :cascade do |t|
     t.date "starting_date"
@@ -35,12 +35,13 @@ ActiveRecord::Schema.define(version: 2020_04_20_190714) do
 
   create_table "products", force: :cascade do |t|
     t.string "reference"
-    t.string "name"
-    t.string "type"
+    t.string "model"
+    t.string "category"
     t.integer "size"
     t.integer "stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "price"
   end
 
   create_table "users", force: :cascade do |t|

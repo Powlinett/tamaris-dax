@@ -1,2 +1,3 @@
-class PhotosController < ApplicationController
+class PhotosController < ProductsController
+
 end

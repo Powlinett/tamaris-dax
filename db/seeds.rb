@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Product.destroy_all
+
+test_shoe = Product.create(
+  reference: "1-1-22426-24-428",
+  model: "escarpin",
+  category: "chaussures",
+  price: 49.95,
+  size: 36,
+  stock: 4
+  )
