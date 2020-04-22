@@ -1,0 +1,10 @@
+@import 'components/*';
+
+body {
+  border: 1px solid red;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

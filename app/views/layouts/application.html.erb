@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TamarisDax</title>
+    <title>Boutique Tamaris - Saint-Paul-lès-Dax</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,22 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <div class="page-content">
+      <%= yield %>
+    </div>
+
+    <div class="footer">
+      <div class="footer-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+      <div class="private-access">
+        <%= link_to 'Ajouter une référence', new_product_path %>
+      </div>
+      <div class="footer-copyright">
+        This footer is made with <i class="fas fa-heart"></i> at Le Wagon
+      </div>
+    </div>
+
   </body>
 </html>

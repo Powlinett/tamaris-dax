@@ -28,6 +28,10 @@ class ProductsController < ApplicationController
 
   private
 
+  def to_param
+    reference
+  end
+
   def set_product
     @product = Product.where(reference: params[:reference]).first
   end
