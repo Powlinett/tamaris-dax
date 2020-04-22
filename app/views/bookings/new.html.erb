@@ -1,8 +1,8 @@
-<%= simple_form_for @booking do |f| %>
+<%= simple_form_for @user, url: bookings_path do |f| %>
   <%= f.input :last_name, label: 'Nom' %>
   <%= f.input :first_name, label: 'Prénom' %>
   <%= f.input :email, label: 'E-mail' %>
   <%= f.input :email_confirmation, label: 'Confirmation de l\'e-mail' %>
-  <%= f.number :phone_number, label: 'Téléphone' %>
-  <%= submit %>
+  <%= f.input :phone_number, label: 'Téléphone' %>
+  <%= f.submit %>
 <% end %>

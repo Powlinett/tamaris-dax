@@ -1,0 +1,7 @@
+<ul>
+  <% @bookings.each do |booking| %>
+    <li>
+      <%= booking.product.reference %> - <%= booking.user.email %>
+    </li>
+  <% end %>
+</ul>
