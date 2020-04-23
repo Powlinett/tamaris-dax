@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_230148) do
+ActiveRecord::Schema.define(version: 2020_04_20_190350) do
 
   create_table "bookings", force: :cascade do |t|
     t.date "starting_date"
@@ -24,22 +24,6 @@ ActiveRecord::Schema.define(version: 2020_04_21_230148) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "photo_attachments", force: :cascade do |t|
-    t.integer "photo_id"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["photo_id"], name: "index_photo_attachments_on_photo_id"
-    t.index ["product_id"], name: "index_photo_attachments_on_product_id"
-  end
-
-  create_table "photos", force: :cascade do |t|
-    t.string "url"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "products", force: :cascade do |t|
     t.string "reference"
     t.string "model"
@@ -47,19 +31,20 @@ ActiveRecord::Schema.define(version: 2020_04_21_230148) do
     t.float "price"
     t.integer "size"
     t.integer "stock"
+    t.text "photos_urls"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
+    t.string "email_confirmation"
     t.string "phone_number"
     t.string "status"
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email_confirmation"
   end
 
 end

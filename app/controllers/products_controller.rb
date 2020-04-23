@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
 
   def show
     @product_model = @product
+    @photos_urls = @product_model.photos_urls
     @all_sizes = Product.where(reference: params[:reference])
   end
 
@@ -27,7 +28,8 @@ class ProductsController < ApplicationController
       category: @category,
       price: @price.to_f,
       size: product_params[:size].to_i,
-      stock: product_params[:stock].to_i
+      stock: product_params[:stock].to_i,
+      photos_urls: @photos
     )
 
     redirect_to product_path(@product.reference)
@@ -47,7 +49,7 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:reference, :size, :stock)
   end
 
-  def page_for_reference(reference)
+  def reference_page(reference)
     main_url = 'https://tamaris.com'
     tamaris_data = Mechanize.new
     tamaris_data.get(main_url)
@@ -58,18 +60,17 @@ class ProductsController < ApplicationController
   end
 
   def scrap_product_page(reference)
-    product_html = Nokogiri::HTML.parse(page_for_reference(reference))
+    product_html = Nokogiri::HTML.parse(reference_page(reference))
 
-    @reference = reference
     @category = product_html.search('.breadcrumb-element')[1].text.strip.downcase
     @model = product_html.search('h1').text.strip
     @price = product_html.search('.price-sales').text.split(' ').first.strip
     # @description = product_html.search('.information-wrapper')[0].text.strip
 
-    @photos = []
-    product_html.search('.productthumbnail').each do |element|
-      @photos << element.attribute('src').value.split('?')[0]
+    # @photos = []
+    @photos = product_html.search('.productthumbnail').map do |element|
+      element.attribute('src').value.split('?')[0]
     end
-    @photos
+    # @photos
   end
 end
