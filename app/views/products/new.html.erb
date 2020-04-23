@@ -1,5 +1,9 @@
-<%= form_for @product, url: products_path do |f| %>
+<%= simple_form_for @product, url: products_path do |f| %>
   <%= f.label :reference %>
-  <%= f.text_field :reference %>
+  <%= f.input :reference %>
+  <%= f.label :size %>
+  <%= f.input :size %>
+  <%= f.label :stock %>
+  <%= f.input :stock %>
   <%= f.submit %>
 <% end %>
