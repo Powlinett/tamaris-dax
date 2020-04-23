@@ -17,11 +17,18 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @reference = product_params
+    @reference = product_params.values_at('reference').first.to_s
 
     scrap_product_page(@reference)
 
-    @product = Product.create(reference: @reference)
+    @product = Product.create(
+      reference: @reference,
+      model: @model,
+      category: @category,
+      price: @price,
+      size: params[:size],
+      stock: params[:stock]
+      )
 
     redirect_to product_path(@product)
   end
@@ -37,7 +44,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:reference)
+    params.require(:product).permit(:reference, :size, :stock)
   end
 
   def page_for_reference(reference)
@@ -47,7 +54,6 @@ class ProductsController < ApplicationController
     tamaris_data.page.forms[0].field_with(id: 'q').value = reference
 
     product_page = tamaris_data.page.forms[0].submit
-
     open(main_url + product_page.uri.path)
   end
 
@@ -55,13 +61,15 @@ class ProductsController < ApplicationController
     product_html = Nokogiri::HTML.parse(page_for_reference(reference))
 
     @reference = reference
-    # @category = product_html.search('.breadcrumb').children[5].text.strip
+    @category = product_html.search('.breadcrumb').children[5].text.strip
+    @model = product_html.search('h1').text.strip
+    @price = product_html.search('price-sales').text.strip
     # @description = product_html.search('.information-wrapper')[0].text.strip
 
-    # @photos = []
-    # product_html.search('.productthumbnail').each do |element|
-    #   @photos << element.attribute('src').value.split('?')[0]
-    # end
-    # @photos
+    @photos = []
+    product_html.search('.productthumbnail').each do |element|
+      @photos << element.attribute('src').value.split('?')[0]
+    end
+    @photos
   end
 end
