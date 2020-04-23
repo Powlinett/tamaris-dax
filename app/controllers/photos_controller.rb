@@ -1,3 +1,0 @@
-class PhotosController < ProductsController
-
-end

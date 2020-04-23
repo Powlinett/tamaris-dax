@@ -1,8 +1,8 @@
 <%= @product_model.model %>
 <%= @product_model.reference %>
 
-<% @product_model.photos.each do |photo| %>
-  <%= image_tag photo.url, width: '200' %>
+<% @photos_urls.each do |photo| %>
+  <%= image_tag photo, width: '200' %>
 <% end %>
 
 <ul>

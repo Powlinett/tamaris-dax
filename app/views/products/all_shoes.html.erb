@@ -3,8 +3,8 @@
     <li>
       <%= link_to shoe.reference, product_path(shoe.reference) %>
       <%= shoe.model %>
-      <% if shoe.photos.exists? %>
-        <%= image_tag shoe.photos.sample.url, width: '150' %>
+      <% if !shoe.photos_urls.empty? %>
+        <%= image_tag shoe.photos_urls[0..1].sample, width: '150' %>
       <% end %>
     </li>
   <% end %>
