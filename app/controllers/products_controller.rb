@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @reference = product_params.values_at('reference').first.to_s
+    @reference = product_params[:reference]
 
     scrap_product_page(@reference)
 
@@ -25,12 +25,12 @@ class ProductsController < ApplicationController
       reference: @reference,
       model: @model,
       category: @category,
-      price: @price,
-      size: params[:size],
-      stock: params[:stock]
-      )
+      price: @price.to_f,
+      size: product_params[:size].to_i,
+      stock: product_params[:stock].to_i
+    )
 
-    redirect_to product_path(@product)
+    redirect_to product_path(@product.reference)
   end
 
   private
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    @product = Product.where(reference: params[:reference]).first
+    @product = Product.find_by(reference: params[:reference])
   end
 
   def product_params
@@ -61,9 +61,9 @@ class ProductsController < ApplicationController
     product_html = Nokogiri::HTML.parse(page_for_reference(reference))
 
     @reference = reference
-    @category = product_html.search('.breadcrumb').children[5].text.strip
+    @category = product_html.search('.breadcrumb-element')[1].text.strip.downcase
     @model = product_html.search('h1').text.strip
-    @price = product_html.search('price-sales').text.strip
+    @price = product_html.search('.price-sales').text.split(' ').first.strip
     # @description = product_html.search('.information-wrapper')[0].text.strip
 
     @photos = []
