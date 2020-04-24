@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_190350) do
+ActiveRecord::Schema.define(version: 2020_04_23_181930) do
 
   create_table "bookings", force: :cascade do |t|
     t.date "starting_date"
@@ -29,8 +29,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_190350) do
     t.string "model"
     t.string "category"
     t.float "price"
-    t.integer "size"
-    t.integer "stock"
     t.text "photos_urls"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,6 +43,15 @@ ActiveRecord::Schema.define(version: 2020_04_20_190350) do
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.integer "size"
+    t.integer "stock"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_variants_on_product_id"
   end
 
 end
