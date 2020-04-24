@@ -1,4 +1,6 @@
-<%= simple_form_for @user, url: bookings_path do |f| %>
+<h2>Réservation en cours: <%= @product.model %> (Taille: <%= @variant.size %>)</h2>
+
+<%= simple_form_for @user, url: product_bookings_path do |f| %>
   <%= f.input :last_name, label: 'Nom' %>
   <%= f.input :first_name, label: 'Prénom' %>
   <%= f.input :email, label: 'E-mail' %>
