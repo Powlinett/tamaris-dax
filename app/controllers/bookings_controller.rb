@@ -38,7 +38,7 @@ class BookingsController < ApplicationController
   def pick_up
     @booking.pick_up
 
-    redirect_to bookins_path
+    redirect_to bookings_path
   end
 
   private
