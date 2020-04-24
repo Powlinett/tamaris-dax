@@ -6,6 +6,7 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.string :state
       t.references :user, foreign_key: true
       t.references :product, foreign_key: true
+      t.references :variant, foreign_key: true
 
       t.timestamps
     end

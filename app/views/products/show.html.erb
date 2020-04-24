@@ -8,7 +8,7 @@
 <ul>
   <% @product.variants.each do |variant| %>
     <li>
-      <%= link_to variant.size, new_booking_path %> (<%= variant.stock %> en stock)
+      <%= link_to variant.size, new_product_booking_path(@product.reference, variant.id) %> (<%= variant.stock %> en stock)
     </li>
   <% end %>
 </ul>

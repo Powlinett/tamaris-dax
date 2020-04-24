@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  root 'pages#home'
+  root to: 'pages#home'
 
   get 'products/all_shoes', to: 'products#all_shoes', as: :all_shoes
 
-  resources :bookings, only: [:new, :create, :index]
-  resources :products, param: :reference, only: [:new, :show, :create]
+  resources :products, param: :reference, only: [:new, :show, :create] do
+    resources :bookings, path: ':variant_id/bookings', only: [:new, :create, :index]
+  end
 end

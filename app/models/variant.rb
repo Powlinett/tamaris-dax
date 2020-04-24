@@ -1,5 +1,6 @@
 class Variant < ApplicationRecord
   belongs_to :product
+  has_many :bookings
 
   validates :product, presence: true
   validates :size, presence: true, inclusion: { in: 35..43 }

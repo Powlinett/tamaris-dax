@@ -18,10 +18,12 @@ ActiveRecord::Schema.define(version: 2020_04_23_181930) do
     t.string "state"
     t.integer "user_id"
     t.integer "product_id"
+    t.integer "variant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_bookings_on_product_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+    t.index ["variant_id"], name: "index_bookings_on_variant_id"
   end
 
   create_table "products", force: :cascade do |t|
