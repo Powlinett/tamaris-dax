@@ -1,0 +1,7 @@
+<ul>
+  <% @bookers.each do |booker| %>
+    <li>
+      <%= booker.last_name.upcase %> <%= booker.first_name %> ( <%= booker.phone_number %> ) - <%= booker.email %>
+    </li>
+  <% end %>
+</ul>

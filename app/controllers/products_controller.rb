@@ -3,6 +3,8 @@ class ProductsController < ApplicationController
 
   before_action :set_product, only: [:create]
 
+  skip_before_action :authenticate_user!, only: [:all_shoes, :show]
+
   def all_shoes
     @shoes = Product.where(category: 'chaussures')
   end
