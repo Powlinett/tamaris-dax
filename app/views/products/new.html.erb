@@ -1,9 +1,11 @@
 <%= simple_form_for @product, url: products_path do |f| %>
   <%= f.label :reference %>
   <%= f.input :reference %>
-  <%= f.label :size %>
-  <%= f.input :size %>
-  <%= f.label :stock %>
-  <%= f.input :stock %>
+  <%= f.simple_fields_for :variants do |f| %>
+    <%= f.label :size %>
+    <%= f.input :size %>
+    <%= f.label :stock %>
+    <%= f.input :stock %>
+    <% end %>
   <%= f.submit %>
 <% end %>

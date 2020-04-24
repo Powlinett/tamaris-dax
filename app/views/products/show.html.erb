@@ -1,14 +1,14 @@
-<%= @product_model.model %>
-<%= @product_model.reference %>
+<%= @product.model %>
+<%= @product.reference %>
 
-<% @photos_urls.each do |photo| %>
+<% @product.photos_urls.each do |photo| %>
   <%= image_tag photo, width: '200' %>
 <% end %>
 
 <ul>
-  <% @all_sizes.each do |product| %>
+  <% @product.variants.each do |variant| %>
     <li>
-      <%= link_to product.size, new_booking_path %> (<%= product.stock %> en stock)
+      <%= link_to variant.size, new_booking_path %> (<%= variant.stock %> en stock)
     </li>
   <% end %>
 </ul>

@@ -1,16 +1,14 @@
 class ProductsController < ApplicationController
   require 'open-uri'
 
-  before_action :set_product, only: [:show]
+  before_action :set_product, only: [:create]
 
   def all_shoes
     @shoes = Product.where(category: 'chaussures')
   end
 
   def show
-    @product_model = @product
-    @photos_urls = @product_model.photos_urls
-    @all_sizes = Product.where(reference: params[:reference])
+    @product = Product.find_by(reference: params[:reference])
   end
 
   def new
@@ -18,20 +16,20 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @reference = product_params[:reference]
+    if !@product.nil?
+      update_or_assign_variant(product_params[:variants], @product)
+    else
+      scrap_product_page(ref_params)
 
-    scrap_product_page(@reference)
-
-    @product = Product.create(
-      reference: @reference,
-      model: @model,
-      category: @category,
-      price: @price.to_f,
-      size: product_params[:size].to_i,
-      stock: product_params[:stock].to_i,
-      photos_urls: @photos
-    )
-
+      @product = Product.create(
+        reference: ref_params,
+        model: @model,
+        category: @category,
+        price: @price.to_f,
+        photos_urls: @photos
+      )
+      assign_variant(product_params[:variants], @product)
+    end
     redirect_to product_path(@product.reference)
   end
 
@@ -42,11 +40,15 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    @product = Product.find_by(reference: params[:reference])
+    @product = Product.find_by(reference: product_params[:reference])
   end
 
   def product_params
-    params.require(:product).permit(:reference, :size, :stock)
+    params.require(:product).permit(:reference, variants: [:size, :stock])
+  end
+
+  def ref_params
+    product_params[:reference]
   end
 
   def reference_page(reference)
@@ -67,10 +69,29 @@ class ProductsController < ApplicationController
     @price = product_html.search('.price-sales').text.split(' ').first.strip
     # @description = product_html.search('.information-wrapper')[0].text.strip
 
-    # @photos = []
     @photos = product_html.search('.productthumbnail').map do |element|
       element.attribute('src').value.split('?')[0]
     end
-    # @photos
+  end
+
+  def update_or_assign_variant(params, product)
+    if product.variants.any?
+      variant = product.variants.find { |v| v.size == params[:size].to_i }
+      if !variant.nil?
+        variant.update_size_stock(variant.id, params[:stock].to_i)
+      else
+        assign_variant(params, product)
+      end
+    else
+      assign_variant(params, product)
+    end
+  end
+
+  def assign_variant(params, product)
+    Variant.create(
+      size: params[:size],
+      stock: params[:stock],
+      product: product
+    )
   end
 end
