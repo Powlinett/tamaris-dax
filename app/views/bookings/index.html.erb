@@ -2,6 +2,9 @@
   <% @bookings.each do |booking| %>
     <li>
       <%= booking.product.reference %> (<%= booking.variant.size %>)- <%= booking.booker.email %>
+      <%= link_to 'Confirmer', booking_confirm_path(booking) %>
+      <%= link_to 'Refuser', booking_cancel_path(booking) %>
+      <%= link_to 'Retirer', booking_pick_up_path(booking) %>
     </li>
   <% end %>
 </ul>

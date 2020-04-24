@@ -13,19 +13,21 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= render 'shared/user_navbar' %>
+    <% else %>
+      <%= render 'shared/navbar' %>
+    <% end %>
 
-    <%= render 'layouts/navbar' %>
-
-    <%= render 'layouts/tabs' %>
+    <%= render 'shared/tabs' %>
 
     <div class="page-content">
       <%= yield %>
     </div>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render 'shared/flashes' %>
 
-    <%= render 'layouts/footer' %>
+    <%= render 'shared/footer' %>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
