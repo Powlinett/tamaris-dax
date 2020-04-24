@@ -5,14 +5,14 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @booker = Booker.new
   end
 
   def create
-    @user = User.new(user_params)
+    @booker = Booker.new(booker_params)
 
-    if @user.save
-      @booking = Booking.create(user: @user, product: @product, variant: @variant)
+    if @booker.save
+      @booking = Booking.create(booker: @booker, product: @product, variant: @variant)
       redirect_to product_bookings_path
     else
       redirect_to product_path(@product.reference)
@@ -21,8 +21,8 @@ class BookingsController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:email, :email_confirmation, :phone_number, :first_name, :last_name)
+  def booker_params
+    params.require(:booker).permit(:email, :email_confirmation, :phone_number, :first_name, :last_name)
   end
 
   def set_product_and_variant
