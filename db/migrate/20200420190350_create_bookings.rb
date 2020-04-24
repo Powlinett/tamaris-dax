@@ -4,7 +4,7 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.date :starting_date
       t.date :ending_date
       t.string :state
-      t.references :user, foreign_key: true
+      t.references :booker, foreign_key: true
       t.references :product, foreign_key: true
       t.references :variant, foreign_key: true
 

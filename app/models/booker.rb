@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class Booker < ApplicationRecord
   has_many :bookings
 
   validates :email, presence: true, confirmation: { case_sensitive: false }

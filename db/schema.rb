@@ -12,17 +12,27 @@
 
 ActiveRecord::Schema.define(version: 2020_04_23_181930) do
 
+  create_table "bookers", force: :cascade do |t|
+    t.string "email"
+    t.string "email_confirmation"
+    t.string "phone_number"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.date "starting_date"
     t.date "ending_date"
     t.string "state"
-    t.integer "user_id"
+    t.integer "booker_id"
     t.integer "product_id"
     t.integer "variant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["booker_id"], name: "index_bookings_on_booker_id"
     t.index ["product_id"], name: "index_bookings_on_product_id"
-    t.index ["user_id"], name: "index_bookings_on_user_id"
     t.index ["variant_id"], name: "index_bookings_on_variant_id"
   end
 
@@ -32,17 +42,6 @@ ActiveRecord::Schema.define(version: 2020_04_23_181930) do
     t.string "category"
     t.float "price"
     t.text "photos_urls"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "email_confirmation"
-    t.string "phone_number"
-    t.string "status"
-    t.string "first_name"
-    t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
