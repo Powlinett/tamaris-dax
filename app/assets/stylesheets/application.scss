@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600&family=PT+Sans:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+
+@import 'variables.scss';
+
 @import 'components/*';
 
 body {
@@ -7,10 +11,19 @@ body {
   flex-direction: column;
   justify-content: space-between;
   background-color: rgba(245, 245, 245, 0.5);
+  font-family: 'PT Sans', 'Cabin', 'Roboto', 'Gill Sans Nova',
+    -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
 .page-content {
   flex-grow: 1;
   width: 1400px;
   margin: 0 auto;
+}
+
+p {
+  font-size: $base-font-size;
+  color: $base-font-color;
 }

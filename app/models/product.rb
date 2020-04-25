@@ -8,4 +8,14 @@ class Product < ApplicationRecord
   validates :category, presence: true
   validates :model, presence: true
   validates :price, presence: true, inclusion: { in: (0..400) }
+
+  def french_price
+    price = self.price.to_s
+    price.split('.').join(',')
+  end
+
+  def french_former_price
+    former_price = self.former_price.to_s
+    former_price.split('.').join(',')
+  end
 end
