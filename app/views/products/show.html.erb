@@ -2,7 +2,7 @@
 <%= @product.reference %>
 
 <% @product.photos_urls.each do |photo| %>
-  <%= image_tag photo, width: '200' %>
+  <%= image_tag photo[:thumbnail] %>
 <% end %>
 
 <ul>

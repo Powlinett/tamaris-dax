@@ -3,7 +3,7 @@
     <li>
       <a href="<%= product_path(product.reference)%>", class="product-card" >
         <% if !product.photos_urls.empty? %>
-          <%= image_tag product.photos_urls[0..1].sample, width: '100%' %>
+          <%= image_tag product.photos_urls[0..1].sample[:full_size] %>
         <% else %>
             <%= image_tag 'camera.png', class: 'no-image' %>
         <% end %>
