@@ -1,6 +1,6 @@
 class Variant < ApplicationRecord
   belongs_to :product
-  has_many :bookings
+  has_many :bookings, dependent: :nullify
 
   validates :product, presence: true
   validates :size, presence: true, inclusion: { in: 35..43 }, uniqueness: { scope: :product }

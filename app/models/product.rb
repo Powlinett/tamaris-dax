@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
-  has_many :bookings
-  has_many :variants
+  has_many :bookings, dependent: :nullify
+  has_many :variants, dependent: :destroy
 
   serialize :photos_urls, Array
 

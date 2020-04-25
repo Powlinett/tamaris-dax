@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
     t.string "model"
     t.string "category"
     t.float "price"
+    t.float "former_price"
     t.text "photos_urls"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
