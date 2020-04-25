@@ -33,12 +33,31 @@
 
 .card-infos {
   width: 100%;
+  background-color: white;
+  color: $base-font-color;
+  padding-bottom: 1rem;
 
   p {
     margin-bottom: 0;
-    background-color: white;
-    color: rgba(0, 0, 0, 0.9);
-    font-size: 0.9rem;
-    padding-top: 6px;
+    padding-top: 0.5rem;
+  }
+
+  .prices {
+    display: flex;
+    font-family: 'Cabin';
+
+    h3 {
+      font-weight: 600;
+      font-size: $base-font-size;
+    }
+
+    .standard-price {
+      text-decoration: line-through;
+    }
+
+    .new-price {
+      color: #CD3939;
+      padding-right: 0.5rem;
+    }
   }
 }

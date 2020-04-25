@@ -5,8 +5,8 @@ class ProductsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:all_shoes, :show]
 
-  def all_shoes
-    @shoes = Product.where(category: 'chaussures')
+  def index
+    @products = Product.all
   end
 
   def show
@@ -71,7 +71,7 @@ class ProductsController < ApplicationController
     @model = html.search('h1').text.strip
     @price = html.search('.price-sales').first['data-sale-price']
     @former_price = html.search('.price-standard').text.split(' ')[0]
-    if @former_price.nil?
+    unless @former_price.nil?
       @former_price = @former_price.strip.split(',').join('.')
     end
     # @description = product_html.search('.information-wrapper')[0].text.strip
