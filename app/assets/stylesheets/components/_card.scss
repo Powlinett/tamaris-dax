@@ -1,0 +1,44 @@
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-auto-rows: 1fr;
+
+  li {
+    list-style: none;
+    height: 100%;
+  }
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 2px;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  background-color: #F7F5F6;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .no-image {
+    max-width: 60%;
+  }
+}
+
+.card-infos {
+  width: 100%;
+
+  p {
+    margin-bottom: 0;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 0.9rem;
+    padding-top: 6px;
+  }
+}

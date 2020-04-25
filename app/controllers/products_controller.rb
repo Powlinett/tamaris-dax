@@ -26,8 +26,9 @@ class ProductsController < ApplicationController
       @product = Product.create(
         reference: ref_params,
         model: @model,
-        category: @category,
+        category: @category.downcase,
         price: @price.to_f,
+        former_price: @former_price.to_f,
         photos_urls: @photos
       )
       assign_variant(product_params[:variants], @product)
@@ -64,14 +65,18 @@ class ProductsController < ApplicationController
   end
 
   def scrap_product_page(reference)
-    product_html = Nokogiri::HTML.parse(reference_page(reference))
+    html = Nokogiri::HTML.parse(reference_page(reference))
 
-    @category = product_html.search('.breadcrumb-element')[1].text.strip.downcase
-    @model = product_html.search('h1').text.strip
-    @price = product_html.search('.price-sales').text.split(' ').first.strip
+    @category = html.search('.breadcrumb-element')[1].text.strip
+    @model = html.search('h1').text.strip
+    @price = html.search('.price-sales').first['data-sale-price']
+    @former_price = html.search('.price-standard').text.split(' ')[0]
+    if @former_price.nil?
+      @former_price = @former_price.strip.split(',').join('.')
+    end
     # @description = product_html.search('.information-wrapper')[0].text.strip
 
-    @photos = product_html.search('.productthumbnail').map do |element|
+    @photos = html.search('.productthumbnail').map do |element|
       element.attribute('src').value.split('?')[0]
     end
   end
