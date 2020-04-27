@@ -1,11 +1,9 @@
 class ProductsController < ApplicationController
   require 'open-uri'
-
   include Scraper
 
   before_action :set_product, only: [:create]
-
-  skip_before_action :authenticate_user!, only: [:all_shoes, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @products = Product.all
@@ -17,17 +15,18 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @variant = Variant.new
   end
 
   def create
     if !@product.nil?
-      update_or_assign_variant(product_params[:variants], @product)
+      @variant = update_or_assign_variant(product_params[:variants], @product)
     else
-      @product = Product.create(product_data(product_params[:reference]))
+      @product = Product.new(product_data(product_params[:reference]))
 
-      assign_variant(product_params[:variants], @product)
+      @variant = assign_variant(product_params[:variants], @product)
     end
-    redirect_to product_path(@product.reference)
+    save_and_redirect
   end
 
   private
@@ -45,23 +44,31 @@ class ProductsController < ApplicationController
   end
 
   def update_or_assign_variant(params, product)
-    if product.variants.any?
-      variant = product.variants.find { |v| v.size == params[:size].to_i }
-      if !variant.nil?
-        variant.update_size_stock(variant.id, params[:stock].to_i)
-      else
-        assign_variant(params, product)
-      end
+    return assign_variants(params, product) unless product.variants.any?
+
+    variant = product.variants.find_by(size: params[:size].to_i)
+    if !variant.nil?
+      variant.update_size_stock(variant.id, params[:stock].to_i)
     else
       assign_variant(params, product)
     end
   end
 
   def assign_variant(params, product)
-    Variant.create(
+    Variant.new(
       size: params[:size],
       stock: params[:stock],
       product: product
     )
+  end
+
+  def save_and_redirect
+    if @product.save
+      @variant.save
+      redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
+    else
+      flash.now[:alert] = 'Produit introuvable sur Tamaris.com :('
+      render :new
+    end
   end
 end

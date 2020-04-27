@@ -9,13 +9,14 @@ gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'nokogiri'
-gem 'mechanize'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
+gem 'turbolinks_render'
 gem 'jbuilder', '~> 2.5'
 gem 'simple_form'
 gem 'pry', '~> 0.12.2'
 gem 'devise'
+gem 'faker'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 

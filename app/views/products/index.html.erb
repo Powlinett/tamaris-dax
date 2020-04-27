@@ -2,7 +2,7 @@
   <% @products.each do |product| %>
     <li>
       <a href="<%= product_path(product.reference)%>", class="product-card" >
-        <% if !product.photos_urls.empty? %>
+        <% if product.photos_urls.any? %>
           <%= image_tag product.photos_urls[0..1].sample[:full_size] %>
         <% else %>
             <%= image_tag 'camera.png', class: 'no-image' %>
@@ -10,7 +10,7 @@
         <div class="card-infos">
           <p><%= product.model %></p>
           <div class="prices">
-            <% if !product.former_price.nil? %>
+            <% if product.former_price > 0 %>
               <h3 class="new-price"><%= product.french_price %> €</h3>
               <h3 class="standard-price"><%= product.french_former_price %> €</h3>
             <% else %>

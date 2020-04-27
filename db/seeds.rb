@@ -1,62 +1,119 @@
+require 'open-uri'
+
+User.destroy_all
 Booking.destroy_all
+Booker.destroy_all
 Variant.destroy_all
 Product.destroy_all
 
-Product.create!(
-  reference: "1-1-22426-24-428",
-  model: "ballerine",
-  category: "chaussures",
-  price: 49.95,
-  photos_urls: [
-    'https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw9dc8bd39/product-images/dw_001-19-22107-24-602_01.jpg',
-    'https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw9dc8bd39/product-images/dw_001-19-22107-24-602_02.jpg',
-    'https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw9dc8bd39/product-images/dw_001-19-22107-24-602_03.jpg',
-    'https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw9dc8bd39/product-images/dw_001-19-22107-24-602_04.jpg'
-  ]
-)
+def scrap_all_products
+  main_url = 'https://tamaris.com/fr-FR/chaussures/'
+  html = Nokogiri::HTML.parse(open(main_url))
 
-Product.create!(
-  reference: "1-1-24216-24-444",
-  model: "escarpin",
-  category: "chaussures",
-  price: 49.95
-)
+  links = html.search('a.tile-link')
+  links.each do |link|
+    html = Nokogiri::HTML.parse(open(link['href']))
+    reference = html.search('span.value')[0].text.strip
+    product = product_data(reference)
 
-3.times do
-  Variant.create!(
-    size: rand(35..43),
-    stock: rand(0..50),
-    product: Product.all.sample
+    assign_variant(product) if !product.nil? && product.save
+    get_other_colors(reference, html)
+  end
+end
+
+def get_reference_page(reference)
+  url = "https://tamaris.com/fr-FR/recherche/?q=#{reference}&lang=fr_FR"
+  html = Nokogiri::HTML.parse(open(url))
+
+  scrap_product_page(html) if html.title.include?(reference)
+end
+
+def scrap_product_page(html)
+  @category = html.search('.breadcrumb-element')[1].text.strip
+  @model = html.title.split('-')[0].strip[/\D*/]
+  @color = html.search('div.label').text.strip
+  @price = html.search('.price-sales').first['data-sale-price']
+  @former_price = html.search('.price-standard').text.split(' ')[0]
+  unless @former_price.nil?
+    @former_price = @former_price.strip.split(',').join('.')
+  end
+  @description = html.search('.information-wrapper')[0].text.strip
+
+  @photos = html.search('.productthumbnail').map do |element|
+    {
+      full_size: element.attribute('src').value.split('?')[0],
+      thumbnail: element.attribute('src').value
+    }
+  end
+end
+
+def product_data(reference)
+  return nil if get_reference_page(reference).nil?
+
+  Product.new(
+    reference: reference,
+    category: @category.downcase,
+    model: @model,
+    color: @color.downcase,
+    price: @price.to_f,
+    former_price: @former_price.to_f,
+    photos_urls: @photos
   )
 end
 
-def reference_page(reference)
-    main_url = 'https://tamaris.com'
-    tamaris_data = Mechanize.new
-    tamaris_data.get(main_url)
-    tamaris_data.page.forms[0].field_with(id: 'q').value = reference
-
-    product_page = tamaris_data.page.forms[0].submit
-    open(main_url + product_page.uri.path)
+def get_other_colors(reference, html)
+  model_ref = reference.split('-')[0..3].join('-')
+  colors = html.search('masked-link.swatchanchor').map do |element|
+    element.attribute('data-color').value
   end
-
-  def scrap_product_page(reference)
-    html = Nokogiri::HTML.parse(reference_page(reference))
-
-    @category = html.search('.breadcrumb-element')[1].text.strip
-    @model = html.search('h1').text.strip
-
-    @price = html.search('.price-sales').first['data-sale-price']
-    @former_price = html.search('.price-standard').text.split(' ')[0]
-    unless @former_price.nil?
-      @former_price = @former_price.strip.split(',').join('.')
-    end
-    # @description = product_html.search('.information-wrapper')[0].text.strip
-
-    @photos = html.search('.productthumbnail').map do |element|
-      {
-        full_size: element.attribute('src').value.split('?')[0],
-        thumbnail: element.attribute('src').value
-      }
-    end
+  colors.each do |color|
+    color_ref = model_ref + "-#{color}"
+    product = product_data(color_ref)
+    assign_variant(product) if !product.nil? && product.save
   end
+end
+
+def assign_variant(product)
+  7.times do
+    variant = Variant.create(
+      size: rand(35..43),
+      stock: rand(0..50),
+      product: product
+    )
+  end
+end
+
+def create_bookers
+  20.times do
+    email = Faker::Internet.email
+    Booker.create(
+      email: email,
+      email_confirmation: email,
+      phone_number: Faker::PhoneNumber.phone_number,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name
+    )
+  end
+end
+
+def create_bookings
+  10.times do
+    product = Product.all.sample
+    Booking.create(
+      booker: Booker.all.sample,
+      product: product,
+      variant: product.variants.sample
+    )
+  end
+end
+
+User.create(
+  email: 'test@test.com',
+  password: '123456'
+)
+
+scrap_all_products
+
+create_bookers
+
+create_bookings

@@ -1,20 +1,15 @@
 module Scraper
-  def reference_page(reference)
-    main_url = 'https://tamaris.com'
-    tamaris_data = Mechanize.new
-    tamaris_data.get(main_url)
-    tamaris_data.page.forms[0].field_with(id: 'q').value = reference
+  def get_reference_page(reference)
+    url = "https://tamaris.com/fr-FR/recherche/?q=#{reference}&lang=fr_FR"
+    html = Nokogiri::HTML.parse(open(url))
 
-    product_page = tamaris_data.page.forms[0].submit
-    open(main_url + product_page.uri.path)
+    scrap_product_page(html) if html.title.include?(reference)
   end
 
-  def scrap_product_page(reference)
-    html = Nokogiri::HTML.parse(reference_page(reference))
-
+  def scrap_product_page(html)
     @category = html.search('.breadcrumb-element')[1].text.strip
-    @model = html.search('h1').text.strip
-
+    @model = html.title.split('-')[0].strip[/\D*/]
+    @color = html.search('div.label').text.strip
     @price = html.search('.price-sales').first['data-sale-price']
     @former_price = html.search('.price-standard').text.split(' ')[0]
     unless @former_price.nil?
@@ -31,13 +26,14 @@ module Scraper
   end
 
   def product_data(reference)
-    scrap_product_page(reference)
+    return { reference: reference } if get_reference_page(reference).nil?
 
     @product_data =
       {
         reference: reference,
-        model: @model,
         category: @category.downcase,
+        model: @model,
+        color: @color.downcase,
         price: @price.to_f,
         former_price: @former_price.to_f,
         photos_urls: @photos
