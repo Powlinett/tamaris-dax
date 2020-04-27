@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
   require 'open-uri'
+  include Scraper
 
   before_action :set_product, only: [:create]
-
-  skip_before_action :authenticate_user!, only: [:all_shoes, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @products = Product.all
@@ -15,25 +15,18 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @variant = Variant.new
   end
 
   def create
     if !@product.nil?
-      update_or_assign_variant(product_params[:variants], @product)
+      @variant = update_or_assign_variant(product_params[:variants], @product)
     else
-      scrap_product_page(ref_params)
+      @product = Product.new(product_data(product_params[:reference]))
 
-      @product = Product.create(
-        reference: ref_params,
-        model: @model,
-        category: @category.downcase,
-        price: @price.to_f,
-        former_price: @former_price.to_f,
-        photos_urls: @photos
-      )
-      assign_variant(product_params[:variants], @product)
+      @variant = assign_variant(product_params[:variants], @product)
     end
-    redirect_to product_path(@product.reference)
+    save_and_redirect
   end
 
   private
@@ -50,55 +43,32 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:reference, variants: [:size, :stock])
   end
 
-  def ref_params
-    product_params[:reference]
-  end
-
-  def reference_page(reference)
-    main_url = 'https://tamaris.com'
-    tamaris_data = Mechanize.new
-    tamaris_data.get(main_url)
-    tamaris_data.page.forms[0].field_with(id: 'q').value = reference
-
-    product_page = tamaris_data.page.forms[0].submit
-    open(main_url + product_page.uri.path)
-  end
-
-  def scrap_product_page(reference)
-    html = Nokogiri::HTML.parse(reference_page(reference))
-
-    @category = html.search('.breadcrumb-element')[1].text.strip
-    @model = html.search('h1').text.strip
-    @price = html.search('.price-sales').first['data-sale-price']
-    @former_price = html.search('.price-standard').text.split(' ')[0]
-    unless @former_price.nil?
-      @former_price = @former_price.strip.split(',').join('.')
-    end
-    # @description = product_html.search('.information-wrapper')[0].text.strip
-
-    @photos = html.search('.productthumbnail').map do |element|
-      element.attribute('src').value.split('?')[0]
-    end
-  end
-
   def update_or_assign_variant(params, product)
-    if product.variants.any?
-      variant = product.variants.find { |v| v.size == params[:size].to_i }
-      if !variant.nil?
-        variant.update_size_stock(variant.id, params[:stock].to_i)
-      else
-        assign_variant(params, product)
-      end
+    return assign_variants(params, product) unless product.variants.any?
+
+    variant = product.variants.find_by(size: params[:size].to_i)
+    if !variant.nil?
+      variant.update_size_stock(variant.id, params[:stock].to_i)
     else
       assign_variant(params, product)
     end
   end
 
   def assign_variant(params, product)
-    Variant.create(
+    Variant.new(
       size: params[:size],
       stock: params[:stock],
       product: product
     )
+  end
+
+  def save_and_redirect
+    if @product.save
+      @variant.save
+      redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
+    else
+      flash.now[:alert] = 'Produit introuvable sur Tamaris.com :('
+      render :new
+    end
   end
 end

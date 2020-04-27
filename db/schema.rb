@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
   create_table "products", force: :cascade do |t|
     t.string "reference"
     t.string "model"
+    t.string "color"
     t.string "category"
     t.float "price"
     t.float "former_price"

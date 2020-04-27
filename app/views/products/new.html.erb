@@ -1,7 +1,7 @@
 <%= simple_form_for @product, url: products_path do |f| %>
   <%= f.label :reference %>
   <%= f.input :reference %>
-  <%= f.simple_fields_for :variants do |f| %>
+  <%= f.simple_fields_for :variants, @variant do |f| %>
     <%= f.label :size %>
     <%= f.input :size %>
     <%= f.label :stock %>
