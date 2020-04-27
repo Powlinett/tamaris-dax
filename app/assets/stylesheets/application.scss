@@ -19,11 +19,23 @@ body {
 
 .page-content {
   flex-grow: 1;
-  width: 1400px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 p {
   font-size: $base-font-size;
-  color: $base-font-color;
+  color: $medium-grey;
 }
+
+h1 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  font-family: 'Cabin';
+  color: $dark-grey;
+}
+
+li {
+  list-style: none;
+}
+

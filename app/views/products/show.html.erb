@@ -1,15 +1,52 @@
-<%= @product.model %>
-<%= @product.reference %>
+<div class="product-show-content">
+  <ul class="thumbnails-pictures">
+    <% @product.photos_urls.each do |photo| %>
+      <li class="thumbnail-picture">
+        <%= image_tag photo[:thumbnail] %>
+      </li>
+    <% end %>
+  </ul>
 
-<% @product.photos_urls.each do |photo| %>
-  <%= image_tag photo[:thumbnail] %>
-<% end %>
+  <div class="full-size-picture" style="background-image: url('<%= @product.photos_urls.first[:full_size] %>')">
+  </div>
 
-<ul>
-  <% @product.variants.each do |variant| %>
-    <li>
-      <%= link_to variant.size, new_product_booking_path(@product.reference, variant.id) %> (<%= variant.stock %> en stock)
-    </li>
-  <% end %>
-</ul>
+  <div class="product-side-content">
+    <h1 class="product-model"><%= @product.model %></h1>
+    <div class="prices">
+      <% if @product.former_price != 0 %>
+        <h2 class="new-price"><%= @product.french_price %> €</h2>
+        <h2 class="standard-price"><%= @product.french_former_price %> €</h2>
+      <% else %>
+        <h2 class="sale-price"><%= @product.french_price %> €</h2>
+      <% end %>
+    </div>
+<!--
+    <h6><%= @product.color %></h6> -->
 
+    <ul class="other-colors">
+    <% @other_colors.each do |product| %>
+      <%= link_to(product_path(product.reference), class: "variant-choice #{product.color}") do %>
+        <li class="color-choice <%= " is-selected" if product.color == @product.color %>"><%= product.color %></li>
+        <div class="underline <%= "is-selected" if product.color == @product.color %>"></div>
+      <% end %>
+    <% end %>
+    </ul>
+
+    <ul class="all-sizes">
+<!--
+      <% @product.variants.order(:size).each do |variant| %>
+        <%= link_to(new_product_booking_path(@product.reference, variant.id), class: 'variant-choice') do %>
+          <li class="size<%= " unavailable" if variant.stock <= 0 %>">
+            <%= variant.size %>
+            <% if variant.stock < 10 %>
+              <p class="last-stock">Plus que <%= variant.stock %> en stock</p>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+-->
+    </ul>
+
+    <%= @product.reference %>
+  </div>
+</div>

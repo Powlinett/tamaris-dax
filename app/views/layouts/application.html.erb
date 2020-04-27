@@ -12,12 +12,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <% if user_signed_in? %>
-      <%= render 'shared/user_navbar' %>
-    <% else %>
-      <%= render 'shared/navbar' %>
-    <% end %>
+  <body class="<%= body_class %>">
+
+    <%= render 'shared/navbar' %>
 
     <%= render 'shared/tabs' %>
 

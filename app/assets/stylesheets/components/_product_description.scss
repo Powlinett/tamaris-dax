@@ -1,0 +1,46 @@
+body.products-show {
+  background-color: #F7F6F5;
+
+  .page-content {
+    max-width: 1800px;
+    width: 100%;
+
+    .product-show-content{
+      height: 900px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      top: -41px;
+    }
+  }
+}
+
+.product-side-content {
+  width: 40%;
+}
+
+.sale-price {
+  font-size: 1.19rem;
+  color: $medium-grey;
+  font-weight: 400;
+}
+
+.other-colors {
+  display: flex;
+  padding: 0;
+  position: relative;
+  margin-top: 36px;
+
+  &:hover {
+
+    .color-choice.is-selected {
+      display: none;
+    }
+
+    .underline.is-selected {
+      display: none;
+    }
+  }
+}
+
+

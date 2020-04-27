@@ -1,0 +1,30 @@
+div.full-size-picture {
+  width: 60%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+ul.thumbnails-pictures {
+  display: inline-block;
+  padding-left: 0;
+  height: $max-list-height;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 0;
+  min-width: 64px;
+
+}
+
+li.thumbnail-picture {
+  margin-top: 8px;
+  border: 1px solid $light-grey;
+
+  img {
+    height: 83px;
+  }
+}
+

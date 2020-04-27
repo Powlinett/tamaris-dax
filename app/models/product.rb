@@ -18,4 +18,8 @@ class Product < ApplicationRecord
     former_price = self.former_price.to_s
     former_price.split('.').join(',')
   end
+
+  def common_ref
+    self.reference.split('-')[0..3].join('-')
+  end
 end

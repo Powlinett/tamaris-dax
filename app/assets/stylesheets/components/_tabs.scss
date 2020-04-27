@@ -1,6 +1,8 @@
-.tabs-underlined {
+.list-inline.tabs-underlined {
   display: flex;
   align-items: center;
+  z-index: 2;
+  background-color: transparent;
 }
 
 .tabs-underlined .tab-underlined {

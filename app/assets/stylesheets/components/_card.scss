@@ -4,7 +4,6 @@
   grid-auto-rows: 1fr;
 
   li {
-    list-style: none;
     height: 100%;
   }
 }
@@ -15,7 +14,6 @@
   margin: 8px 2px;
   justify-content: flex-end;
   align-items: center;
-  height: 100%;
   background-color: #F7F5F6;
 
   &:hover {
@@ -34,30 +32,30 @@
 .card-infos {
   width: 100%;
   background-color: white;
-  color: $base-font-color;
+  color: $medium-grey;
   padding-bottom: 1rem;
 
   p {
     margin-bottom: 0;
     padding-top: 0.5rem;
   }
+}
 
-  .prices {
-    display: flex;
-    font-family: 'Cabin';
+.prices {
+  display: flex;
+  font-family: 'Cabin';
 
-    h3 {
-      font-weight: 600;
-      font-size: $base-font-size;
-    }
+  h3 {
+    font-weight: 600;
+    font-size: $base-font-size;
+  }
 
-    .standard-price {
-      text-decoration: line-through;
-    }
+  .standard-price {
+    text-decoration: line-through;
+  }
 
-    .new-price {
-      color: #CD3939;
-      padding-right: 0.5rem;
-    }
+  .new-price {
+    color: #CD3939;
+    padding-right: 0.5rem;
   }
 }
