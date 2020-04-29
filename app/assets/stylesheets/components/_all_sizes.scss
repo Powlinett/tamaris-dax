@@ -1,8 +1,25 @@
-.all-sizes {
-  display: flex;
-  padding-left: 0;
+body.products-show, body.variants-show {
 
-  .variant.choice {
-    background-image: white;
+  .all-sizes {
+    display: flex;
+    padding-left: 0;
+    position: relative;
+    margin: 0 -4px;
+
+    .variant-box {
+      background-color: transparent;
+    }
+
+    li.size {
+      color: $medium-grey;
+    }
+
+    .is-selected {
+      border: 1px solid $medium-grey;
+    }
+
+    li.size.unavailable {
+      color: $light-grey;
+    }
   }
 }

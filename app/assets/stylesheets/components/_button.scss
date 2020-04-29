@@ -1,0 +1,24 @@
+.button {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  padding: 10px 16px;
+  border: 0.0375rem solid $medium-grey;
+  background-color: $medium-grey;
+  color: white;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+    color: $medium-grey;
+  }
+}
+
+.booking-btn {
+  margin-top: 48px;
+}

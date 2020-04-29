@@ -7,6 +7,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string  :category
       t.float   :price
       t.float   :former_price
+      t.text    :sizes_range
       t.text    :photos_urls
 
       t.timestamps

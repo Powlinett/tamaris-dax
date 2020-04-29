@@ -16,7 +16,11 @@ class BookingsController < ApplicationController
     @booker = Booker.new(booker_params)
 
     if @booker.save
-      @booking = Booking.create(booker: @booker, product: @product, variant: @variant)
+      @booking = Booking.create(
+        booker: @booker,
+        product: @product,
+        variant: @variant
+      )
       redirect_to products_path
     else
       redirect_to product_path(@product.reference)
