@@ -16,14 +16,14 @@ class Booking < ApplicationRecord
   end
 
   def confirm_booking
-    self.state = 'Réservation confirmée'
+    self.state = 'confirmed'
   end
 
   def cancel_booking
-    self.state = 'Réservation impossible'
+    self.state = 'canceled'
   end
 
   def pick_up
-    self.state = 'Réservation récupérée'
+    self.state = 'picked-up'
   end
 end

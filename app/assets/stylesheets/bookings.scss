@@ -1,4 +1,4 @@
-.booking-content {
+.booking-content, .bookings-content {
   justify-content: center;
   margin: 100px 0;
 
@@ -32,5 +32,15 @@
       position: absolute;
       top: 0
     }
+  }
+}
+
+body.bookings-index {
+  .page-content {
+    width: 1500px;
+  }
+
+  .bookings-content {
+    text-align: center;
   }
 }

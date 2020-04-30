@@ -1,10 +1,44 @@
-<ul>
-  <% @bookings.each do |booking| %>
-    <li>
-      <%= booking.product.reference %> (<%= booking.variant.size %>)- <%= booking.booker.email %>
-      <%= link_to 'Confirmer', booking_confirm_path(booking) %>
-      <%= link_to 'Refuser', booking_cancel_path(booking) %>
-      <%= link_to 'Retirer', booking_pick_up_path(booking) %>
-    </li>
-  <% end %>
-</ul>
+<div class="bookings-content">
+  <h1>Réservations en cours</h1>
+  <section class="bookings-table">
+      <header class="bookings-head">
+            <div>Modèle</div>
+            <div>Taille</div>
+            <div>Nom du client</div>
+            <div>Téléphone</div>
+            <div>Actions</div>
+      </header>
+          <% @bookings.each do |booking| %>
+                <div class="bookings-table-content">
+
+              <div>
+                <%= booking.product.reference %>
+              </div>
+              <div>
+                <%= booking.variant.size %>
+              </div>
+              <div>
+                <%= "#{booking.booker.last_name.upcase} #{booking.booker.first_name.capitalize}" %>
+              </div>
+              <div>
+                <%= booking.booker.phone_number %>
+              </div>
+              <div>
+                <%= link_to(booking_confirm_path(booking)) do %>
+                  <i class="fas fa-check-square"></i>
+                  Confirmer
+                <% end %>
+                <%= link_to(booking_cancel_path(booking)) do %>
+                  <i class="fas fa-window-close"></i>
+                  Refuser
+                <% end %>
+                <%= link_to(booking_pick_up_path(booking)) do %>
+                  <i class="far fa-money-bill-alt"></i>
+                  Vendu
+                <% end %>
+              </div>
+                    </div>
+
+          <% end %>
+  </section>
+</div>
