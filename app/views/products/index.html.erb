@@ -3,7 +3,7 @@
     <li class="product-card-wrapper">
       <a href="<%= product_path(product.reference)%>", class="product-card" >
         <div class="product-image">
-          <%= image_tag (product.photos_urls[0..1].sample[:full_size] + "?sw=504&sh=672&sm=fit"), class: 'first-picture' %>
+          <%= image_tag resize(product.photos_urls[0..1].sample, 500, 700), class: 'first-picture' %>
           <ul class="all-sizes product-card-sizes">
             <% product.variants.order(:size).each do |variant| %>
               <%= link_to(new_product_booking_path(product.reference, variant.size),

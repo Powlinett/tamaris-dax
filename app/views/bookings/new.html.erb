@@ -2,7 +2,7 @@
 <div class="booking-content flex-content">
   <div class="booking-product-side">
     <a href="<%= product_path(product.reference)%>", class="product-card" >
-        <%= image_tag product.photos_urls[0..1].sample[:full_size] %>
+        <%= image_tag resize(product.photos_urls[0..1].sample, 600, 700) %>
         <div class="card-infos">
           <div class="flex-content">
             <p><%= product.model %></p>

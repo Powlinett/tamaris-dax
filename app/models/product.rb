@@ -13,7 +13,7 @@ class Product < ApplicationRecord
   validates :sizes_range, presence: true
   validates :photos_urls, presence: true
 
-  after_initialize :set_variants
+  after_save :set_variants
 
   def set_variants
     sizes_range.each do |size|

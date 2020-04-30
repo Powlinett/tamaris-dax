@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
 
   create_table "bookers", force: :cascade do |t|
     t.string "email"
-    t.string "email_confirmation"
     t.string "phone_number"
     t.string "first_name"
     t.string "last_name"

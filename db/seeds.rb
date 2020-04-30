@@ -37,13 +37,10 @@ def scrap_product_page(html)
     @former_price = @former_price.strip.split(',').join('.')
   end
   @sizes_range = ((html.search('.selection').first.text.strip.to_i)..(html.search('.selection').last.text.strip.to_i))
-  @description = html.search('.information-wrapper')[0].text.strip
+  # @description = html.search('.information-wrapper')[0].text.strip
 
   @photos = html.search('.productthumbnail').map do |element|
-    {
-      full_size: element.attribute('src').value.split('?')[0],
-      thumbnail: element.attribute('src').value
-    }
+    element.attribute('src').value.split('?')[0]
   end
 end
 
@@ -77,7 +74,7 @@ end
 def update_variants
   Product.all.each do |product|
     product.variants.each do |variant|
-      variant.update_size_stock(rand(0..20))
+      variant.update_stock(rand(0..20))
       variant.save
     end
   end
