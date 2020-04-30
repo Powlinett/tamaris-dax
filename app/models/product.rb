@@ -9,6 +9,9 @@ class Product < ApplicationRecord
   validates :category, presence: true
   validates :model, presence: true
   validates :price, presence: true, inclusion: { in: (0..300) }
+  validates :color, presence: true
+  validates :sizes_range, presence: true
+  validates :photos_urls, presence: true
 
   after_initialize :set_variants
 

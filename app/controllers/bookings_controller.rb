@@ -56,7 +56,7 @@ class BookingsController < ApplicationController
   end
 
   def set_product_and_variant
-    @variant = Variant.find(params[:variant_id])
-    @product = @variant.product
+    @product = Product.find_by(reference: params[:product_reference])
+    @variant = @product.variants.find_by(size: params[:size])
   end
 end

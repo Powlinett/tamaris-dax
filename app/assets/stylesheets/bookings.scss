@@ -1,3 +1,36 @@
-// Place all the styles related to the bookings controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.booking-content {
+  justify-content: center;
+  margin: 100px 0;
+
+  .booking-product-side {
+    width: 30%;
+
+    .product-card {
+      margin: 0;
+
+      .flex-content {
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .booking-form-side {
+    width: 30%;
+    color: $dark-grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    position: relative;
+
+    h1 {
+      padding: 16px 0;
+      box-shadow: $base-box-shadow;
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      top: 0
+    }
+  }
+}

@@ -4,8 +4,8 @@
   width: 36px;
   margin: 0 4px;
   margin-bottom: 1.5rem;
-  box-shadow: inset 0 0 0 1px $light-grey;
-  background-color: lightgrey;
+  box-shadow: $variant-box-shadow-light;
+  background-color: gainsboro;
   justify-content: center;
   align-items: center;
   color: $medium-light-grey;
@@ -15,10 +15,20 @@
     display: flex;
     text-decoration: none;
     color: $medium-light-grey;
+    box-shadow: $variant-box-shadow-dark;
 
     .underline, .underline.is-selected {
       display: block;
     }
+
+    &.is-selected {
+      box-shadow: none;
+    }
+  }
+
+  &.unavailable {
+    cursor: pointer;
+    pointer-events: none;
   }
 }
 
@@ -39,4 +49,22 @@
 
 .underline.is-selected {
   display: block;
+}
+
+
+.variant-box.little-variant-box {
+  width: 33px;
+  height: 33px;
+  box-shadow: none;
+  // transition: $base-transition;
+  margin: 0;
+
+  &:hover {
+    // transition: $base-transition;
+    box-shadow: $variant-box-shadow-dark;
+  }
+
+  &.unavailable {
+    box-shadow: none;
+  }
 }

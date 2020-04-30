@@ -9,11 +9,13 @@
   display: block;
   width: 100%;
   text-align: center;
-  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: $base-transition;
 
   &:hover {
     text-decoration: none;
-    transition: all 0.3s ease-in-out;
+    transition: $base-transition;
     background-color: white;
     color: $medium-grey;
   }

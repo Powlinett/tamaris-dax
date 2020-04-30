@@ -26,8 +26,7 @@
       <p class="color-choice"><%= @product.color %></p>
       <div class="other-colors">
         <% @other_colors.each do |product| %>
-          <%= link_to(product_variant_path(product.reference),
-          class: "variant-box #{product.color}", method: 'post', remote: true) do %>
+          <%= link_to(product_path(product.reference), class: "variant-box #{product.color.split('/').join(' ')}") do %>
             <div class="underline <%= "is-selected" if product.color == @product.color %>"></div>
           <% end %>
         <% end %>
@@ -37,10 +36,10 @@
     <div class="sizes-content">
       <ul class="all-sizes">
         <% @product.variants.order(:size).each do |variant| %>
-          <%= link_to(product_variant_path(@product.reference),
-          class: "variant-box #{"is-selected" if !@variant.nil? && variant.size == @variant.size}",
-            data: {size: variant.size}, method: 'post', remote: true) do %>
-            <li class="size<%= "unavailable" if variant.stock <= 0 %>">
+          <%= link_to(product_size_path(@product.reference, variant.size),
+          class: "variant-box #{"is-selected" if !@variant.nil? && variant.size == @variant.size}
+            #{' unavailable' if variant.stock <= 0}") do %>
+            <li class="size<%= " unavailable" if variant.stock <= 0 %>">
               <%= variant.size %>
             </li>
           <% end %>
@@ -52,7 +51,7 @@
     </div>
 
     <% if !@variant.nil? %>
-      <%= link_to "RESERVER EN BOUTIQUE", product_new_booking_path(@product.reference, @variant.size), class: "button booking-btn" %>
+      <%= link_to "Réserver en boutique", product_new_booking_path(@product.reference, @variant.size), class: "button booking-btn" %>
     <% else %>
       <div class="button booking-btn no-size-selected">RESERVER EN BOUTIQUE</div>
     <% end %>

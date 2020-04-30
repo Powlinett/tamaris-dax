@@ -2,7 +2,7 @@ class VariantsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
-    @product = Product.find_by(reference: params[:reference])
+    @product = Product.find_by(reference: params[:product_reference])
     @other_colors = Product.where("reference like ?", "%#{@product.common_ref}%")
     @variant = @product.variants.find_by(size: params[:size])
     respond_to do |format|

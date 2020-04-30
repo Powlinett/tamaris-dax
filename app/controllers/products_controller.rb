@@ -55,14 +55,6 @@ class ProductsController < ApplicationController
     # end
   end
 
-  # def assign_variant(params, product)
-  #   Variant.new(
-  #     size: params[:size],
-  #     stock: params[:stock],
-  #     product: product
-  #   )
-  # end
-
   def save_and_redirect
     if @product.save
       @variant.save

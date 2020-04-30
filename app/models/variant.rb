@@ -8,6 +8,5 @@ class Variant < ApplicationRecord
 
   def update_size_stock(new_stock)
     self.stock += new_stock
-    # self.save
   end
 end

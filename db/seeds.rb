@@ -11,12 +11,11 @@ def scrap_all_products
   html = Nokogiri::HTML.parse(open(main_url))
 
   links = html.search('a.tile-link')
-  links[12..13].each do |link|
+  links[7..10].each do |link|
     html = Nokogiri::HTML.parse(open(link['href']))
     reference = html.search('span.value')[0].text.strip
     product = product_data(reference)
-
-    assign_variant(product) if !product.nil? && product.save
+    product.save unless product.nil?
     get_other_colors(reference, html)
   end
 end
@@ -71,13 +70,16 @@ def get_other_colors(reference, html)
   colors.each do |color|
     color_ref = model_ref + "-#{color}"
     product = product_data(color_ref)
-    assign_variant(product) if !product.nil? && product.save
+    product.save
   end
 end
 
-def assign_variant(product)
-  product.variants.each do |variant|
-    variant.update(stock: rand(0..20))
+def update_variants
+  Product.all.each do |product|
+    product.variants.each do |variant|
+      variant.update_size_stock(rand(0..20))
+      variant.save
+    end
   end
 end
 
@@ -111,6 +113,8 @@ User.create(
 )
 
 scrap_all_products
+
+update_variants
 
 create_bookers
 
