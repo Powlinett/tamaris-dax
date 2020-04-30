@@ -3,13 +3,10 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :products, param: :reference, only: [:index, :new, :show, :create] do
-    resources :bookings, path: 'bookings', only: [:create]
+    resources :bookings, path: '/:size/bookings', only: [:new, :create, :update]
     get '/:size', to: 'variants#show', as: :size
-    get '/:size/booking', to: 'bookings#new', as: :new_booking
+    # get '/:size/booking', to: 'bookings#new', as: :new_booking
   end
-
-  # get 'products/:reference#color=*query', to: 'variants#show', as: :product_variant
-  # get 'products/:reference#:color', param: :color, to: 'variants#change_color', as: :color_variant
 
   resources :bookings, only: [:index] do
     get 'confirm', to: 'bookings#confirm', as: :confirm

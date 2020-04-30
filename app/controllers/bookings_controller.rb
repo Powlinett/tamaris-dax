@@ -5,25 +5,30 @@ class BookingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @bookings = Booking.all
+    @bookings = Booking.all.order(created_at: :desc)
   end
 
   def new
     @booker = Booker.new
+    @booking = Booking.new
   end
 
   def create
-    @booker = Booker.new(booker_params)
+    @booker = Booker.new(booking_params[:booker])
 
     if @booker.save
-      @booking = Booking.create(
+      @booking = Booking.new(
         booker: @booker,
         product: @product,
         variant: @variant
       )
-      redirect_to products_path
+      if @booking.save
+        redirect_to products_path
+      else
+        render :new
+      end
     else
-      redirect_to product_path(@product.reference)
+      render :new
     end
   end
 
@@ -47,8 +52,8 @@ class BookingsController < ApplicationController
 
   private
 
-  def booker_params
-    params.require(:booker).permit(:email, :email_confirmation, :phone_number, :first_name, :last_name)
+  def booking_params
+    params.require(:booking).permit(booker: [:email, :email_confirmation, :phone_number, :first_name, :last_name])
   end
 
   def set_booking

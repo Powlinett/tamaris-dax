@@ -6,7 +6,7 @@
         <div class="card-infos">
           <div class="flex-content">
             <p><%= product.model %></p>
-            <p>Taille: <%= @variant.size unless @variant.nil? %></p>
+            <p><%= "Taille: #{@variant.size}" unless @variant.nil? %></p>
           </div>
           <div class="prices">
             <% if product.former_price > 0 %>
@@ -23,12 +23,14 @@
 
   <div class="booking-form-side">
     <h1 class="booking-form">Réserver ce modèle</h1>
-    <%= simple_form_for @booker, url: product_bookings_path do |f| %>
-      <%= f.input :last_name, placeholder: 'Nom', label: false %>
-      <%= f.input :first_name, placeholder: 'Prénom', label: false %>
-      <%= f.input :email, placeholder: 'E-mail', label: false %>
-      <%= f.input :email_confirmation, placeholder: 'Confirmation de l\'e-mail', label: false %>
-      <%= f.input :phone_number, placeholder: 'Téléphone', label: false %>
+    <%= simple_form_for @booking, url: product_bookings_path do |f| %>
+        <%= f.simple_fields_for :booker, @booker do |f|  %>
+        <%= f.input :last_name, placeholder: 'Nom', label: false %>
+        <%= f.input :first_name, placeholder: 'Prénom', label: false %>
+        <%= f.input :email, placeholder: 'E-mail', label: false %>
+        <%= f.input :email_confirmation, placeholder: 'Confirmation de l\'e-mail', label: false %>
+        <%= f.input :phone_number, placeholder: 'Téléphone', label: false %>
+      <% end %>
       <%= f.button :submit, "Réserver maintenant", class: 'button booking-btn' %>
     <% end %>
   </div>
