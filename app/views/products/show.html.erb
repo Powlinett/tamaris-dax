@@ -1,15 +1,60 @@
-<%= @product.model %>
-<%= @product.reference %>
+<div class="product-show-content">
+  <ul class="thumbnails-pictures">
+    <% @product.photos_urls.each_with_index do |photo, index| %>
+      <li class="thumbnail-picture">
+        <%= image_tag photo[:thumbnail], data: { index: index } %>
+      </li>
+    <% end %>
+  </ul>
 
-<% @product.photos_urls.each do |photo| %>
-  <%= image_tag photo[:thumbnail] %>
-<% end %>
+  <div class="picture-wrapper">
+    <%= image_tag @product.photos_urls.first[:full_size], class: 'full-size-picture' %>
+  </div>
 
-<ul>
-  <% @product.variants.each do |variant| %>
-    <li>
-      <%= link_to variant.size, new_product_booking_path(@product.reference, variant.id) %> (<%= variant.stock %> en stock)
-    </li>
-  <% end %>
-</ul>
+  <div class="product-side-content col-lg-4">
+    <h1 class="product-model"><%= @product.model %></h1>
+    <div class="prices sale-prices">
+      <% if @product.former_price != 0 %>
+        <h2 class="price new-price"><%= @product.french_price %> €</h2>
+        <h2 class="price standard-price"><%= @product.french_former_price %> €</h2>
+      <% else %>
+        <h2 class="price sale-price"><%= @product.french_price %> €</h2>
+      <% end %>
+    </div>
 
+    <div class="colors-content">
+      <p class="color-choice"><%= @product.color %></p>
+      <div class="other-colors">
+        <% @other_colors.each do |product| %>
+          <%= link_to(product_path(product.reference), class: "variant-box #{product.color.split('/').join(' ')}") do %>
+            <div class="underline <%= "is-selected" if product.color == @product.color %>"></div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="sizes-content">
+      <ul class="all-sizes">
+        <% @product.variants.order(:size).each do |variant| %>
+          <%= link_to(product_size_path(@product.reference, variant.size),
+          class: "variant-box #{"is-selected" if !@variant.nil? && variant.size == @variant.size}
+            #{' unavailable' if variant.stock <= 0}") do %>
+            <li class="size<%= " unavailable" if variant.stock <= 0 %>">
+              <%= variant.size %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% if !@variant.nil? && @variant.stock < 10 && @variant.stock > 0 %>
+        <p class="last-stocks">Plus que <%= pluralize(@variant.stock, "exemplaire") %> en stock</p>
+      <% end %>
+    </div>
+
+    <% if !@variant.nil? %>
+      <%= link_to "Réserver en boutique", product_new_booking_path(@product.reference, @variant.size), class: "button booking-btn" %>
+    <% else %>
+      <div class="button booking-btn no-size-selected">RESERVER EN BOUTIQUE</div>
+    <% end %>
+
+  </div>
+</div>

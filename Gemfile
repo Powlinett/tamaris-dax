@@ -17,6 +17,7 @@ gem 'simple_form'
 gem 'pry', '~> 0.12.2'
 gem 'devise'
 gem 'faker'
+gem'flutie'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 

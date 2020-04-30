@@ -1,0 +1,17 @@
+.simple_form {
+  width: 100%;
+  padding: 16px;
+
+  .input {
+    margin-bottom: 1.75rem;
+    width: 100%;
+
+    input {
+      width: 100%;
+      padding: .625rem .75rem;
+      border-radius: 0;
+      border: 1px solid $super-light-grey;
+      color: $medium-light-grey;
+    }
+  }
+}

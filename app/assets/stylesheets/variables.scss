@@ -1,4 +1,77 @@
 //Fonts variables
-
 $base-font-size: 0.9rem;
-$base-font-color: #32302e;
+
+//Colors variables
+$dark-grey: rgba(0, 0, 0, 0.8);
+$medium-grey: #32302e;
+$medium-light-grey: rgba(0, 0, 0, 0.6);
+$light-grey: rgba(0, 0, 0, 0.3);
+$super-light-grey: rgba(0,0,0,.1);
+
+//Thumbnails product_show
+
+$max-list-height: calc(6 * 94px);
+
+// Other var
+
+$base-box-shadow: 0px 7px 9px -9px rgba(0, 0, 0, 0.2);
+$variant-box-shadow-light: inset 0 0 0 1px $super-light-grey;
+$variant-box-shadow-dark: inset 0 0 0 1px $medium-grey;
+$base-transition: all 0.3s ease-in-out;
+
+
+// Color-choice background
+.other-colors {
+
+  .white, .ivory {
+    background-color: white;
+  }
+
+  .black {
+    background-color: black;
+  }
+
+  .cognac, .comb {
+    background-color: #89593B;
+  }
+
+  .sage {
+    background-color: mediumturquoise;
+  }
+
+  .navy {
+    background-color: #2D3F72;
+  }
+
+  .lipstick {
+    background-color: crimson;
+  }
+
+  .khaki {
+    background-color: darkkhaki;
+  }
+
+  .orange, .sunset {
+    background-color: darkorange;
+  }
+
+  .silver {
+    background-color: silver;
+  }
+
+  .sun {
+    background-color: gold;
+  }
+
+  .apple {
+    background-color: #C0CA7F;
+  }
+
+  .pink {
+    background-color: #DF3E6E;
+  }
+
+  .taupe, .suede {
+    background-color: #C5AA97;
+  }
+}

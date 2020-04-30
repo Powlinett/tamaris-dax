@@ -16,7 +16,11 @@ class BookingsController < ApplicationController
     @booker = Booker.new(booker_params)
 
     if @booker.save
-      @booking = Booking.create(booker: @booker, product: @product, variant: @variant)
+      @booking = Booking.create(
+        booker: @booker,
+        product: @product,
+        variant: @variant
+      )
       redirect_to products_path
     else
       redirect_to product_path(@product.reference)
@@ -52,7 +56,7 @@ class BookingsController < ApplicationController
   end
 
   def set_product_and_variant
-    @variant = Variant.find(params[:variant_id])
-    @product = @variant.product
+    @product = Product.find_by(reference: params[:product_reference])
+    @variant = @product.variants.find_by(size: params[:size])
   end
 end

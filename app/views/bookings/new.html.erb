@@ -1,10 +1,35 @@
-<h2>Réservation en cours: <%= @product.model %> (Taille: <%= @variant.size %>)</h2>
+<% product = @product %>
+<div class="booking-content flex-content">
+  <div class="booking-product-side">
+    <a href="<%= product_path(product.reference)%>", class="product-card" >
+        <%= image_tag product.photos_urls[0..1].sample[:full_size] %>
+        <div class="card-infos">
+          <div class="flex-content">
+            <p><%= product.model %></p>
+            <p>Taille: <%= @variant.size unless @variant.nil? %></p>
+          </div>
+          <div class="prices">
+            <% if product.former_price > 0 %>
+              <h3 class="new-price"><%= product.french_price %> €</h3>
+              <h3 class="standard-price"><%= product.french_former_price %> €</h3>
+            <% else %>
+              <h3 class="sale-price"><%= product.french_price %> €</h3>
+            <% end %>
+          </div>
+        </div>
+      </a>
+  </div>
 
-<%= simple_form_for @booker, url: product_bookings_path do |f| %>
-  <%= f.input :last_name, label: 'Nom' %>
-  <%= f.input :first_name, label: 'Prénom' %>
-  <%= f.input :email, label: 'E-mail' %>
-  <%= f.input :email_confirmation, label: 'Confirmation de l\'e-mail' %>
-  <%= f.input :phone_number, label: 'Téléphone' %>
-  <%= f.button :submit, "Réserver" %>
-<% end %>
+
+  <div class="booking-form-side">
+    <h1 class="booking-form">Réserver ce modèle</h1>
+    <%= simple_form_for @booker, url: product_bookings_path do |f| %>
+      <%= f.input :last_name, placeholder: 'Nom', label: false %>
+      <%= f.input :first_name, placeholder: 'Prénom', label: false %>
+      <%= f.input :email, placeholder: 'E-mail', label: false %>
+      <%= f.input :email_confirmation, placeholder: 'Confirmation de l\'e-mail', label: false %>
+      <%= f.input :phone_number, placeholder: 'Téléphone', label: false %>
+      <%= f.button :submit, "Réserver maintenant", class: 'button booking-btn' %>
+    <% end %>
+  </div>
+</div>

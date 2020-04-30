@@ -9,24 +9,25 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  def show
-    @product = Product.find_by(reference: params[:reference])
-  end
-
   def new
     @product = Product.new
     @variant = Variant.new
   end
 
   def create
-    if !@product.nil?
-      @variant = update_or_assign_variant(product_params[:variants], @product)
-    else
+    if @product.nil?
+    #   @variant = update_variant(product_params[:variants], @product)
+    # else
       @product = Product.new(product_data(product_params[:reference]))
-
-      @variant = assign_variant(product_params[:variants], @product)
     end
+      @variant = update_variant(product_params[:variants], @product)
+    # end
     save_and_redirect
+  end
+
+  def show
+    @product = Product.find_by(reference: params[:reference])
+    @other_colors = Product.where("reference like ?", "%#{@product.common_ref}%")
   end
 
   private
@@ -43,23 +44,15 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:reference, variants: [:size, :stock])
   end
 
-  def update_or_assign_variant(params, product)
-    return assign_variants(params, product) unless product.variants.any?
+  def update_variant(params, product)
+    # return assign_variants(params, product) unless product.variants.any?
 
     variant = product.variants.find_by(size: params[:size].to_i)
-    if !variant.nil?
-      variant.update_size_stock(variant.id, params[:stock].to_i)
-    else
-      assign_variant(params, product)
-    end
-  end
-
-  def assign_variant(params, product)
-    Variant.new(
-      size: params[:size],
-      stock: params[:stock],
-      product: product
-    )
+    # if !variant.nil?
+      variant.update_size_stock(params[:stock].to_i)
+    # else
+    #   assign_variant(params, product)
+    # end
   end
 
   def save_and_redirect

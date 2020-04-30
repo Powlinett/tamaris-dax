@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
     t.string "category"
     t.float "price"
     t.float "former_price"
+    t.text "sizes_range"
     t.text "photos_urls"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
 
   create_table "variants", force: :cascade do |t|
     t.integer "size"
-    t.integer "stock"
+    t.integer "stock", default: 0
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
