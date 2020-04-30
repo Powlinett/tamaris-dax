@@ -6,7 +6,7 @@
           <%= image_tag (product.photos_urls[0..1].sample[:full_size] + "?sw=504&sh=672&sm=fit"), class: 'first-picture' %>
           <ul class="all-sizes product-card-sizes">
             <% product.variants.order(:size).each do |variant| %>
-              <%= link_to(product_new_booking_path(product.reference, variant.size),
+              <%= link_to(new_product_booking_path(product.reference, variant.size),
               class: "variant-box little-variant-box#{' unavailable' if variant.stock <= 0}") do %>
                 <li class="size<%= " unavailable" if variant.stock <= 0 %>">
                   <%= variant.size %>
