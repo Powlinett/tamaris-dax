@@ -11,7 +11,7 @@ def scrap_all_products
   html = Nokogiri::HTML.parse(open(main_url))
 
   links = html.search('a.tile-link')
-  links[7..10].each do |link|
+  links.each do |link|
     html = Nokogiri::HTML.parse(open(link['href']))
     reference = html.search('span.value')[0].text.strip
     product = product_data(reference)
