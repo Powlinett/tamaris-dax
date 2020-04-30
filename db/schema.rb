@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_04_24_045228) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bookers", force: :cascade do |t|
     t.string "email"
     t.string "phone_number"
@@ -25,9 +28,9 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
     t.date "starting_date"
     t.date "ending_date"
     t.string "state"
-    t.integer "booker_id"
-    t.integer "product_id"
-    t.integer "variant_id"
+    t.bigint "booker_id"
+    t.bigint "product_id"
+    t.bigint "variant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booker_id"], name: "index_bookings_on_booker_id"
@@ -63,10 +66,14 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
   create_table "variants", force: :cascade do |t|
     t.integer "size"
     t.integer "stock", default: 0
-    t.integer "product_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_variants_on_product_id"
   end
 
+  add_foreign_key "bookings", "bookers"
+  add_foreign_key "bookings", "products"
+  add_foreign_key "bookings", "variants"
+  add_foreign_key "variants", "products"
 end
