@@ -1,10 +1,10 @@
-section.bookings-table {
+.bookings-table, .bookers-table {
   text-align: left;
   padding: 12px;
   display: table;
   width: 100%;
 
-  .bookings-table-content {
+  .bookings-table-content, .bookers-table-content {
     display: table-row;
   }
 
@@ -12,6 +12,20 @@ section.bookings-table {
     display: table-cell;
     padding: 8px 16px;
     border: 1px solid $super-light-grey;
+    align-items: center;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .model {
+    display: flex;
+  }
+
+  .no-border {
+    border: none;
   }
 }
 
