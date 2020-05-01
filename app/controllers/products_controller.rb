@@ -18,8 +18,10 @@ class ProductsController < ApplicationController
     if @product.nil?
       @product = Product.new(product_data(product_params[:reference]))
     end
-    @variant = update_variant(product_params[:variants], @product)
-    save_and_redirect
+    if @product.save
+      @variant = update_variant(product_params[:variants], @product)
+      save_and_redirect
+    end
   end
 
   def show
@@ -48,8 +50,7 @@ class ProductsController < ApplicationController
   end
 
   def save_and_redirect
-    if @product.save
-      @variant.save
+    if @variant.save
       redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
     else
       flash.now[:alert] = 'Produit introuvable sur Tamaris.com :('
