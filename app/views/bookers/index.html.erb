@@ -2,9 +2,8 @@
   <h1>Fichier client</h1>
   <section class="bookers-table">
       <header class="bookers-head">
-            <div>Nom</div>
-            <div>Prénom</div>
-            <div>Téléphone</div>
+            <div><p>Nom Prénom</p></div>
+            <div><p>Téléphone</p></div>
             <div>
               <div class="no-border emails">
                 <p>E-mail</p>
@@ -12,13 +11,10 @@
               </div>
             </div>
       </header>
-          <% @bookers.each do |booker| %>
-            <div class="bookers-table-row">
+          <% @bookers.each_with_index do |booker, index| %>
+            <div class="bookers-table-row <%= ' odd' if index.odd? %>">
               <div>
-                <%= booker.last_name %>
-              </div>
-              <div>
-                <%= booker.first_name %>
+                <%= "#{booker.last_name.upcase} #{booker.first_name}" %>
               </div>
               <div>
                 <%= booker.phone_number %>

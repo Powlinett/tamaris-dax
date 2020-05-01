@@ -1,11 +1,16 @@
 class BookingsController < ApplicationController
   before_action :set_product_and_variant, only: [:new, :create]
-  before_action :set_booking, only: [:confirm, :cancel, :pick_up]
+  before_action :set_booking, only: [:confirm, :cancel, :pick_up, :back_in_stock]
 
   skip_before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @bookings = Booking.where.not(state: ['picked', 'canceled'])
+    @bookings = Booking.where.not(actual_state: ['pending', 'confirmed'])
+                       .order(created_at: :desc)
+  end
+
+  def current_bookings
+    @bookings = Booking.where(actual_state: ['pending', 'confirmed', 'closed'])
                        .order(created_at: :desc)
     @bookings.each(&:booking_closed?)
   end
@@ -43,6 +48,11 @@ class BookingsController < ApplicationController
     redirect
   end
 
+  def back_in_stock
+    @booking.back_in_stock
+    redirect
+  end
+
   private
 
   def booking_params
@@ -59,6 +69,6 @@ class BookingsController < ApplicationController
   end
 
   def redirect
-    @booking.save ? (redirect_to bookings_path) : (render :index)
+    @booking.save ? (redirect_to current_bookings_path) : (render :index)
   end
 end

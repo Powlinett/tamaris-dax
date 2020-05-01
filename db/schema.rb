@@ -27,7 +27,8 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
   create_table "bookings", force: :cascade do |t|
     t.date "starting_date"
     t.date "ending_date"
-    t.string "state"
+    t.string "former_state"
+    t.string "actual_state"
     t.bigint "booker_id"
     t.bigint "product_id"
     t.bigint "variant_id"
