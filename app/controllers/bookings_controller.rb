@@ -1,11 +1,18 @@
 class BookingsController < ApplicationController
   before_action :set_product_and_variant, only: [:new, :create]
-  before_action :set_booking, only: [:confirm, :cancel, :pick_up]
+  before_action :set_booking, only: [:confirm, :cancel, :pick_up, :back_in_stock]
 
   skip_before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @bookings = Booking.all.order(created_at: :desc)
+    @bookings = Booking.where.not(actual_state: ['pending', 'confirmed'])
+                       .order(created_at: :desc)
+  end
+
+  def current_bookings
+    @bookings = Booking.where(actual_state: ['pending', 'confirmed', 'closed'])
+                       .order(created_at: :desc)
+    @bookings.each(&:booking_closed?)
   end
 
   def new
@@ -28,20 +35,22 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking.confirm_booking
-
-    redirect_to bookings_path
+    redirect
   end
 
   def cancel
     @booking.cancel_booking
-
-    redirect_to bookings_path
+    redirect
   end
 
   def pick_up
     @booking.pick_up
+    redirect
+  end
 
-    redirect_to bookings_path
+  def back_in_stock
+    @booking.back_in_stock
+    redirect
   end
 
   private
@@ -57,5 +66,9 @@ class BookingsController < ApplicationController
   def set_product_and_variant
     @product = Product.find_by(reference: params[:product_reference])
     @variant = @product.variants.find_by(size: params[:size])
+  end
+
+  def redirect
+    @booking.save ? (redirect_to current_bookings_path) : (render :index)
   end
 end

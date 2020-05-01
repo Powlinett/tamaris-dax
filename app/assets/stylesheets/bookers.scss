@@ -1,3 +1,31 @@
-.bookers-content {
-  padding: 100px 0;
+body.bookers-index {
+
+  .bookers-content {
+    text-align: center;
+
+    .bookers-table {
+
+      padding-top: 1.2rem;
+      border-spacing: 0;
+
+      header div {
+        padding: 0.2rem 1rem;
+      }
+
+      .odd {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      .emails {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .fas {
+          padding-left: 1rem;
+        }
+      }
+    }
+  }
 }

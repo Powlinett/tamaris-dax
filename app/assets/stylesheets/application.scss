@@ -25,13 +25,13 @@ html, body {
 
 .page-content, .content-width {
   flex-grow: 1;
-  max-width: 1400px;
+  max-width: 1800px;
   margin: 0 auto;
 }
 
 .page-content {
   position: relative;
-  top: -40px;
+  // top: -40px;
 }
 
 p {

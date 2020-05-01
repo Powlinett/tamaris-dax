@@ -1,0 +1,27 @@
+<div class="actions no-border">
+  <% if booking.actual_state == 'confirmed' %>
+    <%= link_to(booking_pick_up_path(booking), class: 'action button') do %>
+      <i class="far fa-money-bill-alt"></i>
+      Encaissement
+    <% end %>
+    <%= link_to(booking_back_in_stock_path(booking), class: 'action button') do %>
+      <i class="fas fa-store-alt"></i>
+      Retour en vente
+    <% end %>
+  <% elsif (booking.actual_state == 'closed') && (booking.former_state != 'pending') %>
+    <p><strong><%= 'Date dépassée, à remettre en vente'.upcase %></strong></p>
+    <%= link_to(booking_back_in_stock_path(booking), class: 'action button') do %>
+      <i class="fas fa-store-alt"></i>
+      Retour en vente
+    <% end %>
+  <% else %>
+    <%= link_to(booking_confirm_path(booking), class: 'action button') do %>
+      <i class="fas fa-check-square"></i>
+      En stock
+    <% end %>
+    <%= link_to(booking_cancel_path(booking), class: 'action button') do %>
+      <i class="fas fa-window-close"></i>
+      Indisponible
+    <% end %>
+  <% end %>
+</div>
