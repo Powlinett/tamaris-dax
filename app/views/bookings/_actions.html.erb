@@ -1,0 +1,17 @@
+<div class="actions no-border">
+  <% if booking.state == 'confirmed' %>
+    <%= link_to(booking_pick_up_path(booking), class: 'action button') do %>
+      <i class="far fa-money-bill-alt"></i>
+      Réservation passée en caisse
+    <% end %>
+  <% else %>
+    <%= link_to(booking_confirm_path(booking), class: 'action button') do %>
+      <i class="fas fa-check-square"></i>
+      Je l'ai en stock
+    <% end %>
+    <%= link_to(booking_cancel_path(booking), class: 'action button') do %>
+      <i class="fas fa-window-close"></i>
+      Je ne l'ai plus!
+    <% end %>
+  <% end %>
+</div>

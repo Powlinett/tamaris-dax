@@ -1,3 +1,17 @@
 .bookers-content {
   padding: 100px 0;
 }
+body.bookers-index {
+  .page-content {
+    width: 1500px;
+  }
+
+  .bookers-content {
+    text-align: center;
+  }
+
+  .emails {
+    display: flex;
+    justify-content: space-between;
+  }
+}

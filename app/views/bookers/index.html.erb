@@ -1,14 +1,19 @@
 <div class="bookers-content">
-  <h1>Réservations en cours</h1>
+  <h1>Fichier client</h1>
   <section class="bookers-table">
       <header class="bookers-head">
             <div>Nom</div>
             <div>Prénom</div>
             <div>Téléphone</div>
-            <div>E-mail</div>
+            <div>
+              <div class="no-border emails">
+                <p>E-mail</p>
+                <i class="fas fa-clipboard"></i>
+              </div>
+            </div>
       </header>
           <% @bookers.each do |booker| %>
-            <div class="bookers-table-content">
+            <div class="bookers-table-row">
               <div>
                 <%= booker.last_name %>
               </div>

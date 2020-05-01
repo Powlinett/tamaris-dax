@@ -3,47 +3,37 @@
   <section class="bookings-table">
       <header class="bookings-head">
             <div>Modèle</div>
-            <div>Taille</div>
-            <div>Nom du client</div>
-            <div>Téléphone</div>
+            <div>Dates</div>
+            <div>Coordonnées du client</div>
             <div>Actions</div>
       </header>
           <% @bookings.each do |booking| %>
-            <div class="bookings-table-content">
-              <div>
+            <div class="bookings-table-row <%= booking.state %>">
+              <div class="model-wrapper">
                 <div class="model no-border">
                   <%= image_tag(resize(booking.product.photos_urls.first, 100, 200)) %>
                   <div class="no-border">
-                    <p><%= booking.product.model %></p>
+                    <p class="font-weight-bold"><%= booking.product.model %></p>
                     <p><%= booking.product.color %></p>
-                    <p><%= booking.product.reference %></p>
+                    <p class="font-weight-bold"><%= booking.product.reference %></p>
+                    <p class="font-weight-bold">Taille: <%= booking.variant.size %></p>
                   </div>
                 </div>
               </div>
               <div>
-                <%= booking.variant.size %>
+                 Réservé du <strong><%= booking.starting_date.strftime("%d/%m/%Y") %></strong>
+                 au <strong><%= booking.ending_date.strftime("%d/%m/%Y") %></strong>
               </div>
               <div>
-                <%= "#{booking.booker.last_name.upcase} #{booking.booker.first_name.capitalize}" %>
+                <p class="font-weight-bold"><%= "#{booking.booker.last_name.upcase} #{booking.booker.first_name.capitalize}" %></p>
+                <p>Tél. <strong><%= booking.booker.phone_number %></strong></p>
               </div>
-              <div>
-                <%= booking.booker.phone_number %>
-              </div>
-              <div>
-                <div class="actions no-border">
-                  <%= link_to(booking_confirm_path(booking)) do %>
-                    <i class="fas fa-check-square"></i>
-                    Confirmer
-                  <% end %>
-                  <%= link_to(booking_cancel_path(booking)) do %>
-                    <i class="fas fa-window-close"></i>
-                    Refuser
-                  <% end %>
-                  <%= link_to(booking_pick_up_path(booking)) do %>
-                    <i class="far fa-money-bill-alt"></i>
-                    Vendu
-                  <% end %>
-                </div>
+              <div class="actions-wrapper">
+                <% if booking.state == 'closed' %>
+                  <p><strong><%= 'Date dépassée, à remettre en magasin'.upcase %></strong></p>
+                <% else %>
+                  <%= render partial: 'actions', locals: { booking: booking } %>
+                <% end %>
               </div>
             </div>
           <% end %>

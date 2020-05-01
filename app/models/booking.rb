@@ -10,7 +10,7 @@ class Booking < ApplicationRecord
   after_initialize :set_defaults, unless: :persisted?
 
   def set_defaults
-    self.state = 'En attente de confirmation'
+    self.state = 'pending'
     self.starting_date = Date.today.strftime("%A %d/%m/%Y")
     self.ending_date = (Date.today + 3).strftime("%A %d/%m/%Y")
   end
@@ -24,6 +24,13 @@ class Booking < ApplicationRecord
   end
 
   def pick_up
-    self.state = 'picked-up'
+    self.state = 'picked'
+  end
+
+  def booking_closed?
+    return unless ending_date < Date.today
+
+    self.state = 'closed'
+    save
   end
 end
