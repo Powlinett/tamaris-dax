@@ -25,3 +25,8 @@
     <% end %>
   <% end %>
 </div>
+<% if !booking.former_state.nil? %>
+  <%= link_to booking_undo_action_path(booking) do %>
+    <i class="fas fa-undo"></i>
+  <% end %>
+<% end %>

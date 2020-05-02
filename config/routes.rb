@@ -10,10 +10,11 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index] do
     get 'confirm', to: 'bookings#confirm', as: :confirm
     get 'cancel', to: 'bookings#cancel', as: :cancel
-    get 'pick_up', to: 'bookings#pick_up', as: :pick_up
-    get 'back_in_stock', to: 'bookings#back_in_stock', as: :back_in_stock
+    get 'pick-up', to: 'bookings#pick_up', as: :pick_up
+    get 'back-in-stock', to: 'bookings#back_in_stock', as: :back_in_stock
+    get 'undo-last-action', to: 'bookings#undo_last_action', as: :undo_action
   end
-  get 'current_bookings', to: 'bookings#current_bookings', as: :current_bookings
+  get 'current-bookings', to: 'bookings#current_bookings', as: :current_bookings
 
   resources :bookers, only: [:index]
 end
