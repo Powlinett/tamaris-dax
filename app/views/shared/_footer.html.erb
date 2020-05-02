@@ -6,7 +6,7 @@
         <% if user_signed_in? %>
           <%= link_to 'Déconnexion', destroy_user_session_path, method: 'delete' %>
         <% else %>
-          <%= link_to 'Accès privé', bookings_path %>
+          <%= link_to 'Accès privé', current_bookings_path %>
         <% end %>
         <%= link_to 'Ajouter une référence', new_product_path %>
       </div>

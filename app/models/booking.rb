@@ -11,7 +11,7 @@ class Booking < ApplicationRecord
 
   def set_defaults
     self.actual_state = 'pending'
-    self.former_state = actual_state
+    self.former_state = nil
     self.starting_date = Date.today.strftime("%A %d/%m/%Y")
     self.ending_date = (Date.today + 3).strftime("%A %d/%m/%Y")
   end

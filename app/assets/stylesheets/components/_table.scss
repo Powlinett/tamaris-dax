@@ -18,6 +18,7 @@
   .bookings-table-row, .bookers-table-row {
     display: table-row;
     height: 100%;
+    position: relative;
 
     div {
       padding: 0.5rem 1rem;
@@ -68,6 +69,18 @@
 
   .no-border {
     border: none;
+  }
+
+  .fa-undo {
+    position: absolute;
+    top: -0.9rem;
+    right: -0.9rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    color: $light-grey;
+    border: 1px solid $super-light-grey;
   }
 }
 
