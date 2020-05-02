@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_product_and_variant, only: [:new, :create]
-  before_action :set_booking, only: [:confirm, :cancel, :pick_up,
-                                     :back_in_stock, :undo_last_action]
+  before_action :set_booking,
+                only: [:confirm, :cancel, :pick_up, :back_in_stock, :undo_last_action]
 
   skip_before_action :authenticate_user!, only: [:new, :create]
 

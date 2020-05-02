@@ -25,6 +25,11 @@
       height: 100%;
     }
 
+    .booking-dates {
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-right: 1px solid rgba(0, 0, 0,0.1);
+    }
+
     .actions-wrapper {
       display: flex;
       justify-content: center;
@@ -63,7 +68,14 @@
       display: flex;
       padding-left: 0;
       height: unset;
-      align-items: center;
+      align-items: stretch;
+
+      .no-border {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: auto;
+      }
     }
   }
 

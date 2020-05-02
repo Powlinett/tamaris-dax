@@ -1,36 +1,58 @@
 .navbar-lewagon {
   display: flex;
   justify-content: space-between;
-  background: white;
+  background: rgba(250, 250, 250, 0.8);
   height: 85px;
   padding: 1.5rem 0;
-  color: $light-grey;
+
+  .nav-item {
+    padding: 0 1rem;
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    color: $medium-grey;
+    padding: 0;
+    border-bottom: 1px solid transparent;
+    transition: $base-transition;
+    transform: scale(1, 0.75);
+    font-size: 1.1rem;
+
+    &:hover {
+      color: $medium-grey;
+      border-bottom: 1px solid $medium-grey;
+      transition: $base-transition;
+    }
+  }
 }
 
+.navbar.navbar-expand-sm.navbar-light.navbar-lewagon {
+  position: sticky;
+  top: 0;
+}
 
 .navbar.navbar-lewagon {
   box-shadow: $base-box-shadow;
   z-index: 2;
 
-  .avatar {
-    width: 40px;
-  }
+  // .avatar {
+  //   width: 40px;
+  // }
 
-  .avatar-email {
-    font-size: 0.8rem;
-    border: 1px solid $super-light-grey;
-    border-radius: 0.8rem;
-    margin: 0;
-    padding: 0 0.5rem;
-    position: absolute;
-    top: 30px;
-    right: -50px;
-    background-color: rgba(250, 250, 250, 0.5);
-  }
+  // .avatar-email {
+  //   font-size: 0.8rem;
+  //   border: 1px solid $super-light-grey;
+  //   border-radius: 0.8rem;
+  //   margin: 0;
+  //   padding: 0 0.5rem;
+  //   position: absolute;
+  //   top: 30px;
+  //   right: -50px;
+  //   background-color: rgba(250, 250, 250, 0.5);
+  // }
 
-  .dropdown-menu {
-    top: 100px;
-  }
+  // .dropdown-menu {
+  //   top: 100px;
+  // }
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -38,6 +60,9 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  height: 40px;
-  padding: 0.5rem 0;
+  height: 24px;
+}
+
+.navbar-light .navbar-brand {
+  padding: 0;
 }

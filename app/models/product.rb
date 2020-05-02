@@ -33,6 +33,8 @@ class Product < ApplicationRecord
   end
 
   def common_ref
-    reference.split('-')[0..3].join('-')
+    ref_array = reference.split('-')
+    ref_array = ref_array.reject { |x| ref_array.index(x) == ref_array.index(ref_array.last) }
+    ref_array.join('-')
   end
 end

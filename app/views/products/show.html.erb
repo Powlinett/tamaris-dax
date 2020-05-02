@@ -33,22 +33,24 @@
       </div>
     </div>
 
-    <div class="sizes-content">
-      <ul class="all-sizes">
-        <% @product.variants.order(:size).each do |variant| %>
-          <%= link_to(product_size_path(@product.reference, variant.size),
-          class: "variant-box #{"is-selected" if !@variant.nil? && variant.size == @variant.size}
-            #{' unavailable' if variant.stock <= 0}") do %>
-            <li class="size<%= " unavailable" if variant.stock <= 0 %>">
-              <%= variant.size %>
-            </li>
+    <% if @product.variants.count > 1 %>
+      <div class="sizes-content">
+        <ul class="all-sizes">
+          <% @product.variants.order(:size).each do |variant| %>
+            <%= link_to(product_size_path(@product.reference, variant.size),
+            class: "variant-box #{"is-selected" if !@variant.nil? && variant.size == @variant.size}
+              #{' unavailable' if variant.stock <= 0}") do %>
+              <li class="size<%= " unavailable" if variant.stock <= 0 %>">
+                <%= variant.size %>
+              </li>
+            <% end %>
           <% end %>
+        </ul>
+        <% if !@variant.nil? && @variant.stock < 10 && @variant.stock > 0 %>
+          <p class="last-stocks">Plus que <%= pluralize(@variant.stock, "exemplaire") %> en stock</p>
         <% end %>
-      </ul>
-      <% if !@variant.nil? && @variant.stock < 10 && @variant.stock > 0 %>
-        <p class="last-stocks">Plus que <%= pluralize(@variant.stock, "exemplaire") %> en stock</p>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
 
     <% if !@variant.nil? %>
       <%= link_to "Réserver en boutique", new_product_booking_path(@product.reference, @variant.size), class: "button booking-btn" %>
