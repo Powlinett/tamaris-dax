@@ -1,7 +1,7 @@
 .variant-box {
   display: flex;
   height: 36px;
-  width: 36px;
+  min-width: 36px;
   margin: 0 4px;
   margin-bottom: 1.5rem;
   box-shadow: $variant-box-shadow-light;

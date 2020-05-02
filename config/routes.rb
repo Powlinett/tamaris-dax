@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     get '/:size', to: 'variants#show', as: :size
   end
 
+  get 'toutes-les-chaussures', to: 'products#all_shoes', as: :all_shoes
+  get 'tous-les-accessoires', to: 'products#all_accessories', as: :all_accessories
+  get 'toutes-les-promotions', to: 'products#all_offers', as: :all_offers
+
   resources :bookings, only: [:index] do
     get 'confirm', to: 'bookings#confirm', as: :confirm
     get 'cancel', to: 'bookings#cancel', as: :cancel
@@ -14,7 +18,7 @@ Rails.application.routes.draw do
     get 'back-in-stock', to: 'bookings#back_in_stock', as: :back_in_stock
     get 'undo-last-action', to: 'bookings#undo_last_action', as: :undo_action
   end
-  get 'current-bookings', to: 'bookings#current_bookings', as: :current_bookings
+  get 'reservations-en-cours', to: 'bookings#current_bookings', as: :current_bookings
 
   resources :bookers, only: [:index]
 end

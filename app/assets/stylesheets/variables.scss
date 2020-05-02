@@ -39,7 +39,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: mediumturquoise;
   }
 
-  .navy {
+  .navy, .blue {
     background-color: #2D3F72;
   }
 
@@ -59,7 +59,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: silver;
   }
 
-  .sun, .saffron {
+  .sun, .saffron, .yellow {
     background-color: gold;
   }
 
@@ -71,7 +71,11 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #DF3E6E;
   }
 
-  .taupe, .camel {
+  .taupe, .camel, .sand, .beige, .rose {
     background-color: #C5AA97;
+  }
+
+  .brown {
+    background-color: #765252;
   }
 }

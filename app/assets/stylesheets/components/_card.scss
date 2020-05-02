@@ -2,19 +2,49 @@
   display: grid;
   grid-template-columns: repeat(4, 25%);
   grid-auto-rows: 1fr;
+  transition: $base-transition;
+  grid-row-gap: 0.2rem;
+  grid-column-gap: 0.2rem;
 
   li.product-card-wrapper {
     height: 100%;
+
+    &:hover {
+      .quick-booking {
+        opacity: 1;
+        transition: $base-transition;
+      }
+
+      .product-image > .product-card {
+        opacity: 0;
+        transition: $base-transition;
+      }
+    }
+  }
+}
+
+.product-image {
+  position: relative;
+
+  .quick-booking {
+    position: absolute;
+    bottom: 0;
+    padding: 0 1rem;
+    width: 100%;
+    background-color: white;
+    opacity: 0;
+    transition: $base-transition;
   }
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  margin: 8px 2px;
+  // margin: 0 0.1rem;
   justify-content: flex-end;
   align-items: center;
-  background-color: #F7F5F6;
+  background-color: white;
+  transition: $base-transition;
 
   &:hover {
     text-decoration: none;

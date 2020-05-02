@@ -3,10 +3,23 @@ class ProductsController < ApplicationController
   include Scraper
 
   before_action :set_product, only: [:create]
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!,
+                     only: [:index, :show, :all_shoes, :all_accessories, :all_offers]
 
   def index
     @products = Product.all
+  end
+
+  def all_shoes
+    @products = Product.where(category: 'chaussures')
+  end
+
+  def all_accessories
+    @products = Product.where(category: 'accessoires')
+  end
+
+  def all_offers
+    @products = Product.where(former_price: (1..300))
   end
 
   def new

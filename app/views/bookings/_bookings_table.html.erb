@@ -11,15 +11,15 @@
               <div class="model no-border">
                 <%= link_to((image_tag(resize(booking.product.photos_urls.first, 100, 200))), product_path(booking.product.reference)) %>
                <div class="no-border">
-                  <p class="font-weight-bold"><%= booking.product.model %></p>
-                  <p><%= booking.product.color %></p>
+                  <!-- <p class="font-weight-bold"><%= booking.product.model %></p>
+                  <p><%= booking.product.color %></p> -->
                   <p class="font-weight-bold"><%= booking.product.reference %></p>
-                  <p class="font-weight-bold">Taille: <%= booking.variant.size %></p>
+                  <p>Taille: <strong><%= booking.variant.size %></strong></p>
                   <p>( env. <%= booking.variant.stock %> en stock )</p>
                 </div>
               </div>
             </div>
-            <div>
+            <div class="booking-dates">
                <p>du <strong><%= booking.starting_date.strftime("%d/%m") %></strong></p>
                <p>jusqu'au <strong><%= booking.ending_date.strftime("%d/%m") %></strong></p>
             </div>

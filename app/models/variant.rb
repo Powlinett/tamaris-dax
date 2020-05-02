@@ -3,7 +3,7 @@ class Variant < ApplicationRecord
   has_many :bookings, dependent: :nullify
 
   validates :product, presence: true
-  validates :size, presence: true, inclusion: { in: 35..42 }, uniqueness: { scope: :product }
+  validates :size, presence: true, inclusion: { in: 1..140 }, uniqueness: { scope: :product }
   validates :stock, presence: true, inclusion: { in: 0..100 }
 
   def update_stock(new_stock)
