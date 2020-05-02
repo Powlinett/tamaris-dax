@@ -6,12 +6,12 @@ Booker.destroy_all
 Variant.destroy_all
 Product.destroy_all
 
-def scrap_all_products
-  main_url = 'https://tamaris.com/fr-FR/chaussures/'
+def scrap_all_products(category)
+  main_url = "https://tamaris.com/fr-FR/#{category}/"
   html = Nokogiri::HTML.parse(open(main_url))
 
   links = html.search('a.tile-link')
-  links[13..18].each do |link|
+  links[10..20].each do |link|
     html = Nokogiri::HTML.parse(open(link['href']))
     reference = html.search('span.value')[0].text.strip
     product = product_data(reference)
@@ -29,6 +29,7 @@ end
 
 def scrap_product_page(html)
   @category = html.search('.breadcrumb-element')[1].text.strip
+  @sub_category = html.search('.breadcrumb-element')[2].text.strip
   @model = html.title.split('-')[0].strip[/\D*/]
   @color = html.search('div.label').text.strip
   @price = html.search('.price-sales').first['data-sale-price']
@@ -36,7 +37,7 @@ def scrap_product_page(html)
   unless @former_price.nil?
     @former_price = @former_price.strip.split(',').join('.')
   end
-  @sizes_range = ((html.search('.selection').first.text.strip.to_i)..(html.search('.selection').last.text.strip.to_i))
+  @sizes_array = html.search('.selection').map { |s| s.text.strip.to_i }
   # @description = html.search('.information-wrapper')[0].text.strip
 
   @photos = html.search('.productthumbnail').map do |element|
@@ -50,25 +51,32 @@ def product_data(reference)
   Product.new(
     reference: reference,
     category: @category.downcase,
+    sub_category: @sub_category.downcase,
     model: @model,
     color: @color.downcase,
     price: @price.to_f,
-    sizes_range: @sizes_range,
+    sizes_range: @sizes_array,
     former_price: @former_price.to_f,
     photos_urls: @photos
   )
 end
 
 def get_other_colors(reference, html)
-  model_ref = reference.split('-')[0..3].join('-')
+  model_ref = model_reference(reference)
   colors = html.search('masked-link.swatchanchor').map do |element|
     element.attribute('data-color').value
   end
   colors.each do |color|
     color_ref = model_ref + "-#{color}"
     product = product_data(color_ref)
-    product.save
+    product.save unless product.nil?
   end
+end
+
+def model_reference(reference)
+  ref_array = reference.split('-')
+  ref_array = ref_array.reject { |x| ref_array.index(x) == ref_array.index(ref_array.last) }
+  ref_array.join('-')
 end
 
 def update_variants
@@ -109,7 +117,8 @@ User.create(
   password: '123456'
 )
 
-scrap_all_products
+scrap_all_products('chaussures')
+scrap_all_products('accessoires')
 
 update_variants
 

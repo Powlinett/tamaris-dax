@@ -8,6 +8,7 @@ module Scraper
 
   def scrap_product_page(html)
     @category = html.search('.breadcrumb-element')[1].text.strip
+    @sub_category = html.search('.breadcrumb-element')[2].text.strip
     @model = html.title.split('-')[0].strip[/\D*/]
     @color = html.search('div.label').text.strip
     @price = html.search('.price-sales').first['data-sale-price']
@@ -15,7 +16,7 @@ module Scraper
     unless @former_price.nil?
       @former_price = @former_price.strip.split(',').join('.')
     end
-    @sizes_range = ((html.search('.selection').first.text.strip.to_i)..(html.search('.selection').last.text.strip.to_i))
+    @sizes_array = html.search('.selection').map { |s| s.text.strip.to_i }
     # @description = product_html.search('.information-wrapper')[0].text.strip
 
     @photos = html.search('.productthumbnail').map do |element|
@@ -30,11 +31,12 @@ module Scraper
       {
         reference: reference,
         category: @category.downcase,
+        sub_category: @sub_category,
         model: @model,
         color: @color.downcase,
         price: @price.to_f,
         former_price: @former_price.to_f,
-        sizes_range: @sizes_range,
+        sizes_range: @sizes_array,
         photos_urls: @photos
       }
   end

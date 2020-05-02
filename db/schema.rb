@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_045228) do
     t.string "model"
     t.string "color"
     t.string "category"
+    t.string "sub_category"
     t.float "price"
     t.float "former_price"
     t.text "sizes_range"
