@@ -31,7 +31,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: black;
   }
 
-  .cognac, .nut, .brandy {
+  .cognac, .nut, .brandy, .marron {
     background-color: #89593B;
   }
 
@@ -43,11 +43,11 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #2D3F72;
   }
 
-  .lipstick {
+  .lipstick, .chili, .rouge {
     background-color: crimson;
   }
 
-  .khaki {
+  .khaki, .kaki, .vert {
     background-color: darkkhaki;
   }
 
@@ -55,7 +55,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: darkorange;
   }
 
-  .silver {
+  .silver, .gris, .metallique {
     background-color: silver;
   }
 
@@ -67,15 +67,23 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #C0CA7F;
   }
 
-  .pink {
+  .pink, .cranberry, .magenta {
     background-color: #DF3E6E;
   }
 
-  .taupe, .camel, .sand, .beige, .rose {
+  .taupe, .camel, .sand, .dune {
     background-color: #C5AA97;
   }
 
-  .brown {
+  .brown, .cafe {
     background-color: #765252;
+  }
+
+  .beige, .cream {
+    background-color: #CDBCAC;
+  }
+
+  .rose {
+    background-color: #DEBDB6;
   }
 }
