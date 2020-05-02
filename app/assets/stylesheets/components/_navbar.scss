@@ -11,11 +11,12 @@
 
   .navbar-nav .nav-item .nav-link {
     color: $medium-grey;
+    font-family: 'Nunito', sans-serif;
     padding: 0;
     border-bottom: 1px solid transparent;
     transition: $base-transition;
-    transform: scale(1, 0.75);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
 
     &:hover {
       color: $medium-grey;

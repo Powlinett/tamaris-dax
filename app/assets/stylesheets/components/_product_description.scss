@@ -45,6 +45,12 @@ body.products-show, body.variants-show {
   position: relative;
   margin: 0 -4px;
 
+  .variant-box {
+    &:hover {
+      box-shadow: $variant-box-shadow-light;
+    }
+  }
+
   &:hover {
     .underline.is-selected {
       display: none;
