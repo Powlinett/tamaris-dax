@@ -1,6 +1,6 @@
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 25%);
+  grid-template-columns: repeat(3, 33%);
   grid-auto-rows: 1fr;
   transition: $base-transition;
   grid-row-gap: 0.2rem;
@@ -14,7 +14,6 @@
         opacity: 1;
         transition: $base-transition;
         background-color: white;
-        text-align: center;
         padding-top: 0.5rem;
       }
 
@@ -36,11 +35,19 @@
     padding: 0 1rem;
     width: 100%;
     opacity: 0;
+    text-align: center;
     transition: $base-transition;
 
-    p {
+    p, .booking-link {
       font-weight: bolder;
       letter-spacing: 0.025rem;
+      color: $medium-grey;
+      font-size: $base-font-size;
+    }
+
+    .unavailable {
+      font-weight: 300;
+      color: $light-grey;
     }
   }
 }
@@ -48,7 +55,6 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  // margin: 0 0.1rem;
   justify-content: flex-end;
   align-items: center;
   background-color: white;
