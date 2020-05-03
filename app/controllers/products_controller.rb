@@ -3,23 +3,28 @@ class ProductsController < ApplicationController
   include Scraper
 
   before_action :set_product, only: [:create]
+
   skip_before_action :authenticate_user!,
                      only: [:index, :show, :all_shoes, :all_accessories, :all_offers]
 
   def index
     @products = Product.all
+    collect_only_in_stock
   end
 
   def all_shoes
     @products = Product.where(category: 'chaussures')
+    collect_only_in_stock
   end
 
   def all_accessories
     @products = Product.where(category: 'accessoires')
+    collect_only_in_stock
   end
 
   def all_offers
     @products = Product.where(former_price: (1..300))
+    collect_only_in_stock
   end
 
   def new
@@ -69,5 +74,9 @@ class ProductsController < ApplicationController
       flash.now[:alert] = 'Produit introuvable sur Tamaris.com :('
       render :new
     end
+  end
+
+  def collect_only_in_stock
+    @products = @products.select(&:still_any_stock?)
   end
 end

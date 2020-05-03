@@ -37,4 +37,10 @@ class Product < ApplicationRecord
     ref_array = ref_array.reject { |x| ref_array.index(x) == ref_array.index(ref_array.last) }
     ref_array.join('-')
   end
+
+  def still_any_stock?
+    total_stock = 0
+    variants.each { |variant| total_stock += variant.stock }
+    total_stock.positive?
+  end
 end
