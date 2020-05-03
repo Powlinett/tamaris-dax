@@ -4,9 +4,9 @@
       <a href="<%= product_path(product.reference)%>", class="product-card" >
         <div class="product-image" style="background-image: url(<%= resize(product.photos_urls[1], 440, 500) %>">
           <%= image_tag resize(product.photos_urls.first, 440, 500), class: 'first-picture' %>
-          <% if product.variants.count > 1 %>
-            <div class="quick-booking">
-              <p>Réserver en magasin</p>
+          <div class="quick-booking">
+            <p>Réserver en magasin</p>
+            <% if product.variants.count > 1 %>
               <ul class="all-sizes product-card-sizes">
                 <% product.variants.order(:size).each do |variant| %>
                   <%= link_to(new_product_booking_path(product.reference, variant.size),
@@ -17,8 +17,8 @@
                   <% end %>
                 <% end %>
               </ul>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
         <div class="card-infos">
           <p><%= product.model %> - <%= product.color %></p>

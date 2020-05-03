@@ -1,5 +1,5 @@
 //Fonts variables
-$base-font-size: 0.9rem;
+$base-font-size: 0.875rem;
 
 //Colors variables
 $dark-grey: rgba(0, 0, 0, 0.8);
@@ -35,10 +35,6 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #89593B;
   }
 
-  .sage {
-    background-color: mediumturquoise;
-  }
-
   .navy, .blue {
     background-color: #2D3F72;
   }
@@ -47,8 +43,8 @@ $base-transition: all 0.3s ease-in-out;
     background-color: crimson;
   }
 
-  .khaki, .kaki, .vert {
-    background-color: darkkhaki;
+  .khaki, .kaki, .vert, .olive, .sage {
+    background-color: rgba(151, 146, 86, 0.7);
   }
 
   .orange, .sunset {

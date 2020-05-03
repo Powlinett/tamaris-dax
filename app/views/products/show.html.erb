@@ -1,3 +1,5 @@
+<%= render 'shared/tabs' %>
+
 <div class="product-show-content">
   <ul class="thumbnails-pictures">
     <% @product.photos_urls.each_with_index do |photo, index| %>
@@ -13,13 +15,16 @@
 
   <div class="product-side-content col-lg-4">
     <h1 class="product-model"><%= @product.model %></h1>
-    <div class="prices sale-prices">
-      <% if @product.former_price != 0 %>
-        <h2 class="price new-price"><%= @product.french_price %> €</h2>
-        <h2 class="price standard-price"><%= @product.french_former_price %> €</h2>
-      <% else %>
-        <h2 class="price sale-price"><%= @product.french_price %> €</h2>
-      <% end %>
+    <div class="prices-wrapper">
+      <div class="prices sale-prices">
+        <% if @product.former_price != 0 %>
+          <h2 class="price new-price"><%= @product.french_price %> €</h2>
+          <h2 class="price standard-price"><%= @product.french_former_price %> €</h2>
+        <% else %>
+          <h2 class="price sale-price"><%= @product.french_price %> €</h2>
+        <% end %>
+      </div>
+      <p>T.T.C, retrait en magasin</p>
     </div>
 
     <div class="colors-content">
@@ -52,6 +57,10 @@
       </div>
     <% end %>
 
+    <% if @product.category == 'chaussures' %>
+      <p class='show-size-modal'>Quelle taille est faite pour vous?</p>
+    <% end %>
+
     <% if !@variant.nil? %>
       <%= link_to "Réserver en boutique", new_product_booking_path(@product.reference, @variant.size), class: "button booking-btn" %>
     <% else %>
@@ -60,3 +69,5 @@
 
   </div>
 </div>
+
+<%= render 'sizes_modal' %>

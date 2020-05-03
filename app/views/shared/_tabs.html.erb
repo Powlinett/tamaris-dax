@@ -1,11 +1,25 @@
 <ul class="list-inline tabs-underlined">
   <li>
-    <%= link_to 'Chaussures', products_path, class: 'tab-underlined active' %>
+    <%= link_to 'Tamaris', root_path %>
   </li>
+
+  <% if @product.category == 'chaussures' %>
+    <li>
+      <%= link_to "Chaussures", all_shoes_path  %>
+    </li>
+  <% end %>
+
+  <% if @product.category == 'accessoires' %>
+    <li>
+      <%= link_to "Accessoires", all_accessories_path  %>
+    </li>
+  <% end %>
+
   <li>
-    <a href="#" class="tab-underlined">"Accessoires"</a>
+    <%= link_to "#{@product.sub_category.capitalize}", "#" %>
   </li>
+
   <li>
-    <a href="#" class="tab-underlined">"Promos"</a>
+    <%= "#{@product.model.capitalize}" %>
   </li>
 </ul>
