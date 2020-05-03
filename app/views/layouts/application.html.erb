@@ -14,14 +14,16 @@
 
   <body class="<%= body_class %>">
 
-    <%= render 'shared/navbar' %>
-<!--
-    <%= render 'shared/tabs' %> -->
 
-    <%= render 'shared/flashes' %>
+    <%= render 'shared/navbar' %>
+
 
     <div class="page-content">
+
+      <%= render 'shared/flashes' %>
+
       <%= yield %>
+
     </div>
 
 

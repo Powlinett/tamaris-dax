@@ -13,9 +13,13 @@
       .quick-booking {
         opacity: 1;
         transition: $base-transition;
+        background-color: white;
+        text-align: center;
+        padding-top: 0.5rem;
       }
 
-      .product-image > .product-card {
+      .product-image > .product-card,
+      .product-image > .first-picture {
         opacity: 0;
         transition: $base-transition;
       }
@@ -31,9 +35,13 @@
     bottom: 0;
     padding: 0 1rem;
     width: 100%;
-    background-color: white;
     opacity: 0;
     transition: $base-transition;
+
+    p {
+      font-weight: bolder;
+      letter-spacing: 0.025rem;
+    }
   }
 }
 

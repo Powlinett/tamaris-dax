@@ -32,10 +32,15 @@ body.products-show, body.variants-show {
       color: $medium-grey;
     }
   }
+
+  .prices-wrapper p {
+    color: $medium-light-grey;
+    font-size: 0.85rem;
+  }
 }
 
 .colors-content {
-  margin-top: 36px;
+  margin-top: 1.5rem;
 }
 
 .other-colors {
