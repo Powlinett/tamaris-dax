@@ -1,12 +1,20 @@
 <ul class="products-grid">
+
   <% @products.each do |product| %>
+
     <li class="product-card-wrapper">
-      <a href="<%= product_path(product.reference)%>", class="product-card" >
+      <%= link_to(product_path(product.reference), class: 'product-card') do %>
+
         <div class="product-image" style="background-image: url(<%= resize(product.photos_urls[1], 440, 500) %>">
           <%= image_tag resize(product.photos_urls.first, 440, 500), class: 'first-picture' %>
+
           <div class="quick-booking">
-            <p>Réserver en magasin</p>
-            <% if product.variants.count > 1 %>
+            <% if (product.variants.count == 1) && (product.variants[0].stock) > 0 %>
+              <%= link_to 'Réserver en magasin', new_product_booking_path(product.reference, product.variants[0].size), class: 'booking-link' %>
+            <% elsif product.variants.count == 1 %>
+              <p class="unavailable">épuisé</p>
+            <% else %>
+              <p class="booking-link">Réserver en magasin</p>
               <ul class="all-sizes product-card-sizes">
                 <% product.variants.order(:size).each do |variant| %>
                   <%= link_to(new_product_booking_path(product.reference, variant.size),
@@ -19,7 +27,9 @@
               </ul>
             <% end %>
           </div>
+
         </div>
+
         <div class="card-infos">
           <p><%= product.model %> - <%= product.color %></p>
           <div class="prices">
@@ -31,7 +41,10 @@
             <% end %>
           </div>
         </div>
-      </a>
+
+      <% end %>
     </li>
+
   <% end %>
+
 </ul>

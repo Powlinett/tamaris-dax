@@ -1,6 +1,6 @@
-.list-inline.tabs-underlined {
+.list-inline.tabs-links {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   background-color: transparent;
   width: 100%;
   margin-bottom: 0;
@@ -9,18 +9,20 @@
   position: absolute;
   font-size: 0.875rem;
 
-  a::after {
+  .tab-link::after {
     content: "/";
-    padding: 0 0.5rem;
+    float: right;
+    padding: 0 0.3rem;
+  }
+
+  a:hover {
+    color: $light-grey;
+    text-decoration: underline;
   }
 
   li, a {
     color: $light-grey;
     text-decoration: none;
-
-    &:hover {
-      color: $light-grey;
-    }
   }
 
   li:last-child {

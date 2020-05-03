@@ -1,21 +1,21 @@
-<ul class="list-inline tabs-underlined">
-  <li>
+<ul class="list-inline tabs-links">
+  <li class="tab-link">
     <%= link_to 'Tamaris', root_path %>
   </li>
 
   <% if @product.category == 'chaussures' %>
-    <li>
+    <li class="tab-link">
       <%= link_to "Chaussures", all_shoes_path  %>
     </li>
   <% end %>
 
   <% if @product.category == 'accessoires' %>
-    <li>
+    <li class="tab-link">
       <%= link_to "Accessoires", all_accessories_path  %>
     </li>
   <% end %>
 
-  <li>
+  <li class="tab-link">
     <%= link_to "#{@product.sub_category.capitalize}", "#" %>
   </li>
 
