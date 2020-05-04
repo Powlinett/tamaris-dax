@@ -18,6 +18,8 @@ gem 'pry', '~> 0.12.2'
 gem 'devise'
 gem 'faker'
 gem'flutie'
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
