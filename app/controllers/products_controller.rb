@@ -38,7 +38,10 @@ class ProductsController < ApplicationController
     end
     if @product.save
       @variant = update_variant(product_params[:variants], @product)
-      save_and_redirect
+      save_variant_and_redirect
+    else
+      flash.now[:alert] = 'Référence introuvable sur Tamaris.com :('
+      render :new
     end
   end
 
@@ -67,11 +70,11 @@ class ProductsController < ApplicationController
     @variant
   end
 
-  def save_and_redirect
+  def save_variant_and_redirect
     if @variant.save
       redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
     else
-      flash.now[:alert] = 'Produit introuvable sur Tamaris.com :('
+      flash.now[:alert] = 'Référence introuvable sur Tamaris.com :('
       render :new
     end
   end

@@ -31,7 +31,7 @@ class BookingsController < ApplicationController
       product: @product,
       variant: @variant
     )
-    @booking.save ? (redirect_to root_path) : (redirect_to :new)
+    @booking.save ? (redirect_to root_path) : (render :new)
   end
 
   def confirm

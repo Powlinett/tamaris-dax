@@ -1,4 +1,5 @@
 <% product = @product %>
+
 <div class="booking-content flex-content">
   <div class="booking-product-side">
     <a href="<%= product_path(product.reference)%>", class="product-card" >
@@ -23,7 +24,7 @@
 
   <div class="booking-form-side">
     <h1 class="booking-form">Réserver ce modèle</h1>
-    <%= simple_form_for @booking, url: product_bookings_path, remote: true do |f| %>
+    <%= simple_form_for Booking.new, url: product_bookings_path do |f| %>
         <%= f.simple_fields_for :booker, @booker do |f|  %>
         <%= f.input :last_name, placeholder: 'Nom', label: false %>
         <%= f.input :first_name, placeholder: 'Prénom', label: false %>
