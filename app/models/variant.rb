@@ -1,10 +1,13 @@
 class Variant < ApplicationRecord
+  PERMITTED_SIZES = [1, (35..43).to_a, (70..130).select { |i| (i % 5).zero? }].flatten.freeze
+
   belongs_to :product
   has_many :bookings, dependent: :nullify
 
   validates :product, presence: true
-  validates :size, presence: true, inclusion: { in: 1..140 }, uniqueness: { scope: :product }
   validates :stock, presence: true, inclusion: { in: 0..100 }
+  validates :size, presence: true, uniqueness: { scope: :product },
+                   inclusion: { in: PERMITTED_SIZES }
 
   def update_stock(new_stock)
     self.stock += new_stock

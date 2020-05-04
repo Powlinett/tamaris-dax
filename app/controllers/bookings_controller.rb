@@ -24,14 +24,12 @@ class BookingsController < ApplicationController
   def create
     @booker = Booker.new(booking_params[:booker])
 
-    return render :new unless @booker.save
-
     @booking = Booking.new(
       booker: @booker,
       product: @product,
       variant: @variant
     )
-    @booking.save ? (redirect_to root_path) : (render :new)
+    @booker.save && @booking.save ? (redirect_to root_path) : (render :new)
   end
 
   def confirm
