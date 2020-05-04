@@ -12,6 +12,7 @@
   text-transform: uppercase;
   border-radius: 0;
   transition: $base-transition;
+  margin-top: 2rem;
 
   &:hover {
     text-decoration: none;
@@ -19,8 +20,4 @@
     background-color: white;
     color: $medium-grey;
   }
-}
-
-.booking-btn {
-  margin-top: 2rem;
 }

@@ -1,12 +1,15 @@
-.bookings-content {
-  margin-top: 2rem;
-}
-
 .booking-content, .bookings-content {
   justify-content: center;
+  margin: 4rem auto;
+  padding: 2rem;
+  padding-bottom: 0;
+  box-shadow: 0 0 6px rgba(0,0,0,.1);
 
   .booking-product-side {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .product-card {
       margin: 0;
@@ -22,18 +25,27 @@
     color: $dark-grey;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background: white;
     position: relative;
+    padding-bottom: 69.8px;
 
-    h1 {
-      padding: 16px 0;
+    .booking-form {
+      padding: 1rem 0;
       box-shadow: $base-box-shadow;
       width: 100%;
       text-align: center;
-      position: absolute;
-      top: 0
+      margin-bottom: 1rem;
+      display:flex;
+      justify-content: center;
+
+      h1 {
+        margin-bottom: 0;
+      }
+    }
+
+    .booking-btn {
+      margin-top: 0;
     }
   }
 }

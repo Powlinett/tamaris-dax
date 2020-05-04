@@ -1,11 +1,8 @@
-<%= simple_form_for @product, url: products_path do |f| %>
-  <%= f.label :reference %>
+<%= simple_form_for @product, url: products_path, method: 'post' do |f| %>
   <%= f.input :reference %>
   <%= f.simple_fields_for :variants, @variant do |f| %>
-    <%= f.label :size %>
     <%= f.input :size %>
-    <%= f.label :stock %>
     <%= f.input :stock %>
     <% end %>
-  <%= f.submit %>
+  <%= f.submit 'Créer le produit' %>
 <% end %>

@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
   end
 
   def all_offers
-    @products = Product.where(former_price: (1..300))
+    @products = Product.where.not(former_price: 0.0)
     collect_only_in_stock
   end
 
@@ -36,9 +36,11 @@ class ProductsController < ApplicationController
     if @product.nil?
       @product = Product.new(product_data(product_params[:reference]))
     end
-    if @product.save
-      @variant = update_variant(product_params[:variants], @product)
-      save_and_redirect
+    if @product.save && update_variant(product_params[:variants], @product)
+      redirect_or_render_new
+    else
+      flash.now[:alert] = 'Référence introuvable sur Tamaris.com :('
+      render :new
     end
   end
 
@@ -63,15 +65,22 @@ class ProductsController < ApplicationController
 
   def update_variant(params, product)
     @variant = product.variants.find_by(size: params[:size].to_i)
-    @variant.update_stock(params[:stock].to_i)
-    @variant
+
+    if @variant.nil? || params[:stock].to_i.zero?
+      @variant = Variant.new(
+        size: params[:size].to_i,
+        stock: params[:stock].to_i
+      )
+    else
+      @variant.update(stock: params[:stock].to_i)
+    end
   end
 
-  def save_and_redirect
-    if @variant.save
+  def redirect_or_render_new
+    if @variant.persisted?
       redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
     else
-      flash.now[:alert] = 'Produit introuvable sur Tamaris.com :('
+      flash.now[:alert] = 'Merci de vérifier la taille ou le stock'
       render :new
     end
   end
