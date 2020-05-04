@@ -13,9 +13,10 @@ def scrap_all_products(category)
   links = html.search('a.tile-link')
   links.each do |link|
     html = Nokogiri::HTML.parse(open(link['href']))
-    next if html.nil?
+    reference = html.search('span.value')[0]
+    next if reference.nil?
 
-    reference = html.search('span.value')[0].text.strip
+    reference = reference.text.strip
     product = product_data(reference)
     product.save unless product.nil?
     get_other_colors(reference, html)
