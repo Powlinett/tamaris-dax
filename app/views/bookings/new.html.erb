@@ -23,7 +23,9 @@
 
 
   <div class="booking-form-side">
-    <h1 class="booking-form">Réserver ce modèle</h1>
+    <div class="booking-form">
+      <h1>Réserver ce modèle</h1>
+    </div>
     <%= simple_form_for @booking, url: product_bookings_path, method: 'post' do |f| %>
         <%= f.simple_fields_for :booker, @booker do |f|  %>
         <%= f.input :last_name, placeholder: 'Nom', label: false %>
