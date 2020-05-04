@@ -9,6 +9,8 @@ class Booking < ApplicationRecord
 
   after_initialize :set_defaults, unless: :persisted?
 
+  after_save :send_record_email
+
   def set_defaults
     self.actual_state = 'pending'
     self.former_state = nil
@@ -46,5 +48,11 @@ class Booking < ApplicationRecord
 
   def undo_state_change
     self.actual_state = former_state
+  end
+
+  private
+
+  def send_record_email
+    BookingMailer.with(booking: self).registration.deliver_later
   end
 end
