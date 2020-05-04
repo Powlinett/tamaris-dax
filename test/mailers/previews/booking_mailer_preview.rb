@@ -1,8 +1,8 @@
 # Preview all emails at http://localhost:3000/rails/mailers/booking_mailer
 class BookingMailerPreview < ActionMailer::Preview
-  # Preview this email at http://localhost:3000/rails/mailers/booking_mailer/booking_registration
-  def booking_registration
+  # Preview this email at http://localhost:3000/rails/mailers/booking_mailer/registration
+  def registration
     booking = Booking.last
-    BookingMailer.with(booking_id: booking.id).booking_registration
+    BookingMailer.with(booking: booking).registration
   end
 end

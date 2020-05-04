@@ -53,6 +53,6 @@ class Booking < ApplicationRecord
   private
 
   def send_record_email
-    BookingMailer.with(booker_id: id).booking_registration
+    BookingMailer.with(booking: self).registration.deliver_later
   end
 end
