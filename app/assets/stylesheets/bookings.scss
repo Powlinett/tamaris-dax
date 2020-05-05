@@ -1,9 +1,12 @@
-.booking-content, .bookings-content {
-  justify-content: center;
-  margin: 4rem auto;
+.booking-content.new-booking-content {
   padding: 2rem;
   padding-bottom: 0;
   box-shadow: 0 0 6px rgba(0,0,0,.1);
+}
+
+.booking-content, .bookings-content {
+  justify-content: center;
+  margin: 4rem auto;
 
   .booking-product-side {
     width: 50%;

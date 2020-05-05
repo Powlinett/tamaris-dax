@@ -1,6 +1,6 @@
 <% product = @product %>
 
-<div class="booking-content flex-content">
+<div class="booking-content new-booking-content flex-content">
   <div class="booking-product-side">
     <a href="<%= product_path(product.reference)%>", class="product-card" >
         <%= image_tag resize(product.photos_urls[0..1].sample, 500, 700) %>
