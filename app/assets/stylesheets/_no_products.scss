@@ -1,0 +1,44 @@
+.no-product-message {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  min-height: calc(100vh - 85px - 100px);
+  justify-content: center;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+    text-align: center;
+    color: $light-grey;
+
+    div {
+      margin: 3rem;
+
+      p {
+        font-size: 1.5rem;
+        color: $light-grey;
+
+        a {
+          color: $light-grey;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .facebook {
+          margin: 0;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  h2 {
+    font-weight: bolder;
+  }
+}

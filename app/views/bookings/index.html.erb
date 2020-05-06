@@ -1,4 +1,5 @@
 <div class="bookings-content">
   <h1>Historique des réservations</h1>
+  <%= link_to 'Réservations en cours', current_bookings_path, class: "bookings-link" %>
   <%= render 'bookings_table' %>
 </div>

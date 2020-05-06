@@ -5,6 +5,8 @@
   transition: $base-transition;
   grid-row-gap: 0.2rem;
   grid-column-gap: 0.2rem;
+  width: 90%;
+  margin: 0 auto;
 
   li.product-card-wrapper {
     height: 100%;
@@ -28,6 +30,7 @@
 
 .product-image {
   position: relative;
+  background-size: contain;
 
   .quick-booking {
     position: absolute;

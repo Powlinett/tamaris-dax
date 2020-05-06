@@ -2,7 +2,7 @@
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 0.1rem;
-  padding: 10px 16px;
+  padding: 0.6rem 1rem;
   border: 0.0375rem solid $medium-grey;
   background-color: $medium-grey;
   color: white;
@@ -19,5 +19,24 @@
     transition: $base-transition;
     background-color: white;
     color: $medium-grey;
+  }
+}
+
+.simple-form-btn {
+  margin-top: 1rem;
+}
+
+.pagination-link {
+  width: max-content;
+  background-color: white;
+  color: $medium-grey;
+  font-size: $base-font-size;
+  padding: 0.4rem 0.75rem;
+  letter-spacing: 0.05rem;
+  margin-top: 0;
+
+  &:hover{
+    background-color: $medium-grey;
+    color: white;
   }
 }

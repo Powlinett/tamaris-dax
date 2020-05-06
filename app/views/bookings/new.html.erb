@@ -1,11 +1,11 @@
 <% product = @product %>
 
-<div class="booking-content new-booking-content flex-content">
+<div class="booking-content new-booking-content">
   <div class="booking-product-side">
-    <a href="<%= product_path(product.reference)%>", class="product-card" >
-        <%= image_tag resize(product.photos_urls[0..1].sample, 500, 700) %>
+    <a href="<%= product_path(product.reference)%>" class="product-card" style="background-image: url(<%= resize(product.photos_urls[1], 500, 700) %>">
+        <%= image_tag resize(product.photos_urls[0], 500, 700) %>
         <div class="card-infos">
-          <div class="flex-content">
+          <div class='model'>
             <p><%= product.model %></p>
             <p><%= "Taille: #{@variant.size}" unless @variant.nil? %></p>
           </div>

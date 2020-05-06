@@ -2,11 +2,15 @@
   padding: 2rem;
   padding-bottom: 0;
   box-shadow: 0 0 6px rgba(0,0,0,.1);
+  width: max-content;
+  display: flex;
 }
 
 .booking-content, .bookings-content {
   justify-content: center;
-  margin: 4rem auto;
+  margin: 2rem auto;
+  margin-bottom: 3rem;
+  width: 90%;
 
   .booking-product-side {
     width: 50%;
@@ -16,8 +20,22 @@
 
     .product-card {
       margin: 0;
+      background-size: contain;
 
-      .flex-content {
+      img {
+        transition: $base-transition;
+      }
+
+      &:hover {
+
+        img {
+          opacity: 0;
+          transition: $base-transition;
+        }
+      }
+
+      .card-infos .model {
+        display: flex;
         justify-content: space-between;
       }
     }
@@ -32,6 +50,7 @@
     background: white;
     position: relative;
     padding-bottom: 69.8px;
+    margin-top: -1px;
 
     .booking-form {
       padding: 1rem 0;
@@ -41,10 +60,6 @@
       margin-bottom: 1rem;
       display:flex;
       justify-content: center;
-
-      h1 {
-        margin-bottom: 0;
-      }
     }
 
     .booking-btn {
