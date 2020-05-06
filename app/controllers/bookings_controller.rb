@@ -6,14 +6,15 @@ class BookingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @bookings = Booking.where.not(actual_state: ['pending', 'confirmed'])
-                       .order(updated_at: :desc)
+    @bookings = Booking.where(actual_state: ['back', 'picked', 'canceled'])
+                       .order(updated_at: :desc).page(params[:page])
   end
 
   def current_bookings
     @bookings = Booking.where(actual_state: ['pending', 'confirmed', 'closed'])
                        .order(created_at: :desc)
-    @bookings.each(&:booking_closed?)
+    @bookings = Kaminari.paginate_array(@bookings.each(&:booking_closed?))
+                        .page(params[:page])
   end
 
   def new
@@ -54,20 +55,21 @@ class BookingsController < ApplicationController
     @booking.variant.save ? redirect : (render :current_bookings)
   end
 
-  def undo_last_action
-    if @booking.former_state.eql? nil
-      redirect_to current_bookings_path
-    else
-      @booking.actual_state = @booking.former_state
-      @booking.former_state = nil
-      redirect
-    end
-  end
+  # def undo_last_action
+  #   if @booking.former_state.eql? nil
+  #     redirect_to current_bookings_path
+  #   else
+  #     @booking.actual_state = @booking.former_state
+  #     @booking.former_state = nil
+  #     redirect
+  #   end
+  # end
 
   private
 
   def booking_params
-    params.require(:booking).permit(booker: [:email, :email_confirmation, :phone_number, :first_name, :last_name])
+    params.require(:booking)
+          .permit(booker: [:email, :email_confirmation, :phone_number, :first_name, :last_name])
   end
 
   def set_booking

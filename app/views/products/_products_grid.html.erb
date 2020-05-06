@@ -5,8 +5,8 @@
     <li class="product-card-wrapper">
       <%= link_to(product_path(product.reference), class: 'product-card') do %>
 
-        <div class="product-image" style="background-image: url(<%= resize(product.photos_urls[1], 440, 500) %>">
-          <%= image_tag resize(product.photos_urls.first, 440, 500), class: 'first-picture' %>
+        <div class="product-image" style="background-image: url(<%= resize(product.photos_urls[1], 450, 600) %>">
+          <%= image_tag resize(product.photos_urls.first, 450, 600), class: 'first-picture' %>
 
           <div class="quick-booking">
             <% if (product.variants.count == 1) && (product.variants[0].stock) > 0 %>

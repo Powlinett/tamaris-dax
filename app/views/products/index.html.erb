@@ -4,6 +4,27 @@
 
 <% else %>
 
-  <%= render 'products_grid' %>
+  <div class="products-container">
+
+  <%= render 'shared/tabs' %>
+
+    <div class="index-category">
+      <h1><%= @products.first.category.upcase %></h1>
+      <p class="products-count">
+        <%= pluralize(@all_products.count, 'produit') %>
+      </p>
+    </div>
+
+    <div class="pagination-wrapper">
+      <%= link_to_prev_page @products, 'produits précédents', class: 'button pagination-link' %>
+    </div>
+
+    <%= render 'products_grid' %>
+
+    <div class="pagination-wrapper">
+      <%= link_to_next_page @products, 'produits suivants', class: 'button pagination-link' %>
+    </div>
+
+  </div>
 
 <% end %>

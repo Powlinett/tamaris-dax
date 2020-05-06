@@ -11,8 +11,6 @@
               <div class="model no-border">
                 <%= link_to((image_tag(resize(booking.product.photos_urls.first, 100, 200))), product_path(booking.product.reference)) %>
                <div class="no-border">
-                  <!-- <p class="font-weight-bold"><%= booking.product.model %></p>
-                  <p><%= booking.product.color %></p> -->
                   <p class="font-weight-bold"><%= booking.product.reference %></p>
                   <p>Taille: <strong><%= booking.variant.size %></strong></p>
                   <p>( env. <%= booking.variant.stock %> en stock )</p>

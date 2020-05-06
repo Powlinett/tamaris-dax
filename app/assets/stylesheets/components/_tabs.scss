@@ -7,11 +7,11 @@
   padding-top: 1rem;
   z-index: 2;
   position: absolute;
-  font-size: 0.875rem;
+  font-size: $base-font-size;
 
-  .tab-link::after {
+  .tab-link::before {
     content: "/";
-    float: right;
+    float: left;
     padding: 0 0.3rem;
   }
 
@@ -27,5 +27,30 @@
 
   li:last-child {
     color: $medium-grey;
+
+    &::before {
+      color: $light-grey;
+    }
+  }
+
+  .root-link::before {
+    content: none;
   }
 }
+
+.products-container .list-inline {
+  .tab-link:hover {
+    text-decoration: none;
+  }
+
+  .category-link a {
+    color: $dark-grey;
+    font-weight: bold;
+
+    &::before {
+      color: $light-grey;
+      font-weight: 400;
+    }
+  }
+}
+

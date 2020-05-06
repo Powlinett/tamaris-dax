@@ -2,11 +2,16 @@ body.bookers-index {
 
   .bookers-content {
     text-align: center;
+    margin: 2rem auto;
+    margin-bottom: 3rem;
+    width: 60vw;
 
     .bookers-table {
 
       padding-top: 1.2rem;
       border-spacing: 0;
+      width: 80%;
+      margin: 0 auto;
 
       header div {
         padding: 0.2rem 1rem;

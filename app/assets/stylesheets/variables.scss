@@ -5,7 +5,7 @@ $base-font-size: 0.875rem;
 $dark-grey: rgba(0, 0, 0, 0.8);
 $medium-grey: #32302e;
 $medium-light-grey: rgba(0, 0, 0, 0.6);
-$light-grey: rgba(0, 0, 0, 0.3);
+$light-grey: #918c88;
 $super-light-grey: rgba(0,0,0,.1);
 
 //Thumbnails product_show
@@ -24,14 +24,14 @@ $base-transition: all 0.3s ease-in-out;
 .other-colors {
 
   .white, .ivory {
-    background-color: white;
+    background-color: white!important;
   }
 
   .black {
     background-color: black;
   }
 
-  .cognac, .nut, .brandy, .marron {
+  .cognac, .nut, .brandy, .marron, .chestnut, .brandy {
     background-color: #89593B;
   }
 
@@ -39,7 +39,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #2D3F72;
   }
 
-  .lipstick, .chili, .rouge {
+  .lipstick, .chili, .rouge, .fire {
     background-color: crimson;
   }
 
@@ -55,7 +55,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: silver;
   }
 
-  .sun, .saffron, .yellow {
+  .sun, .saffron, .yellow, .mustard {
     background-color: gold;
   }
 
@@ -71,7 +71,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #C5AA97;
   }
 
-  .brown, .cafe {
+  .brown, .cafe, .mocca {
     background-color: #765252;
   }
 
@@ -79,7 +79,19 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #CDBCAC;
   }
 
-  .rose {
+  .rose, .champagne {
     background-color: #DEBDB6;
+  }
+
+  .granata, .bordeaux {
+    background-color: #703436;
+  }
+
+  .emerald {
+    background-color: #27AF88;
+  }
+
+  .smoke {
+    background-color: #9B9287;
   }
 }

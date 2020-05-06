@@ -9,13 +9,13 @@ class Booking < ApplicationRecord
 
   after_initialize :set_defaults, unless: :persisted?
 
-  after_save :send_record_email
+  after_create :send_record_email
 
   def set_defaults
     self.actual_state = 'pending'
     self.former_state = nil
     self.starting_date = Date.today.strftime("%A %d/%m/%Y")
-    self.ending_date = (Date.today + 3).strftime("%A %d/%m/%Y")
+    self.ending_date = (starting_date + 3).strftime("%A %d/%m/%Y")
   end
 
   def confirm_booking

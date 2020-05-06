@@ -1,9 +1,21 @@
     <div class="footer">
       <div class="footer-links">
-        <a href="https://www.facebook.com/tamaris.saintpaullesdax/" target="_blank">
-          <p>Suivez nous sur</p>
-          <i class="fab fa-facebook"></i><p>acebook</p>
-        </a>
+        <p class="follow">Suivez nous sur</p>
+        <div class="social-medias">
+          <p>
+            <a href="https://www.facebook.com/tamaris.saintpaullesdax/" target="_blank">
+              <i class="fab fa-facebook"></i>acebook
+            </a>
+          </p>
+          <p>
+            &
+          </p>
+          <p>
+            <a href="#" target="_blank">
+              <i class="fab fa-instagram"></i>Instagram
+            </a>
+          </p>
+        </div>
       </div>
       <div class="private-access">
         <% if user_signed_in? %>
@@ -11,9 +23,5 @@
         <% else %>
           <%= link_to 'Accès privé', current_bookings_path %>
         <% end %>
-        <%= link_to 'Ajouter une référence', new_product_path %>
-      </div>
-      <div class="footer-copyright">
-        This footer is made with <i class="fas fa-heart"></i> at Le Wagon
       </div>
     </div>
