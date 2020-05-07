@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   root to: 'pages#home'
 
+  get 'products/search', to: 'products#search', as: :search
+
   resources :products, param: :reference, only: [:index, :new, :show, :create] do
     resources :bookings, path: '/:size/bookings', only: [:new, :create, :update]
     get '/:size', to: 'variants#show', as: :size
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
     get 'cancel', to: 'bookings#cancel', as: :cancel
     get 'pick-up', to: 'bookings#pick_up', as: :pick_up
     get 'back-in-stock', to: 'bookings#back_in_stock', as: :back_in_stock
-    get 'undo-last-action', to: 'bookings#undo_last_action', as: :undo_action
+    # get 'undo-last-action', to: 'bookings#undo_last_action', as: :undo_action
   end
   get 'reservations-en-cours', to: 'bookings#current_bookings', as: :current_bookings
 
