@@ -1,6 +1,6 @@
 <div class="products-container">
 
-  <%= render 'shared/tabs' %>
+  <%= render 'shared/tabs' unless body_class.include? 'products-search' %>
 
   <div class="index-category">
     <% if body_class.include? 'products-search' %>
