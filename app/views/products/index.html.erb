@@ -3,7 +3,11 @@
   <%= render 'shared/tabs' %>
 
   <div class="index-category">
-    <h1><%= @products.first.category.upcase %></h1>
+    <% if body_class.include? 'products-search' %>
+      <h1>Résultats</h1>
+    <% else %>
+      <h1><%= @products.first.category %></h1>
+    <% end %>
     <p class="products-count">
       <%= pluralize(@all_products.count, 'produit') %>
     </p>

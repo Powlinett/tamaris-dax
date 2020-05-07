@@ -5,8 +5,8 @@
   height: 4.5rem;
 
   .navbar-center {
-    // width: 100%;
-    // position: absolute;
+    width: 100%;
+    position: absolute;
 
     .navbar-nav {
       margin: 0 auto;
@@ -55,6 +55,12 @@
 .navbar-light .navbar-brand {
   padding: 0;
   margin: 0;
+}
+
+.navbar-nav.mr-auto {
+  position: relative;
+  z-index: 5;
+  align-items: center;
 }
 
 .user-navbar {
