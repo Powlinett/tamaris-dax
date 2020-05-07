@@ -5,29 +5,27 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:create]
 
   skip_before_action :authenticate_user!,
-                     only: [:index, :show, :all_shoes, :all_accessories, :all_offers]
+                     only: [:index, :show, :all_shoes, :all_accessories,
+                            :all_offers, :search]
 
   def index
     @all_products = Product.all
-    paginate_products
+    render_index_or_no_products
   end
 
   def all_shoes
     @all_products = Product.where(category: 'chaussures')
-    paginate_products
-    render :index
+    render_index_or_no_products
   end
 
   def all_accessories
     @all_products = Product.where(category: 'accessoires')
-    paginate_products
-    render :index
+    render_index_or_no_products
   end
 
   def all_offers
     @all_products = Product.where.not(former_price: 0.0)
-    paginate_products
-    render :index
+    render_index_or_no_products
   end
 
   def new
@@ -49,7 +47,17 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(reference: params[:reference])
-    @other_colors = Product.where("reference like ?", "%#{@product.common_ref}%")
+    @other_colors = Product.where('reference like ?', "%#{@product.common_ref}%")
+  end
+
+  def search
+    @all_products = Product.search_in_products(params[:query])
+    if @all_products.empty?
+      render :no_results
+    else
+      paginate_products
+      render :index
+    end
   end
 
   private
@@ -85,6 +93,15 @@ class ProductsController < ApplicationController
     else
       flash.now[:alert] = 'Merci de vérifier la taille ou le stock'
       render :new
+    end
+  end
+
+  def render_index_or_no_products
+    if @all_products.empty?
+      render :no_products
+    else
+      paginate_products
+      render :index
     end
   end
 
