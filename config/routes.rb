@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   root to: 'pages#home'
 
-  get 'products/search', to: 'products#search', as: :search
+  get 'products/search', to: 'products#search', as: :products_search
 
   resources :products, param: :reference, only: [:index, :new, :show, :create] do
     resources :bookings, path: '/:size/bookings', only: [:new, :create, :update]
@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'toutes-les-chaussures', to: 'products#all_shoes', as: :all_shoes
   get 'tous-les-accessoires', to: 'products#all_accessories', as: :all_accessories
   get 'toutes-les-promotions', to: 'products#all_offers', as: :all_offers
+
+  get 'bookings/search', to: 'bookings#search', as: :bookings_search
 
   resources :bookings, only: [:index] do
     get 'confirm', to: 'bookings#confirm', as: :confirm

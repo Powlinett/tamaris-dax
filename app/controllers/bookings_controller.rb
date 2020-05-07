@@ -13,8 +13,7 @@ class BookingsController < ApplicationController
   def current_bookings
     @bookings = Booking.where(actual_state: ['pending', 'confirmed', 'closed'])
                        .order(created_at: :desc)
-    @bookings = Kaminari.paginate_array(@bookings.each(&:booking_closed?))
-                        .page(params[:page])
+    @bookings = @bookings.page(params[:page])
   end
 
   def new
@@ -55,15 +54,11 @@ class BookingsController < ApplicationController
     @booking.variant.save ? redirect : (render :current_bookings)
   end
 
-  # def undo_last_action
-  #   if @booking.former_state.eql? nil
-  #     redirect_to current_bookings_path
-  #   else
-  #     @booking.actual_state = @booking.former_state
-  #     @booking.former_state = nil
-  #     redirect
-  #   end
-  # end
+  def search
+    @bookings = Booking.search_in_bookings(params[:query])
+    @bookings = @bookings.page(params[:page])
+    render :index
+  end
 
   private
 
