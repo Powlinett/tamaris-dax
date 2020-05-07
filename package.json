@@ -1,5 +1,7 @@
 {
   "name": "tamaris-dax",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "tailwindcss": "^1.4.5"
+  }
 }
