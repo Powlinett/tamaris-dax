@@ -18,7 +18,7 @@ class Booking < ApplicationRecord
                     booker: [:first_name, :last_name, :email, :phone_number]
                   },
                   using: {
-                    tsearch: { prefix: true } # <-- now `superman batm` will return something!
+                    tsearch: { prefix: true }
                   }
 
   def set_defaults

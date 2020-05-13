@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   get 'reservations-en-cours', to: 'bookings#current_bookings', as: :current_bookings
 
   resources :bookers, only: [:index]
+  get 'bookers/search', to: 'bookers#search', as: :bookers_search
 end
