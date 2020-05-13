@@ -7,14 +7,15 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = Booking.where(actual_state: ['back', 'picked', 'canceled'])
-                       .order(updated_at: :desc).page(params[:page])
+                       .order(updated_at: :desc)
+    paginate_bookings
   end
 
   def current_bookings
     @bookings = Booking.where(actual_state: ['pending', 'confirmed', 'closed'])
                        .order(created_at: :desc)
-    @bookings = Kaminari.paginate_array(@bookings.each(&:booking_closed?))
-                        .page(params[:page])
+    paginate_bookings
+    render :index
   end
 
   def new
@@ -51,19 +52,15 @@ class BookingsController < ApplicationController
 
   def back_in_stock
     @booking.back_in_stock
-    @booking.variant.stock += 1
+    @booking.variant.stock -= 1
     @booking.variant.save ? redirect : (render :current_bookings)
   end
 
-  # def undo_last_action
-  #   if @booking.former_state.eql? nil
-  #     redirect_to current_bookings_path
-  #   else
-  #     @booking.actual_state = @booking.former_state
-  #     @booking.former_state = nil
-  #     redirect
-  #   end
-  # end
+  def search
+    @bookings = Booking.search_in_bookings(params[:query])
+    @bookings = @bookings.page(params[:page])
+    render :index
+  end
 
   private
 
@@ -83,5 +80,10 @@ class BookingsController < ApplicationController
 
   def redirect
     @booking.save ? (redirect_to current_bookings_path) : (render :current_bookings)
+  end
+
+  def paginate_bookings
+    @bookings.each(&:booking_closed?)
+    @bookings = Kaminari.paginate_array(@bookings).page(params[:page]).per(10)
   end
 end

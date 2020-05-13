@@ -11,6 +11,16 @@ class Booking < ApplicationRecord
 
   after_create :send_record_email
 
+  include PgSearch::Model
+  pg_search_scope :search_in_bookings,
+                  associated_against: {
+                    product: [:reference, :model, :category, :sub_category],
+                    booker: [:first_name, :last_name, :email, :phone_number]
+                  },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+
   def set_defaults
     self.actual_state = 'pending'
     self.former_state = nil
@@ -39,11 +49,10 @@ class Booking < ApplicationRecord
   end
 
   def booking_closed?
-    self.former_state = actual_state
     return unless ending_date < Date.today
 
+    self.former_state = actual_state
     self.actual_state = 'closed'
-    save
   end
 
   def undo_state_change

@@ -6,4 +6,11 @@ class Booker < ApplicationRecord
   validates :email_confirmation, presence: true
   validates :phone_number, presence: true, format: { with: /\A(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}\z/ }
   validates :first_name, :last_name, presence: true
+
+  include PgSearch::Model
+  pg_search_scope :search_in_bookers,
+                  against: [:last_name, :first_name, :email, :phone_number],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end

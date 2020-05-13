@@ -8,7 +8,7 @@
       <%= image_tag 'close.svg' %>
       Retour en vente
     <% end %>
-  <% elsif (booking.actual_state == 'closed') && (booking.former_state != 'pending') %>
+  <% elsif (booking.actual_state == 'closed') %>
     <p><strong><%= 'Date dépassée, à remettre en vente'.upcase %></strong></p>
     <%= link_to(booking_back_in_stock_path(booking), class: 'action button') do %>
       <%= image_tag 'check.svg' %>
