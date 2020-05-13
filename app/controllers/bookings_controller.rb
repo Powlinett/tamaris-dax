@@ -15,6 +15,7 @@ class BookingsController < ApplicationController
     @bookings = Booking.where(actual_state: ['pending', 'confirmed', 'closed'])
                        .order(created_at: :desc)
     paginate_bookings
+    render :index
   end
 
   def new
@@ -83,6 +84,6 @@ class BookingsController < ApplicationController
 
   def paginate_bookings
     @bookings.each(&:booking_closed?)
-    @bookings = Kaminari.paginate_array(@bookings).page(params[:page])
+    @bookings = Kaminari.paginate_array(@bookings).page(params[:page]).per(10)
   end
 end

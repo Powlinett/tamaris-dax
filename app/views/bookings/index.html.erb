@@ -1,14 +1,19 @@
 <div class="bookings-content">
-  <% unless body_class.include? 'bookings-search' %>
+  <% if body_class.include? 'bookings-index' %>
     <h1>Historique des réservations</h1>
+    <%= link_to 'Réservations en cours', current_bookings_path, class: "bookings-link" %>
+  <% elsif body_class.include? 'bookings-current_bookings' %>
+    <h1>Réservations en cours</h1>
+    <%= link_to 'Historique des réservations', bookings_path, class: "bookings-link" %>
   <% else %>
     <h1>Résultats</h1>
   <% end %>
 
-  <%= link_to 'Réservations en cours', current_bookings_path, class: "bookings-link" %>
   <%= form_tag bookings_search_path, method: :get do %>
     <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher une réservation" %>
     <%= submit_tag "Search", class: "btn btn-primary", style: 'display: none' %>
   <% end %>
   <%= render 'bookings_table' %>
+
+  <%= paginate @bookings %>
 </div>
