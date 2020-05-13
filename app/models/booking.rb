@@ -53,7 +53,6 @@ class Booking < ApplicationRecord
 
     self.former_state = actual_state
     self.actual_state = 'closed'
-    save
   end
 
   def undo_state_change
