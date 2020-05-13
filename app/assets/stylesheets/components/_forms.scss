@@ -39,3 +39,27 @@
     margin-right: 0.5rem;
   }
 }
+
+.products-search-form {
+  display: flex;
+
+  input {
+    border: 0px;
+
+    &:focus {
+      border: 0px;
+      box-shadow: none;
+    }
+  }
+}
+
+
+.products-search-form .form-control::placeholder {
+  color: $super-light-grey;
+
+  &::after {
+    visibility: visible;
+    content: url('search.svg');
+  }
+
+}
