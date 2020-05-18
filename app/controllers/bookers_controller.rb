@@ -6,6 +6,8 @@ class BookersController < ApplicationController
   end
 
   def search
+    redirect_to(bookers_path) && return if params[:query].empty?
+
     @bookers = Booker.search_in_bookers(params[:query])
     @bookers = @bookers.page(params[:page])
     render :index

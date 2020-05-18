@@ -57,6 +57,8 @@ class BookingsController < ApplicationController
   end
 
   def search
+    redirect_to(bookings_path) && return if params[:query].empty?
+
     @bookings = Booking.search_in_bookings(params[:query])
     @bookings = @bookings.page(params[:page])
     render :index

@@ -39,3 +39,52 @@
     margin-right: 0.5rem;
   }
 }
+
+.products-search-form {
+  display: flex;
+
+  input {
+    border: 0px;
+    font-family: 'PT sans', 'Cabin';
+    font-size: 1.05rem;
+    border-bottom: 0 solid transparent;
+    border-radius: 0;
+    padding: 0;
+    transition: $base-transition;
+
+    &:focus {
+      border: 0px;
+      box-shadow: none;
+      border-bottom: 1px solid $medium-light-grey;
+      border-radius: 0;
+      transition: $base-transition;
+
+      &::placeholder {
+        color: $light-grey;
+        transition: $base-transition;
+      }
+    }
+  }
+
+  label {
+    margin: 0;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: url('search.svg');
+      display: flex;
+      height: 2rem;
+      width: 2rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.products-search-form .form-control::placeholder {
+  color: transparent;
+  transition: $base-transition;
+}
