@@ -84,8 +84,10 @@
       .no-border {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
         height: auto;
+        padding-top: 0;
+        padding-bottom: 0;
       }
     }
   }
