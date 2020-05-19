@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
   validates :product, presence: true
   validates :variant, presence: true
 
-  after_initialize :set_defaults, unless: :persisted?
+  before_create :set_defaults, unless: :persisted?
 
   after_create :send_record_email
 
@@ -24,8 +24,8 @@ class Booking < ApplicationRecord
   def set_defaults
     self.actual_state = 'pending'
     self.former_state = nil
-    self.starting_date = Date.today.strftime("%A %d/%m/%Y")
-    self.ending_date = (starting_date + 3).strftime("%A %d/%m/%Y")
+    self.starting_date = Date.today if starting_date.nil?
+    self.ending_date = starting_date + 3
   end
 
   def confirm_booking
@@ -49,7 +49,7 @@ class Booking < ApplicationRecord
   end
 
   def booking_closed?
-    return unless ending_date < Date.today
+    return unless ending_date <= Date.today
 
     self.former_state = actual_state
     self.actual_state = 'closed'

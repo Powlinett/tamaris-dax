@@ -85,7 +85,7 @@ class BookingsController < ApplicationController
   end
 
   def paginate_bookings
-    @bookings.each(&:booking_closed?)
+    # @bookings.each(&:booking_closed?)
     @bookings = Kaminari.paginate_array(@bookings).page(params[:page]).per(10)
   end
 end
