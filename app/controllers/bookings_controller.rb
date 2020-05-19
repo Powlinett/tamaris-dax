@@ -47,12 +47,13 @@ class BookingsController < ApplicationController
 
   def pick_up
     @booking.pick_up
-    redirect
+    @booking.variant.stock -= 1
+    @booking.variant.save ? redirect : (render :current_bookings)
   end
 
   def back_in_stock
     @booking.back_in_stock
-    @booking.variant.stock -= 1
+    @booking.variant.stock += 1 if @booking.former_state == 'confirmed'
     @booking.variant.save ? redirect : (render :current_bookings)
   end
 
