@@ -3,11 +3,14 @@ class Booking < ApplicationRecord
   belongs_to :product
   belongs_to :variant
 
+  after_initialize :set_defaults, unless: :persisted?
+
   validates :booker, presence: true
   validates :product, presence: true
   validates :variant, presence: true
-
-  before_create :set_defaults, unless: :persisted?
+  validates :starting_date, presence: true
+  validates :ending_date, presence: true
+  validates :actual_state, presence: true
 
   after_create :send_record_email
 
@@ -21,19 +24,12 @@ class Booking < ApplicationRecord
                     tsearch: { prefix: true }
                   }
 
-  def set_defaults
-    self.actual_state = 'pending'
-    self.former_state = nil
-    self.starting_date = Date.today if starting_date.nil?
-    self.ending_date = starting_date + 3
-  end
-
-  def confirm_booking
+  def confirm
     self.former_state = actual_state
     self.actual_state = 'confirmed'
   end
 
-  def cancel_booking
+  def cancel
     self.former_state = actual_state
     self.actual_state = 'canceled'
   end
@@ -48,12 +44,12 @@ class Booking < ApplicationRecord
     self.actual_state = 'back'
   end
 
-  def booking_closed?
-    return unless ending_date <= Date.today
+  def is_closed?
+    return false if ending_date > Date.today
 
     self.former_state = actual_state
     self.actual_state = 'closed'
-    save
+    return true
   end
 
   def undo_state_change
@@ -61,6 +57,12 @@ class Booking < ApplicationRecord
   end
 
   private
+
+  def set_defaults
+    self.actual_state = 'pending'
+    self.starting_date = Date.today if self.starting_date.nil?
+    self.ending_date = starting_date + 3
+  end
 
   def send_record_email
     BookingMailer.with(booking: self).registration.deliver_later

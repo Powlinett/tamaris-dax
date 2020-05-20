@@ -35,13 +35,13 @@ class BookingsController < ApplicationController
   end
 
   def confirm
-    @booking.confirm_booking
+    @booking.confirm
     @booking.variant.stock -= 1
     @booking.variant.save ? redirect : (render :current_bookings)
   end
 
   def cancel
-    @booking.cancel_booking
+    @booking.cancel
     redirect
   end
 
@@ -86,7 +86,6 @@ class BookingsController < ApplicationController
   end
 
   def paginate_bookings
-    # @bookings.each(&:booking_closed?)
     @bookings = Kaminari.paginate_array(@bookings).page(params[:page]).per(10)
   end
 end
