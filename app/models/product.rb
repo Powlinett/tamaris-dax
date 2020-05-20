@@ -1,11 +1,4 @@
 class Product < ApplicationRecord
-  include PgSearch::Model
-  pg_search_scope :search_in_products,
-                  against: [:reference, :model, :category, :sub_category],
-                  using: {
-                    tsearch: { prefix: true } # <-- now `superman batm` will return something!
-                  }
-
   has_many :bookings, dependent: :nullify
   has_many :variants, dependent: :destroy
 
@@ -22,6 +15,13 @@ class Product < ApplicationRecord
   validates :photos_urls, presence: true
 
   after_save :set_variants
+
+  include PgSearch::Model
+  pg_search_scope :search_in_products,
+                  against: [:reference, :model, :category, :sub_category],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 
   def set_variants
     sizes_range.each do |size|
