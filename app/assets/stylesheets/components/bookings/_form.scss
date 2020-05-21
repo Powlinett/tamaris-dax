@@ -1,0 +1,70 @@
+.simple_form.new_booking {
+  padding: 1rem;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.booking-content.new-booking-content {
+  padding: 2rem;
+  padding-bottom: 0;
+  box-shadow: 0 0 6px rgba(0,0,0,.1);
+  width: 43vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.booking-product-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .product-card {
+    margin: 0;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+
+    img {
+      transition: $base-transition;
+    }
+
+    &:hover {
+
+      img {
+        opacity: 0;
+        transition: $base-transition;
+      }
+    }
+
+    .card-infos .model {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.booking-form-side {
+  color: $dark-grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  position: relative;
+  padding-bottom: 69.8px;
+  margin-top: -1px;
+
+  .booking-form {
+    padding: 1rem 0;
+    box-shadow: $base-box-shadow;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+    display:flex;
+    justify-content: center;
+  }
+
+  .booking-btn {
+    margin-top: 0;
+  }
+}
+

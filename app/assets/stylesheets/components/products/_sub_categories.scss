@@ -1,0 +1,34 @@
+.sub-categories-container {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid $super-light-grey;
+  text-transform: uppercase;
+  font-family: 'Nunito';
+  font-weight: 300;
+
+  p {
+    color: $light-grey;
+    font-size: 1rem;
+  }
+}
+
+.sub-categories {
+  padding-left: 0;
+  margin-top: 1rem;
+
+  .sub-category {
+    text-decoration: none;
+
+    a.nav-link {
+      transition: none;
+    }
+
+    &:hover {
+      a.nav-link {
+        border-bottom: 1px solid transparent;
+        color: $light-grey !important;
+        transition: none;
+      }
+    }
+  }
+}

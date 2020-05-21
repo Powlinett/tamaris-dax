@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   require 'open-uri'
   include Scraper
 
-  before_action :set_product, only: [:create]
+  before_action :set_product, only: [:create, :destroy]
 
   skip_before_action :authenticate_user!,
                      only: [:index, :show, :all_offers, :search, :index_by_sub_category]
@@ -17,17 +17,22 @@ class ProductsController < ApplicationController
     render_index_or_no_products
   end
 
+  def index_by_sub_category
+    @products = Product.where(sub_category: params[:sub_category])
+    category = @products.first.category
+    @sub_categories = Product.where(category: category).pluck(:sub_category).uniq
+    render_index_or_no_products
+  end
+
   def all_offers
     @products = Product.where.not(former_price: 0.0)
     set_sub_categories
     render_index_or_no_products
   end
 
-  def index_by_sub_category
-    @products = Product.where(sub_category: params[:sub_category])
-    category = @products.first.category
-    @sub_categories = Product.where(category: category).pluck(:sub_category).uniq
-    render_index_or_no_products
+  def show
+    @product = Product.find_by(reference: params[:reference])
+    @other_colors = Product.where('reference like ?', "%#{@product.common_ref}%")
   end
 
   def new
@@ -47,9 +52,14 @@ class ProductsController < ApplicationController
     end
   end
 
-  def show
-    @product = Product.find_by(reference: params[:reference])
-    @other_colors = Product.where('reference like ?', "%#{@product.common_ref}%")
+  def destroy
+    @variant = @product.variants.find_by(size: product_params[:variants][:size].to_i)
+    @variant.stock -= product_params[:variants][:stock].to_i
+    if @variant.save
+      redirect_to category_path(@product.category)
+    else
+      render :new
+    end
   end
 
   def search

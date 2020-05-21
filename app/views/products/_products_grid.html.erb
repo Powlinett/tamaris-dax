@@ -5,9 +5,10 @@
     <li class="product-card-wrapper">
       <%= link_to(product_path(product.reference), class: 'product-card') do %>
 
-        <div class="product-image" style="background-image: url(<%= resize(product.photos_urls[1], 450, 600) %>">
-          <%= image_tag resize(product.photos_urls.first, 450, 600), class: 'first-picture' %>
-
+        <div class="product-card-content" style="background-image: url(<%= resize(product.photos_urls[1], 450, 600) %>">
+          <div class="product-image">
+            <%= image_tag resize(product.photos_urls.first, 450, 600), class: 'first-picture' %>
+          </div>
           <div class="quick-booking">
             <% if (product.variants.count == 1) && (product.variants[0].stock) > 0 %>
               <%= link_to 'Réserver en magasin', new_product_booking_path(product.reference, product.variants[0].size), class: 'booking-link' %>

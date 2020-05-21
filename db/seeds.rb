@@ -12,7 +12,7 @@ require 'open-uri'
 # )
 
 def scrap_all_products(category)
-  main_url = "https://tamaris.com/fr-FR/#{category}/?start=96&sz=24"
+  main_url = "https://tamaris.com/fr-FR/#{category}"
   html = Nokogiri::HTML.parse(open(main_url))
 
   links = html.search('a.tile-link')
@@ -102,37 +102,38 @@ def update_variants
   end
 end
 
-# def create_bookers
-#   20.times do
-#     email = Faker::Internet.email
-#     Booker.create!(
-#       email: email,
-#       email_confirmation: email,
-#       phone_number: "0612345678",
-#       first_name: Faker::Name.first_name,
-#       last_name: Faker::Name.last_name
-#     )
-#   end
-# end
+def create_bookers
+  30.times do
+    email = Faker::Internet.email
+    Booker.create!(
+      email: email,
+      email_confirmation: email,
+      phone_number: "0612345678",
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name
+    )
+  end
+end
 
-# def create_bookings
-#   dates = (Date.today - 4 .. Date.today).to_a
-#   10.times do
-#     product = Product.all.sample
-#     Booking.create!(
-#       booker: Booker.all.sample,
-#       product: product,
-#       variant: product.variants.sample,
-#       starting_date: dates.sample
-#     )
-#   end
-# end
+def create_bookings
+  dates = (Date.today - 4 .. Date.today).to_a
+  20.times do
+    product = Product.all.sample
+    Booking.create!(
+      booker: Booker.all.sample,
+      product: product,
+      variant: product.variants.sample,
+      starting_date: dates.sample
+    )
+  end
+  Rake::Task['check_bookings'].invoke
+end
 
 scrap_all_products('chaussures')
 scrap_all_products('accessoires')
 
 update_variants
 
-# create_bookers
+create_bookers
 
-# create_bookings
+create_bookings

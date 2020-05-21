@@ -1,0 +1,37 @@
+.form-container {
+  width: 400px;
+  margin: 3rem auto;
+}
+
+.simple_form {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .input {
+    margin-bottom: 1.75rem;
+    width: 100%;
+
+    input {
+      width: 100%;
+      padding: .625rem .75rem;
+      border-radius: 0;
+      border: 1px solid $super-light-grey;
+      color: $medium-light-grey;
+    }
+  }
+}
+
+.checkbox {
+  width: 100%;
+  display: flex;
+
+  #user_remember_me {
+    width: auto;
+    margin-right: 0.5rem;
+  }
+}
+
+

@@ -3,7 +3,9 @@
 
 @import 'variables.scss';
 
-@import 'components/*';
+@import 'components/shared/*';
+@import 'components/products/*';
+@import 'components/bookings/*';
 
 @import '/*';
 
