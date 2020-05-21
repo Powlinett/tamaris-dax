@@ -3,14 +3,20 @@ module Scraper
     url = "https://tamaris.com/fr-FR/recherche/?q=#{reference}&lang=fr_FR"
     html = Nokogiri::HTML.parse(open(url))
 
-    scrap_product_page(html) if html.title.include?(reference)
+    if html.title.include?(reference)
+      scrap_product_page(html)
+    else
+      new_url = html.search('.tile-link').last.attribute('href').value
+      html = Nokogiri::HTML.parse(open(new_url))
+      scrap_product_page(html)
+    end
   end
 
   def scrap_product_page(html)
     @category = html.search('.breadcrumb-element')[1].text.strip
     @sub_category = html.search('.breadcrumb-element')[2].text.strip
-    @model = html.title.split('-')[0].strip[/\D*/]
-    @color = html.search('div.label').text.strip
+    @model = html.title.split('-')[0].strip[/\D*/].strip
+    @color = html.search('div.label').text.gsub('#', '').strip
     @price = html.search('.price-sales').first['data-sale-price']
     @former_price = html.search('.price-standard').text.split(' ')[0]
     unless @former_price.nil?

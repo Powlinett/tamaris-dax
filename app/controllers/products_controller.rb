@@ -37,12 +37,12 @@ class ProductsController < ApplicationController
 
   def create
     if @product.nil?
-      @product = Product.new(product_data(product_params[:reference]))
+      @product = Product.new(product_data(product_params[:reference].strip))
     end
     if @product.save && update_variant(product_params[:variants], @product)
       redirect_or_render_new
     else
-      flash.now[:alert] = 'Référence introuvable sur Tamaris.com :('
+      flash.now[:alert] = 'Référence introuvable ou erreur lors de la récupération des données'
       render :new
     end
   end
@@ -109,12 +109,12 @@ class ProductsController < ApplicationController
   end
 
   def collect_only_in_stock
-    @products = @products.order(updated_at: :asc).select(&:still_any_stock?)
+    @products = @products.order(updated_at: :desc).select(&:still_any_stock?)
   end
 
   def paginate_products
     @paginated_products = Kaminari.paginate_array(collect_only_in_stock)
-                        .page(params[:page])
+                                  .page(params[:page])
   end
 
   def set_sub_categories

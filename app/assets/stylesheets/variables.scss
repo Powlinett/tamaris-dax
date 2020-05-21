@@ -23,15 +23,15 @@ $base-transition: all 0.3s ease-in-out;
 // Color-choice background
 .other-colors {
 
-  .white, .ivory {
+  .white, .ivory, .offwhite, .ecru {
     background-color: white!important;
   }
 
-  .black {
+  .black, .blk {
     background-color: black;
   }
 
-  .cognac, .nut, .brandy, .marron, .chestnut, .brandy {
+  .cognac, .nut, .brandy, .marron, .chestnut, .brandy, .tobacco {
     background-color: #89593B;
   }
 
@@ -51,7 +51,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: darkorange;
   }
 
-  .silver, .gris, .metallique {
+  .silver, .gris, .metallique, .anthracite {
     background-color: silver;
   }
 
@@ -79,7 +79,7 @@ $base-transition: all 0.3s ease-in-out;
     background-color: #CDBCAC;
   }
 
-  .rose, .champagne {
+  .rose, .champagne, .antelope {
     background-color: #DEBDB6;
   }
 
@@ -93,5 +93,9 @@ $base-transition: all 0.3s ease-in-out;
 
   .smoke {
     background-color: #9B9287;
+  }
+
+  .gold {
+    background-color: #BBA290;
   }
 }
