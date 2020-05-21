@@ -1,27 +1,28 @@
-<% @product = @products.first unless @products.nil? %>
-
 <ul class="list-inline tabs-links">
   <li class="tab-link root-link">
     <%= link_to 'Tamaris', root_path %>
   </li>
 
-  <% if @product.category == 'chaussures' %>
+  <% if body_class.include? 'products-search' %>
     <li class="tab-link category-link">
-      <%= link_to "Chaussures", all_shoes_path  %>
+      Recherche
     </li>
-  <% elsif @product.category == 'accessoires' %>
+  <% else %>
     <li class="tab-link category-link">
-      <%= link_to "Accessoires", all_accessories_path  %>
+      <%= link_to @product.category.capitalize, category_path(@product.category)  %>
+    </li>
+  <% end %>
+
+  <% if (body_class.include? 'index_by_sub_category') || (body_class.include? 'products-show') %>
+    <li class="tab-link subcategory-link">
+      <%= link_to @product.sub_category.capitalize, sub_category_path(@product.sub_category) %>
     </li>
   <% end %>
 
   <% if @products.nil? %>
-    <li class="tab-link subcategory-link">
-      <%= link_to "#{@product.sub_category.capitalize}", "#" %>
-    </li>
-
     <li class="tab-link product-model">
       <%= "#{@product.model.capitalize}" %>
     </li>
   <% end %>
+
 </ul>

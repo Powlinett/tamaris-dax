@@ -2,7 +2,7 @@
   <% if body_class.include? 'bookings-index' %>
     <h1>Historique des réservations</h1>
     <%= link_to 'Réservations en cours', current_bookings_path, class: "bookings-link" %>
-  <% elsif body_class.include? 'bookings-current_bookings' %>
+  <% elsif body_class.include? 'current_bookings' %>
     <h1>Réservations en cours</h1>
     <%= link_to 'Historique des réservations', bookings_path, class: "bookings-link" %>
   <% else %>

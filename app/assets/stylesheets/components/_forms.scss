@@ -51,6 +51,7 @@
     border-radius: 0;
     padding: 0;
     transition: $base-transition;
+    width: 0;
 
     &:focus {
       border: 0px;
@@ -58,6 +59,7 @@
       border-bottom: 1px solid $medium-light-grey;
       border-radius: 0;
       transition: $base-transition;
+      width: max-content;
 
       &::placeholder {
         color: $light-grey;

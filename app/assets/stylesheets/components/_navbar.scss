@@ -16,24 +16,24 @@
   .nav-item {
     padding: 0 1rem;
   }
+}
 
-  .nav-item .nav-link {
-    color: $medium-grey;
-    font-family: 'Nunito', sans-serif;
-    padding: 0;
-    border-bottom: 1px solid transparent;
-    transition: $base-transition;
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
-    text-transform: uppercase;
-    transform: scale(1,0.93);
+.nav-link {
+  color: $medium-grey !important;
+  font-family: 'Nunito', sans-serif;
+  padding: 0 !important;
+  border-bottom: 1px solid transparent;
+  transition: $base-transition;
+  font-size: 0.95rem;
+  letter-spacing: 0.01rem;
+  text-transform: uppercase;
+  transform: scale(1,0.93);
 
-      &:hover {
-          color: $medium-grey;
-          border-bottom: 1px solid $medium-grey;
-          transition: $base-transition;
-      }
-  }
+    &:hover {
+        color: $medium-grey;
+        border-bottom: 1px solid $medium-grey;
+        transition: $base-transition;
+    }
 }
 
 .navbar.navbar-expand-sm.navbar-light.navbar-lewagon {
@@ -50,6 +50,8 @@
 .navbar-lewagon .navbar-brand img {
   height: 1.5rem;
   vertical-align: unset;
+  position: relative;
+  z-index: 4;
 }
 
 .navbar-light .navbar-brand {

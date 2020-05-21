@@ -1,6 +1,6 @@
 <ul class="products-grid">
 
-  <% @products.each do |product| %>
+  <% @paginated_products.each do |product| %>
 
     <li class="product-card-wrapper">
       <%= link_to(product_path(product.reference), class: 'product-card') do %>
