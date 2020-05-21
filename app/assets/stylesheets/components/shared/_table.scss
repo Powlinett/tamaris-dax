@@ -1,0 +1,64 @@
+.bookings-link {
+  color: $medium-light-grey;
+
+  &:hover {
+    color: $medium-light-grey;
+    text-decoration: none;
+  }
+}
+
+.bookings-table, .bookers-table {
+  text-align: left;
+  display: table;
+  width: 100%;
+  margin: 0 auto;
+  border-spacing: 0 1rem;
+  font-size: 1.1rem;
+
+  div {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .bookings-table-row, .bookers-table-row {
+    display: table-row;
+    height: 100%;
+    position: relative;
+
+    div {
+      padding: 0.5rem 1rem;
+      height: 100%;
+    }
+  }
+
+  .no-border {
+    border: none;
+  }
+
+  // .fa-undo {
+  //   position: absolute;
+  //   top: -0.9rem;
+  //   right: -0.9rem;
+  //   padding: 0.5rem;
+  //   background-color: white;
+  //   border-radius: 50%;
+  //   font-size: 0.7rem;
+  //   color: $light-grey;
+  //   border: 1px solid $super-light-grey;
+  // }
+}
+
+header {
+  display: table-row;
+
+  div {
+    border: 1px solid $super-light-grey;
+    padding: 1rem;
+    text-align: center;
+  }
+}

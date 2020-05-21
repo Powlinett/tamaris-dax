@@ -5,7 +5,7 @@ module Scraper
 
     if html.title.include?(reference)
       scrap_product_page(html)
-    else
+    elsif html.search('.tile-link').last != nil
       new_url = html.search('.tile-link').last.attribute('href').value
       html = Nokogiri::HTML.parse(open(new_url))
       scrap_product_page(html)

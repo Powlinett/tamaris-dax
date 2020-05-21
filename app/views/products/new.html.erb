@@ -1,13 +1,16 @@
-<div class="form-container">
+<div class="change-stock-forms">
+  <div class="form-container">
 
-  <%= simple_form_for @product, url: products_path, method: 'post' do |f| %>
-    <%= f.input :reference %>
-    <%= f.simple_fields_for :variants, @variant do |f| %>
-      <%= f.input :size %>
-      <%= f.input :stock %>
-      <% end %>
-    <%= f.submit 'Créer le produit', class: 'button simple-form-btn' %>
-  <% end %>
+    <%= simple_form_for @product, url: products_path, method: 'post' do |f| %>
+      <%= f.input :reference %>
+      <%= f.simple_fields_for :variants, @variant do |f| %>
+        <%= f.input :size %>
+        <%= f.input :stock %>
+        <% end %>
+      <%= f.submit 'Créer le produit', class: 'button simple-form-btn' %>
+    <% end %>
 
+  </div>
+
+  <%= render 'delete_form' %>
 </div>
-

@@ -1,6 +1,6 @@
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(3, 33%);
+  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
   transition: $base-transition;
   grid-row-gap: 0.2rem;
@@ -9,29 +9,29 @@
   margin: 0 auto;
   margin-bottom: 2rem;
 
-  li.product-card-wrapper {
-    height: 100%;
-
-    &:hover {
-      .quick-booking {
-        opacity: 1;
-        transition: $base-transition;
-        background-color: white;
-        padding-top: 0.5rem;
-      }
-
-      .product-image > .product-card,
-      .product-image > .first-picture {
-        opacity: 0;
-        transition: $base-transition;
-      }
+  li.product-card-wrapper:hover {
+    .quick-booking {
+      opacity: 1;
+      transition: $base-transition;
+      background-color: white;
+      padding-top: 0.5rem;
     }
+
+    .product-card-content > .product-card,
+    .product-card-content > .first-picture {
+      opacity: 0;
+      transition: $base-transition;
+    }
+  }
+
+  .product-image {
+    height: 585px;
+    overflow: hidden;
   }
 }
 
-.product-image {
+.product-card-content {
   position: relative;
-  background-size: contain;
 
   .quick-booking {
     position: absolute;
@@ -59,13 +59,17 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
   background-color: white;
   transition: $base-transition;
+  background-size: contain;
 
   &:hover {
     text-decoration: none;
+  }
+
+  .product-image {
+    width: 100%;
+    flex-grow: 1;
   }
 
   img {
