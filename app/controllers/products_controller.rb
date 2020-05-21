@@ -54,12 +54,13 @@ class ProductsController < ApplicationController
 
   def destroy
     @variant = @product.variants.find_by(size: product_params[:variants][:size].to_i)
-    @variant.stock -= product_params[:variants][:stock].to_i
-    if @variant.save
-      redirect_to category_path(@product.category)
+    stock_to_remove = product_params[:variants][:stock].to_i
+    if @variant.stock >= stock_to_remove
+      @variant.stock -= stock_to_remove
     else
-      render :new
+      @variant.stock = 0
     end
+    @variant.save ? (redirect_to category_path(@product.category)) : (render :new)
   end
 
   def search
