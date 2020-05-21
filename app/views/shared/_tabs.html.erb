@@ -15,7 +15,7 @@
 
   <% if (body_class.include? 'index_by_sub_category') || (body_class.include? 'products-show') %>
     <li class="tab-link subcategory-link">
-      <%= link_to @product.sub_category.capitalize, sub_category_path(@product.sub_category) %>
+      <%= link_to @product.sub_category.capitalize, sub_category_path(slug(@product.sub_category)) %>
     </li>
   <% end %>
 

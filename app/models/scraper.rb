@@ -37,7 +37,7 @@ module Scraper
       {
         reference: reference,
         category: @category.downcase,
-        sub_category: @sub_category,
+        sub_category: @sub_category.downcase,
         model: @model,
         color: @color.downcase,
         price: @price.to_f,

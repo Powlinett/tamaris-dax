@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   require 'open-uri'
+  include ProductsHelper
   include Scraper
 
   before_action :set_product, only: [:create, :destroy]
@@ -18,9 +19,10 @@ class ProductsController < ApplicationController
   end
 
   def index_by_sub_category
-    @products = Product.where(sub_category: params[:sub_category])
+    @products = Product.where(sub_category: unslug(params[:sub_category]))
     category = @products.first.category
-    @sub_categories = Product.where(category: category).pluck(:sub_category).uniq
+    @sub_categories = Product.where(category: category)
+                             .pluck(:sub_category).uniq
     render_index_or_no_products
   end
 
@@ -44,7 +46,7 @@ class ProductsController < ApplicationController
     if @product.nil?
       @product = Product.new(product_data(product_params[:reference].strip))
     end
-    if @product.save && update_variant(product_params[:variants], @product)
+    if @product.save && update_variant(variant_params, @product)
       redirect_or_render_new
     else
       flash.now[:alert] = 'Référence introuvable ou erreur lors de la récupération des données'
@@ -53,8 +55,8 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @variant = @product.variants.find_by(size: product_params[:variants][:size].to_i)
-    stock_to_remove = product_params[:variants][:stock].to_i
+    @variant = @product.variants.find_by(size: variant_params[:size].to_i)
+    stock_to_remove = variant_params[:stock].to_i
     if @variant.stock >= stock_to_remove
       @variant.stock -= stock_to_remove
     else
@@ -86,6 +88,10 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:reference, variants: [:size, :stock])
+  end
+
+  def variant_params
+    product_params[:variants]
   end
 
   def update_variant(params, product)
@@ -120,7 +126,8 @@ class ProductsController < ApplicationController
   end
 
   def collect_only_in_stock
-    @products = @products.order(updated_at: :desc).select(&:still_any_stock?)
+    @products = @products.order(updated_at: :desc)
+                         .select(&:still_any_stock?)
   end
 
   def paginate_products
