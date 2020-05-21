@@ -5,26 +5,28 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:create]
 
   skip_before_action :authenticate_user!,
-                     only: [:index, :show, :all_shoes, :all_accessories,
-                            :all_offers, :search]
+                     only: [:index, :show, :all_offers, :search, :index_by_sub_category]
 
   def index
-    @all_products = Product.all
-    render_index_or_no_products
-  end
-
-  def all_shoes
-    @all_products = Product.where(category: 'chaussures')
-    render_index_or_no_products
-  end
-
-  def all_accessories
-    @all_products = Product.where(category: 'accessoires')
+    if params[:category].nil?
+      @products = Product.all
+    else
+      @products = Product.where(category: params[:category])
+    end
+    set_sub_categories
     render_index_or_no_products
   end
 
   def all_offers
-    @all_products = Product.where.not(former_price: 0.0)
+    @products = Product.where.not(former_price: 0.0)
+    set_sub_categories
+    render_index_or_no_products
+  end
+
+  def index_by_sub_category
+    @products = Product.where(sub_category: params[:sub_category])
+    category = @products.first.category
+    @sub_categories = Product.where(category: category).pluck(:sub_category).uniq
     render_index_or_no_products
   end
 
@@ -51,10 +53,11 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @all_products = Product.search_in_products(params[:query])
-    if @all_products.empty?
+    @products = Product.search_in_products(params[:query])
+    if @products.empty?
       render :no_results
     else
+      set_sub_categories
       paginate_products
       render :index
     end
@@ -97,7 +100,7 @@ class ProductsController < ApplicationController
   end
 
   def render_index_or_no_products
-    if @all_products.empty?
+    if @products.empty?
       render :no_products
     else
       paginate_products
@@ -106,11 +109,15 @@ class ProductsController < ApplicationController
   end
 
   def collect_only_in_stock
-    @all_products = @all_products.order(updated_at: :asc).select(&:still_any_stock?)
+    @products = @products.order(updated_at: :asc).select(&:still_any_stock?)
   end
 
   def paginate_products
-    @products = Kaminari.paginate_array(collect_only_in_stock)
+    @paginated_products = Kaminari.paginate_array(collect_only_in_stock)
                         .page(params[:page])
+  end
+
+  def set_sub_categories
+    @sub_categories = @products.pluck(:sub_category).uniq
   end
 end

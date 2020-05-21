@@ -5,8 +5,6 @@
   width: 100%;
   margin-bottom: 0;
   padding-top: 1rem;
-  z-index: 2;
-  position: absolute;
   font-size: $base-font-size;
 
   .tab-link::before {
@@ -38,12 +36,17 @@
   }
 }
 
+.products-show .list-inline.tabs-links {
+  z-index: 2;
+  position: absolute;
+}
+
 .products-container .list-inline {
   .tab-link:hover {
     text-decoration: none;
   }
 
-  .category-link a {
+  :last-child a {
     color: $dark-grey;
     font-weight: bold;
 

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'support@tamaris-saintpaullesdax.com'
+  default from: 'service-client@tamaris-saintpaullesdax.com'
   layout 'mailer'
 end

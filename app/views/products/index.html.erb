@@ -1,26 +1,40 @@
+<% @product = @paginated_products.first %>
+
+
 <div class="products-container">
+  <%= render 'shared/tabs' %>
 
-  <%= render 'shared/tabs' unless body_class.include? 'products-search' %>
+  <div class="flex-content">
+    <div class="side-content">
+      <%= render 'sub_categories_list' %>
+    </div>
 
-  <div class="index-category">
-    <% if body_class.include? 'products-search' %>
-      <h1>Résultats</h1>
-    <% else %>
-      <h1><%= @products.first.category %></h1>
-    <% end %>
-    <p class="products-count">
-      <%= pluralize(@all_products.count, 'produit') %>
-    </p>
-  </div>
+    <div class="main-content">
+      <div class="index-category">
+        <% if body_class.include? 'products-search' %>
+          <h1>Résultats de recherche pour "<%= params[:query].upcase %>"</h1>
+        <% elsif body_class.include? 'all_offers' %>
+          <h1>Promotions</h1>
+        <% elsif body_class.include? 'index_by_sub_category' %>
+          <h1><%= @product.sub_category %></h1>
+        <% else %>
+          <h1><%= @product.category %></h1>
+        <% end %>
+        <p class="products-count">
+          <%= pluralize(@products.count, 'produit') %>
+        </p>
+      </div>
 
-  <div class="pagination-wrapper">
-    <%= link_to_prev_page @products, 'produits précédents', class: 'button pagination-link' %>
-  </div>
+      <div class="pagination-wrapper">
+        <%= link_to_prev_page @paginated_products, 'produits précédents', class: 'button pagination-link' %>
+      </div>
 
-  <%= render 'products_grid' %>
+      <%= render 'products_grid' %>
 
-  <div class="pagination-wrapper">
-    <%= link_to_next_page @products, 'produits suivants', class: 'button pagination-link' %>
+      <div class="pagination-wrapper">
+        <%= link_to_next_page @paginated_products, 'produits suivants', class: 'button pagination-link' %>
+      </div>
+    </div>
   </div>
 
 </div>
