@@ -1,10 +1,10 @@
 require 'open-uri'
 
 # User.destroy_all
-# Booking.destroy_all
-# Booker.destroy_all
-# Variant.destroy_all
-# Product.destroy_all
+Booking.destroy_all
+Booker.destroy_all
+Variant.destroy_all
+Product.destroy_all
 
 # User.create(
 #   email: 'test@test.com',
@@ -52,7 +52,8 @@ def scrap_product_page(html)
     @former_price = @former_price.strip.split(',').join('.')
   end
   @sizes_array = html.search('.selection').map { |s| s.text.strip.to_i }
-  # @description = html.search('.information-wrapper')[0].text.strip
+  @raw_features = html.search('.info-table').text
+  @description = html.search('.long-description').text.split("\n").last
 
   @photos = html.search('.productthumbnail').map do |element|
     element.attribute('src').value.split('?')[0]
@@ -61,6 +62,9 @@ end
 
 def product_data(reference)
   return nil if get_reference_page(reference).nil?
+
+  @product_features = ProductFeature.where(product_features(@raw_features))
+                                    .first_or_create
 
   Product.new(
     reference: reference,
@@ -71,8 +75,21 @@ def product_data(reference)
     price: @price.to_f,
     sizes_range: @sizes_array,
     former_price: @former_price.to_f,
-    photos_urls: @photos
+    photos_urls: @photos,
+    product_feature: @product_features
   )
+end
+
+def product_features(features_text)
+  array = features_text.split("\n").map { |x| x.gsub(':', '').strip }
+  array = array.reject { |x| x.empty? }
+
+  @features_hash = Hash[*array]
+  @product_features =
+    {
+      features_hash: @features_hash,
+      description: @description
+    }
 end
 
 def get_other_colors(reference, html)

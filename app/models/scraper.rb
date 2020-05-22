@@ -23,7 +23,8 @@ module Scraper
       @former_price = @former_price.strip.split(',').join('.')
     end
     @sizes_array = html.search('.selection').map { |s| s.text.strip.to_i }
-    # @description = product_html.search('.information-wrapper')[0].text.strip
+    @raw_features = html.search('.info-table').text
+    @description = html.search('.long-description').text.split("\n").last.strip
 
     @photos = html.search('.productthumbnail').map do |element|
       element.attribute('src').value.split('?')[0]
@@ -32,6 +33,9 @@ module Scraper
 
   def product_data(reference)
     return { reference: reference } if get_reference_page(reference).nil?
+
+    @product_features = ProductFeature.where(product_features(@raw_features))
+                                      .first_or_create
 
     @product_data =
       {
@@ -43,7 +47,20 @@ module Scraper
         price: @price.to_f,
         former_price: @former_price.to_f,
         sizes_range: @sizes_array,
-        photos_urls: @photos
+        photos_urls: @photos,
+        product_feature: @product_features
+      }
+  end
+
+  def product_features(features_text)
+    array = features_text.split("\n").map { |x| x.gsub(':', '').strip }
+    array = array.reject { |x| x.empty? }
+
+    @features_hash = Hash[*array]
+    @product_features =
+      {
+        features_hash: @features_hash,
+        description: @description
       }
   end
 end
