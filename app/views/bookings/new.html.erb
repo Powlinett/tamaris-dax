@@ -2,8 +2,8 @@
 
 <div class="booking-content new-booking-content">
   <div class="booking-product-side">
-    <a href="<%= product_path(product.reference)%>" class="product-card" style="background-image: url(<%= resize(product.photos_urls[1], 500, 700) %>">
-        <div class='product-image'>
+    <a href="<%= product_path(product.reference)%>" class="product-card">
+        <div class='product-image' style="background-image: url(<%= resize(product.photos_urls[1], 500, 700) %>">
           <%= image_tag resize(product.photos_urls[0], 500, 700) %>
         </div>
         <div class="card-infos">
