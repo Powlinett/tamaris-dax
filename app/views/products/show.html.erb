@@ -2,7 +2,7 @@
   <%= render 'shared/tabs' %>
 
   <div class="product-show-content">
-    <ul class="thumbnails-pictures">
+    <ul class="thumbnails-pictures no-mobile">
       <% @product.photos_urls.each_with_index do |photo, index| %>
         <li class="thumbnail-picture">
           <%= image_tag resize(photo, 72, 96) , data: { index: index } %>
@@ -14,7 +14,7 @@
       <%= image_tag @product.photos_urls.first, class: 'full-size-picture' %>
     </div>
 
-    <div class="product-side-content col-lg-4">
+    <div class="product-side-content">
       <h1 class="product-model"><%= @product.model %></h1>
       <div class="prices-wrapper">
         <div class="prices sale-prices">

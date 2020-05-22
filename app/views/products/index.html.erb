@@ -2,24 +2,42 @@
 
 
 <div class="products-container">
+
   <%= render 'shared/tabs' %>
 
   <div class="flex-content">
+
+    <div class="only-mobile">
+      <div class="index-title">
+          <% if body_class.include? 'products-search' %>
+            <h1>Résultats de recherche pour "<%= params[:query].upcase %>"</h1>
+          <% elsif body_class.include? 'all_offers' %>
+            <h1>Promotions</h1>
+          <% elsif body_class.include? 'index_by_sub_category' %>
+            <h1><%= @product.sub_category %></h1>
+          <% else %>
+            <h1><%= @product.category %></h1>
+          <% end %>
+        </div>
+    </div>
+
     <div class="side-content">
       <%= render 'sub_categories_list' %>
     </div>
 
     <div class="main-content">
-      <div class="index-category">
-        <% if body_class.include? 'products-search' %>
-          <h1>Résultats de recherche pour "<%= params[:query].upcase %>"</h1>
-        <% elsif body_class.include? 'all_offers' %>
-          <h1>Promotions</h1>
-        <% elsif body_class.include? 'index_by_sub_category' %>
-          <h1><%= @product.sub_category %></h1>
-        <% else %>
-          <h1><%= @product.category %></h1>
-        <% end %>
+      <div class="index-category no-mobile">
+        <div class="index-title">
+          <% if body_class.include? 'products-search' %>
+            <h1>Résultats de recherche pour "<%= params[:query].upcase %>"</h1>
+          <% elsif body_class.include? 'all_offers' %>
+            <h1>Promotions</h1>
+          <% elsif body_class.include? 'index_by_sub_category' %>
+            <h1><%= @product.sub_category %></h1>
+          <% else %>
+            <h1><%= @product.category %></h1>
+          <% end %>
+        </div>
         <p class="products-count">
           <%= pluralize(@products.count, 'produit') %>
         </p>

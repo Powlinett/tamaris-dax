@@ -47,6 +47,8 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    autoprefixer-rails (9.7.6)
+      execjs
     bcrypt (3.1.13)
     bcrypt (3.1.13-java)
     bindex (0.8.1)
@@ -54,6 +56,10 @@ GEM
       msgpack (~> 1.0)
     bootsnap (1.4.6-java)
       msgpack (~> 1.0)
+    bootstrap (4.5.0)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     byebug (11.1.2)
     capybara (3.32.1)
@@ -160,6 +166,7 @@ GEM
     pg_search (2.3.2)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    popper_js (1.16.0)
     postmark (1.21.1)
       json
     postmark-rails (0.20.0)
@@ -177,6 +184,8 @@ GEM
     puma (3.12.4-java)
     rack (2.2.2)
     rack-protection (2.0.8.1)
+      rack
+    rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -243,9 +252,20 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.3.0)
+      ffi (~> 1.9)
+    sassc (2.3.0-x64-mingw32)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    semantic_range (2.3.0)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
     sidekiq (6.0.7)
@@ -294,6 +314,11 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webpacker (5.1.1)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-driver (0.7.1-java)
@@ -311,6 +336,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
+  bootstrap (~> 4.5.0)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
@@ -344,6 +370,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webpacker (~> 5.x)
 
 RUBY VERSION
    ruby 2.6.6p146
