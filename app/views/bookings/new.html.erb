@@ -1,5 +1,9 @@
 <% product = @product %>
 
+<div class="booking-form only-mobile">
+  <h1>Réserver ce modèle</h1>
+</div>
+
 <div class="booking-content new-booking-content">
   <div class="booking-product-side">
     <a href="<%= product_path(product.reference)%>" class="product-card">
@@ -25,7 +29,7 @@
 
 
   <div class="booking-form-side">
-    <div class="booking-form">
+    <div class="booking-form no-mobile">
       <h1>Réserver ce modèle</h1>
     </div>
     <%= simple_form_for @booking, url: product_bookings_path, method: 'post' do |f| %>
