@@ -2,14 +2,14 @@
   margin-top: 1rem;
   text-align: center;
 
-  h1 {
-    text-transform: uppercase;
-  }
-
   .products-count {
     margin-top: 1rem;
     color: $medium-light-grey;
   }
+}
+
+.index-title h1 {
+  text-transform: uppercase;
 }
 
 .pagination-wrapper {
