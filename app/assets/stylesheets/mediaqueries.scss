@@ -99,15 +99,25 @@
 
   .product-show-content {
     flex-direction: column;
+    padding-left: 0 !important;
 
     .picture-wrapper, .full-size-picture {
-      width: 100vw;
+      min-width: 100vw;
     }
 
     .product-side-content {
       width: 100%;
       padding: 0 0.5rem;
     }
+  }
+
+  .product-show-description, .product-features, .long-description {
+    margin: 0;
+    width: 100%;
+  }
+
+  .product-show-description {
+    padding: 0 0.5rem;
   }
 
   .booking-content.new-booking-content {
