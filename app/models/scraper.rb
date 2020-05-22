@@ -53,7 +53,9 @@ module Scraper
   end
 
   def product_features(features_text)
-    array = features_text.split("\n").map { |x| x.gsub(':', '').strip }
+    array = features_text.split("\n").map do |x|
+              x.gsub(':', '').gsub(/\A\p{Space}*|\p{Space}*\z/, '')
+            end
     array = array.reject { |x| x.empty? }
 
     @features_hash = Hash[*array]

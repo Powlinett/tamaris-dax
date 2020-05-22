@@ -1,0 +1,42 @@
+.product-show-description {
+  width: 50vw;
+  margin: 2rem auto;
+  text-align: center;
+
+  h5 {
+    padding: 1rem;
+    font-weight: bold;
+    color: $medium-grey;
+    font-size: 1.1rem;
+    letter-spacing: 0.03rem;
+    display: inline-block;
+    margin: 0;
+    border-bottom: 0.15rem solid $medium-grey;
+  }
+}
+
+.product-features, .long-description {
+  width: 33vw;
+  margin: 0 auto;
+}
+
+ul.product-features {
+  padding-left: 0;
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $super-light-grey;
+
+  li.feature {
+    display: flex;
+
+    .feature-name {
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.long-description {
+  text-align: justify;
+}
+

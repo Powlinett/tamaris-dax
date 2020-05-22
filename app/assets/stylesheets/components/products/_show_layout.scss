@@ -1,13 +1,15 @@
 body.products-show, body.variants-show {
-  background-color: #F7F6F5;
-
   .page-content {
-    width: 100%;
+    min-width: 100%;
+    margin: 0;
 
     .product-show-content{
       display: flex;
       align-items: center;
       position: relative;
+      margin: 0 auto;
+      background-color: #F7F6F5;
+      padding-left: 2rem;
     }
   }
 }

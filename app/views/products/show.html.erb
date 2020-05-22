@@ -53,7 +53,9 @@
             <% end %>
           </ul>
           <% if !@variant.nil? && @variant.stock < 10 && @variant.stock > 0 %>
-            <p class="last-stocks">Plus que <%= pluralize(@variant.stock, "exemplaire") %> en stock</p>
+            <p class="last-stocks">
+              Plus que <%= pluralize(@variant.stock, "exemplaire") %> en stock
+            </p>
           <% end %>
         </div>
       <% end %>
@@ -71,6 +73,25 @@
       <% end %>
 
     </div>
+  </div>
+
+  <div class="product-show-description">
+    <h5>Informations sur le produit</h5>
+    <ul class="product-features">
+      <% @product.product_feature.features_hash.each do |feature, value| %>
+        <li class="feature">
+          <p class="feature-name">
+            <%= feature %>:
+          </p>
+          <p class="feature-value">
+            <%= value %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+    <p class="long-description">
+      <%= @product.product_feature.description %>
+    </p>
   </div>
 
   <%= render 'products/sizes_modal' %>
