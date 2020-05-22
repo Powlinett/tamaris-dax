@@ -9,7 +9,7 @@
           <div class="product-image">
             <%= image_tag resize(product.photos_urls.first, 450, 600), class: 'first-picture' %>
           </div>
-          <div class="quick-booking">
+          <div class="quick-booking no-mobile">
             <% if (product.variants.count == 1) && (product.variants[0].stock) > 0 %>
               <%= link_to 'Réserver en magasin', new_product_booking_path(product.reference, product.variants[0].size), class: 'booking-link' %>
             <% elsif product.variants.count == 1 %>
