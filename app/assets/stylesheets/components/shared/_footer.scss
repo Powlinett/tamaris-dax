@@ -24,17 +24,17 @@
   text-decoration: none;
   font-size: 1.5rem;
   display: flex;
-  align-items: center;
   font-weight: bold;
 }
 
 .footer-links .follow, .social-medias p {
   font-size: 1.5rem;
-  margin-right: 0.3rem;
+  // margin-right: 0.3rem;
   transform: scale(0.95,1);
   font-weight: bold;
 }
 
 .social-medias {
   display: flex;
+  align-items: center;
 }

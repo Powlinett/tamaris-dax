@@ -1,10 +1,12 @@
 .show-size-modal {
   text-decoration: underline;
+  color: $medium-grey;
+  font-size: $base-font-size;
   margin-top: 0.5rem;
 
   &:hover {
     text-decoration: none;
-    cursor: pointer;
+    color: $medium-grey;
   }
 }
 

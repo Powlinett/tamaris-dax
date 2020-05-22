@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: { registrations: "registrations" }
+  get 'admin', to: redirect('/users/sign_in')
+
   root to: 'pages#home'
 
   get 'products/recherche', to: 'products#search', as: :products_search
