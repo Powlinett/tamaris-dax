@@ -9,6 +9,14 @@
     margin: 0 !important;
   }
 
+  .no-mobile {
+    display: none !important;
+  }
+
+  .only-mobile {
+    display: inline-block !important;
+  }
+
   .navbar {
     background-color: white;
   }
@@ -102,36 +110,26 @@
     }
   }
 
-  .no-mobile {
-    display: none !important;
-  }
-
-  .only-mobile {
-    display: inline-block !important;
-  }
-
   .booking-content.new-booking-content {
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     width: 90vw;
     padding: 0;
     box-shadow: none;
     margin: 0.5rem auto;
 
     .booking-form-side {
-      grid-row-start: 1;
       padding-bottom: 0.5rem;
-
-      .booking-form {
-        box-shadow: none;
-        margin-bottom: 0.5rem;
-      }
 
       .simple_form.new_booking {
         padding: 0;
       }
     }
+  }
 
+  .booking-form {
+    box-shadow: none;
+    margin-bottom: 0;
   }
 }
 

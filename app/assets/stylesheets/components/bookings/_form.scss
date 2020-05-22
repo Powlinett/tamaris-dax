@@ -59,18 +59,17 @@
   padding-bottom: 69.8px;
   margin-top: -1px;
 
-  .booking-form {
-    padding: 1rem 0;
-    box-shadow: $base-box-shadow;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1rem;
-    display:flex;
-    justify-content: center;
-  }
-
   .booking-btn {
     margin-top: 0;
   }
 }
 
+.booking-form {
+  padding: 1rem 0;
+  box-shadow: $base-box-shadow;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+  display:flex;
+  justify-content: center;
+}
