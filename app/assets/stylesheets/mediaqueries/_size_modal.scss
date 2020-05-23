@@ -3,16 +3,6 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: 90vw;
-    font-size: 1rem;
-
-    .custom-modal-header {
-      font-size: 1.2rem;
-      padding: 1rem 0;
-    }
-
-    .modal-informations {
-      font-size: $base-font-size;
-    }
   }
 
   .sizes-wrapper {
@@ -34,6 +24,35 @@
 
     :last-child {
       border-bottom: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sizes-modal {
+    width: 100vw;
+    font-size: 1rem;
+
+    .custom-modal-header {
+      font-size: 1.2rem;
+      padding: 1rem 0;
+    }
+
+    .modal-informations {
+      font-size: $base-font-size;
+    }
+
+    .sizes-wrapper.container {
+      padding: 0;
+
+      .size-headline-title {
+        display: flex;
+      }
+
+      .row {
+        flex-direction: column;
+        justify-content: space-around;
+      }
     }
   }
 }

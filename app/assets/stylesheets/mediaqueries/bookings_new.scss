@@ -21,3 +21,14 @@
     margin-bottom: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .booking-content.new-booking-content {
+    margin: 0;
+  }
+
+  .booking-form {
+    box-shadow: none;
+    margin-top: 1.5rem;
+  }
+}
