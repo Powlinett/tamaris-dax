@@ -68,7 +68,7 @@
     <% elsif !@variant.nil? %>
       <%= link_to "Réserver en boutique", new_product_booking_path(@product.reference, @variant.size), class: "button booking-btn" %>
     <% else %>
-      <div class="button booking-btn no-size-selected">Réserver en boutique</div>
+      <div class="button booking-btn no-size-selected no-mobile">Réserver en boutique</div>
     <% end %>
 
   </div>

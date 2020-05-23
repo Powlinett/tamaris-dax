@@ -20,16 +20,17 @@
 
 .products-container {
   width: 85vw;
-}
 
-.products-container .main-content {
-  padding-left: 0.5rem;
-  flex-grow: 1;
+  .sub-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    width: max-content;
+    grid-gap: 1rem;
+  }
 }
 
 .products-container .side-content {
-  padding-right: 0.5rem;
-  width: 17%;
+  width: 100%;
 }
 
 .products-search .index-category h1 {

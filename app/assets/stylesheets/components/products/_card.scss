@@ -24,14 +24,32 @@
     }
   }
 
-  .product-image {
-    height: 585px;
-    overflow: hidden;
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    transition: $base-transition;
+    background-size: contain;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    .product-image {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    img {
+      height: 550px;
+    }
   }
 }
 
 .product-card-content {
   position: relative;
+  background-position: center;
+  background-size: cover;
 
   .quick-booking {
     position: absolute;
@@ -56,26 +74,6 @@
   }
 }
 
-.product-card {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  transition: $base-transition;
-  background-size: contain;
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  .product-image {
-    width: 100%;
-    flex-grow: 1;
-  }
-
-  img {
-    width: 100%;
-  }
-}
 
 .card-infos {
   width: 100%;
