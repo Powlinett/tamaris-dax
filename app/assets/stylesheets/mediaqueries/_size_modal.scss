@@ -1,0 +1,39 @@
+@media screen and (max-width: 576px) {
+  .sizes-modal {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 90vw;
+    font-size: 1rem;
+
+    .custom-modal-header {
+      font-size: 1.2rem;
+      padding: 1rem 0;
+    }
+
+    .modal-informations {
+      font-size: $base-font-size;
+    }
+  }
+
+  .sizes-wrapper {
+    flex-direction: column;
+    padding: 0 4.5rem;
+    padding-bottom: 2rem;
+    align-items: center;
+
+    :first-child {
+      width: 100%;
+    }
+
+    .sizes-table-values {
+      border-right: none;
+      border-bottom: 1px solid $medium-grey;
+      width: 100%;
+      padding: 1rem 0;
+    }
+
+    :last-child {
+      border-bottom: none;
+    }
+  }
+}

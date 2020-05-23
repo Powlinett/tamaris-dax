@@ -1,0 +1,42 @@
+@media screen and (max-width: 576px) {
+  .products-show .page-content {
+    padding: 0;
+    max-width: calc(100vw - 1rem);
+  }
+
+  .product-show-content {
+    flex-direction: column;
+    padding-left: 0 !important;
+
+    .picture-wrapper, .full-size-picture {
+      min-width: 100%;
+    }
+
+    .product-side-content {
+      min-width: 100%;
+      padding: 0 0.5rem;
+      padding-top: 1rem;
+      background-color: white;
+    }
+
+    .button.booking-btn {
+      position: fixed;
+      bottom: 0;
+      z-index: 6;
+      margin-top: 0;
+      left: 0;
+      border: 1rem solid white;
+      box-shadow: 0px 9px 9px 7px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .product-show-description, .product-features, .long-description {
+    margin: 0;
+    width: 100%;
+  }
+
+  .product-show-description {
+    padding: 0 0.5rem;
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,14 @@
+@media screen and (max-width: 576px) {
+  .footer {
+    height: 5rem;
+  }
+
+  .footer-links {
+    flex-direction: row;
+
+    p, a, .follow {
+      font-weight: 400;
+      font-size: 1.1rem;
+    }
+  }
+}

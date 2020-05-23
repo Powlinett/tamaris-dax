@@ -1,0 +1,23 @@
+@media screen and (max-width: 576px) {
+  .booking-content.new-booking-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    box-shadow: none;
+    margin: 0.5rem auto;
+
+    .booking-form-side {
+      padding-bottom: 0.5rem;
+
+      .simple_form.new_booking {
+        padding: 0;
+      }
+    }
+  }
+
+  .booking-form {
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+}

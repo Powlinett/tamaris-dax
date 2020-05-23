@@ -12,7 +12,7 @@
     </li>
     <% @sub_categories.each do |sub_category| %>
       <li class='sub-category'>
-        <%= link_to sub_category, sub_category_path(slug(sub_category)), class: 'nav-link' %>
+        <%= link_to sub_category.capitalize, sub_category_path(slug(sub_category)), class: 'nav-link' %>
       </li>
     <% end %>
   </ul>

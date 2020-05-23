@@ -1,0 +1,31 @@
+@media screen and (max-width: 576px) {
+  .products-container {
+    width: 100% !important;
+    // max-width: calc(100vw - 1rem);
+
+    .index-title h1 {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .sub-container {
+      display: flex !important;
+      flex-direction: column;
+      margin: 0 auto;
+
+      .main-content {
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
+      }
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+
+      .product-image img {
+        height: unset;
+        max-width: calc(50vw - 0.7rem);
+      }
+    }
+  }
+}
