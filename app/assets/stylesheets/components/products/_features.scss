@@ -28,6 +28,7 @@ ul.product-features {
 
   li.feature {
     display: flex;
+    flex-wrap: wrap;
 
     .feature-name {
       font-weight: bold;
