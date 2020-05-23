@@ -1,51 +1,40 @@
-.simple_form.new_booking {
-  padding: 1rem;
-  padding-right: 0;
-  padding-bottom: 0;
-}
-
 .booking-content.new-booking-content {
   padding: 2rem;
+  padding-top: 1.5rem;
   padding-bottom: 0;
   box-shadow: 0 0 6px rgba(0,0,0,.1);
-  width: 43vw;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 50%);
+  grid-gap: 1rem;
 }
 
-.booking-product-side {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.booking-product-side .product-card {
+  margin: 0;
+  width: 100%;
+  text-decoration: none;
 
-  .product-card {
-    margin: 0;
+  .product-image {
     background-position: center;
     background-size: cover;
     width: 100%;
-    height: 100%;
+  }
 
-    .product-image {
-      background-position: center;
-      background-size: cover;
-    }
+  img {
+    width: 100%;
+    transition: $base-transition;
+  }
+
+  &:hover {
 
     img {
+      opacity: 0;
       transition: $base-transition;
     }
+  }
 
-    &:hover {
-
-      img {
-        opacity: 0;
-        transition: $base-transition;
-      }
-    }
-
-    .card-infos .model {
-      display: flex;
-      justify-content: space-between;
-    }
+  .card-infos .model {
+    display: flex;
+    justify-content: space-between;
   }
 }
 

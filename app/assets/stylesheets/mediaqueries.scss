@@ -88,7 +88,8 @@
       text-align: center;
     }
 
-    .flex-content {
+    .sub-container {
+      display: flex !important;
       flex-direction: column;
       margin: 0 auto;
 
