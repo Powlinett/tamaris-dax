@@ -31,11 +31,9 @@
     display: flex;
     align-items: center;
 
-    &::before {
-      content: url('search.svg');
-      vertical-align: -0.75rem;
-      height: 1.5rem;
-      width: 1.5rem;
+    img {
+      height: 1.3rem;
+      width: 1.3rem;
     }
 
     &:hover {
