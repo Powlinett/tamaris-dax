@@ -16,9 +16,11 @@
     margin-bottom: 0;
     min-width: 100vw;
     z-index: 10;
-    position: relative;
-    left: -16px;
-    padding: 2rem 0;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    padding: 1rem 0;
+    box-shadow: $base-box-shadow;
 
   }
   .mobile-list {
