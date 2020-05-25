@@ -1,8 +1,10 @@
-.navbar-lewagon {
-  display: flex;
-  justify-content: space-between;
+.navbar.navbar-expand-md.navbar-light.navbar-lewagon {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  box-shadow: $base-box-shadow;
   background: rgba(250, 250, 250, 0.97);
-  height: 4.8rem;
+  padding: 1rem 1rem;
 
   .navbar-center {
     width: 100%;
@@ -36,13 +38,6 @@
     }
 }
 
-.navbar.navbar-expand-sm.navbar-light.navbar-lewagon {
-  position: sticky;
-  top: 0;
-  box-shadow: $base-box-shadow;
-  z-index: 4;
-}
-
 .navbar-lewagon .navbar-brand img {
   height: 1.5rem;
   vertical-align: unset;
@@ -59,16 +54,16 @@
   align-items: center;
 }
 
-.user-navbar {
+// .user-navbar {
 
-  .nav-item {
-    padding: 0 0.5rem;
+//   .nav-item {
+//     padding: 0 0.5rem;
 
-    .nav-link {
-      font-weight: bold;
-    }
-  }
-}
+//     .nav-link {
+//       font-weight: bold;
+//     }
+//   }
+// }
 
 .nav-items {
   display: flex;

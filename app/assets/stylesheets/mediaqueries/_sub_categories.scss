@@ -1,0 +1,29 @@
+@media screen and (max-width: 576px) {
+
+}
+
+@media (max-width: 768px) {
+  .sub-categories-container {
+    border-top: none;
+    margin: 0;
+    padding: 0;
+    overflow: scroll;
+    width: calc(100vw - 1rem);
+
+    .sub-categories {
+      display: flex;
+
+      .sub-category {
+        min-width: max-content;
+        padding: 0.5rem 0.5rem;
+        background-color: #f5f4f3;
+        margin-right: 0.5rem;
+        border-radius: 2px;
+
+        .nav-link {
+          text-transform: none;
+        }
+      }
+    }
+  }
+}

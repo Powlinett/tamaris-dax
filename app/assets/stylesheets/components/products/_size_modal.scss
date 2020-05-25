@@ -39,23 +39,31 @@
 
 .sizes-wrapper.container {
   display: flex;
+  padding: 0 2rem;
+  width: max-content;
 
   :last-child {
     border-right: none;
+    padding-right: 0 !important;
   }
 }
 
 .size-headline-title.row {
   width: max-content;
-  font-weight: light;
+  padding-right: 1rem;
 }
 
 .foot-length-headline, .size-headline {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
 .size-headline, .size-value {
   font-weight: bolder;
+  padding: 0;
 }
 
 .sizes-table-values {
