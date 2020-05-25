@@ -33,9 +33,9 @@
 
     &::before {
       content: url('search.svg');
-      display: flex;
-      height: 2rem;
-      width: 2rem;
+      vertical-align: -0.75rem;
+      height: 1.5rem;
+      width: 1.5rem;
     }
 
     &:hover {
