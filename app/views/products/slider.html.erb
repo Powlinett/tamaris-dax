@@ -1,7 +1,0 @@
-<ul class="thumbnails-pictures no-mobile">
-  <% @product.photos_urls.each_with_index do |photo, index| %>
-    <li class="thumbnail-picture">
-      <%= image_tag resize(photo, 72, 96) , data: { index: index } %>
-    </li>
-  <% end %>
-</ul>

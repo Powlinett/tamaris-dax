@@ -47,7 +47,7 @@ module Scraper
         price: @price.to_f,
         former_price: @former_price.to_f,
         sizes_range: @sizes_array,
-        photos_urls: @photos,
+        photos_urls: @photos.uniq,
         product_feature: @product_features
       }
   end

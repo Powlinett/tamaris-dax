@@ -2,12 +2,11 @@
   display: flex;
   padding-left: 0;
   position: relative;
-  width: calc(8 * 44px);
   flex-wrap: wrap;
 
   .variant-box {
     background-color: transparent;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
 
   li.size {

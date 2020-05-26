@@ -47,10 +47,12 @@
 
       .size-headline-title {
         display: flex;
+        padding-right: 0;
       }
 
       .row {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: nowrap;
         justify-content: space-around;
       }
     }
