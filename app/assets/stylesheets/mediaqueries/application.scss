@@ -25,6 +25,10 @@
     width: unset;
     padding: 0 0.5rem;
   }
+
+  .change-stock-forms {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 @media (max-width: 992px) {

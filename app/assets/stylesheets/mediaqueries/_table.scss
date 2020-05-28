@@ -1,0 +1,38 @@
+@media screen and (max-width: 576px) {
+  .bookings-head {
+    display: none !important;
+  }
+
+  .bookings-table {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 0.5rem;
+    margin-top: 1rem;
+
+    .bookings-table-row {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .booker {
+      border-left: none;
+      border-right: none;
+    }
+
+    .booking-dates {
+      display: flex;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+
+  .bookings-table-row div, .bookers-table-row div {
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  .actions-wrapper {
+    text-align: center;
+  }
+}
