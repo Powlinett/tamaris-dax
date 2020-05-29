@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-md navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "https://tamaris.com/on/demandware.static/Sites-FR-Site/-/default/dw4739fad8/images/logo-tamaris.svg" %>
+    <%= image_tag 'logo-tamaris.svg' %>
   <% end %>
 
   <div class='d-flex align-items-center'>
@@ -46,9 +46,10 @@
               Menu admin
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href=<%= current_bookings_path %>>Réservations</a>
-              <a class="dropdown-item" href=<%= new_product_path %>>Gestion des stocks</a>
-              <a class="dropdown-item" href=<%= bookers_path %>>Fichier clients</a>
+              <%= link_to 'Réservations', current_bookings_path, class: 'dropdown-item' %>
+              <%= link_to 'Gestion des stocks', new_product_path, class: 'dropdown-item' %>
+              <%= link_to 'Fichier clients', bookers_path, class: 'dropdown-item' %>
+              <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
             </div>
           </li>
         <% end %>
