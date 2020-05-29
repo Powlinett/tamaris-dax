@@ -1,0 +1,44 @@
+.pages-location h1 {
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.location-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 2.5rem;
+
+  .infos-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 4rem;
+  }
+
+  .infos-content h3 {
+    font-size: 1.5rem;
+    color: $medium-grey;
+    margin-bottom: 1rem;
+    font-family: 'Cabin';
+    font-weight: 600;
+  }
+
+  .opening-hours {
+    width: max-content;
+    padding-bottom: 1.5rem;
+  }
+
+  .day {
+    display: flex;
+    justify-content: space-between;
+
+    :last-child {
+      padding-left: 2rem;
+    }
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+}

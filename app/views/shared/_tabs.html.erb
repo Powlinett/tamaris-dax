@@ -1,3 +1,5 @@
+<% @product = @paginated_products.first unless @paginated_products.nil? %>
+
 <ul class="list-inline tabs-links no-mobile">
   <li class="tab-link root-link">
     <%= link_to 'Tamaris', root_path %>
@@ -19,7 +21,7 @@
     </li>
   <% end %>
 
-  <% if @products.nil? %>
+  <% if @paginated_products.nil? %>
     <li class="tab-link product-model">
       <%= "#{@product.model.capitalize}" %>
     </li>

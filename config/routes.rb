@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'admin', to: redirect('/users/sign_in')
 
   root to: 'pages#home'
+  get 'nous-trouver', to: 'pages#location', as: :location
 
   get 'products/recherche', to: 'products#search', as: :products_search
   get 'categories/:sub_category', to: 'products#index_by_sub_category', as: :sub_category
@@ -35,4 +36,5 @@ Rails.application.routes.draw do
   get 'bookers/recherche', to: 'bookers#search', as: :bookers_search
 
   get ':category', to: 'products#index', as: :category
+
 end

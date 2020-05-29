@@ -2,12 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Boutique Tamaris - Saint-Paul-lès-Dax</title>
+    <% if !params[:category].nil? || !params[:sub_category].nil? %>
+      <title><%= params.values.last.capitalize %> - Boutique Tamaris Saint-Paul-Lès-Dax</title>
+    <% elsif !@product.nil? %>
+      <title><%= "#{@product.model.capitalize} #{@product.color}" %> - Boutique Tamaris Saint-Paul-Lès-Dax</title>
+    <% else %>
+      <title>Boutique Tamaris - Saint-Paul-lès-Dax</title>
+    <% end %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/de5affd924.js" crossorigin="anonymous"></script>
