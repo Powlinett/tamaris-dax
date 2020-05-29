@@ -5,19 +5,19 @@
     <%= link_to 'Tamaris', root_path %>
   </li>
 
-  <% if body_class.include? 'products-search' %>
-    <li class="tab-link category-link">
-      Recherche
-    </li>
-  <% else %>
-    <li class="tab-link category-link">
-      <%= link_to @product.category.capitalize, category_path(@product.category)  %>
-    </li>
-  <% end %>
+  <li class="tab-link category-link">
+    <% if body_class.include? 'products-search' %>
+        Recherche
+    <% elsif params[:category] == 'promotions' %>
+        <%= link_to params[:category].capitalize, category_path(params[:category])  %>
+    <% else %>
+        <%= link_to @product.category.capitalize, category_path(@product.category)  %>
+    <% end %>
+  </li>
 
-  <% if (body_class.include? 'index_by_sub_category') || (body_class.include? 'products-show') %>
+  <% unless body_class == 'products products-index' %>
     <li class="tab-link subcategory-link">
-      <%= link_to @product.sub_category.capitalize, sub_category_path(slug(@product.sub_category)) %>
+      <%= link_to @product.sub_category.capitalize, sub_category_path(@product.category, slug(@product.sub_category)) %>
     </li>
   <% end %>
 

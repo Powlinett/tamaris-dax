@@ -11,6 +11,8 @@ class ProductsController < ApplicationController
   def index
     if params[:category].nil?
       @products = Product.all
+    elsif params[:category] == 'promotions'
+      @products = Product.where.not(former_price: 0.0)
     else
       @products = Product.where(category: params[:category])
     end
@@ -19,18 +21,22 @@ class ProductsController < ApplicationController
   end
 
   def index_by_sub_category
-    @products = Product.where(sub_category: unslug(params[:sub_category]))
-    category = @products.first.category
-    @sub_categories = Product.where(category: category)
-                             .pluck(:sub_category).uniq
+    if params[:category] == 'promotions'
+      @products_by_cat = Product.where.not(former_price: 0.0)
+    else
+      @products_by_cat = Product.where(category: params[:category])
+    end
+    @products = @products_by_cat.where(sub_category: unslug(params[:sub_category]))
+
+    @sub_categories = @products_by_cat.pluck(:sub_category).uniq
     render_index_or_no_products
   end
 
-  def all_offers
-    @products = Product.where.not(former_price: 0.0)
-    set_sub_categories
-    render_index_or_no_products
-  end
+  # def all_offers
+  #   @products = Product.where.not(former_price: 0.0)
+  #   set_sub_categories
+  #   render_index_or_no_products
+  # end
 
   def show
     @product = Product.find_by(reference: params[:reference])
