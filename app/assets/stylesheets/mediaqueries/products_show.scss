@@ -17,7 +17,7 @@
   .product-side-content {
     min-width: 100%;
     padding: 0 0.5rem;
-    padding-top: 1rem;
+    padding-bottom: 1.5rem;
     background-color: white;
   }
 
@@ -39,6 +39,30 @@
 
   .product-show-description {
     padding: 0 0.5rem;
-    margin-top: 1rem;
+  }
+
+  .carousel-indicators {
+    position: relative;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    background-color: white;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+
+    li {
+      height: 0.6rem;
+      width: 0.6rem;
+      background-color: $super-light-grey;
+      opacity: 1;
+      margin-right: 0.25rem;
+      margin-left: 0.25rem;
+      border-radius: 50%;
+
+      &.active {
+        background-color: $light-grey;
+      }
+    }
   }
 }
