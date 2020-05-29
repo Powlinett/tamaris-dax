@@ -54,17 +54,6 @@
   align-items: center;
 }
 
-// .user-navbar {
-
-//   .nav-item {
-//     padding: 0 0.5rem;
-
-//     .nav-link {
-//       font-weight: bold;
-//     }
-//   }
-// }
-
 .nav-items {
   display: flex;
   position: absolute;
@@ -77,8 +66,9 @@
   display: flex;
   align-items: center;
   z-index: 5;
+}
 
-  :first-child {
-    padding: 0;
-  }
+.dropdown-menu {
+  left: unset;
+  right: 0;
 }

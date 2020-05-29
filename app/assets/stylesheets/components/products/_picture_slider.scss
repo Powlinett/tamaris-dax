@@ -13,6 +13,8 @@ body.products-show, body.variants-show {
       img {
         max-width: 0;
         max-height: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
       }
     }
 
@@ -22,6 +24,8 @@ body.products-show, body.variants-show {
       img {
         max-width: 100%;
         max-height: unset;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
       }
     }
   }

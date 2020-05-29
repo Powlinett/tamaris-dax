@@ -29,34 +29,28 @@
       </div>
 
       <div class="navbar-right-side mobile-list">
+        <div class="no-mobile">
+          <%= render 'shared/search_form' %>
+        </div>
 
         <% unless user_signed_in? %>
-
-          <div class="no-mobile">
-            <%= render 'shared/search_form' %>
-          </div>
           <li class="nav-item">
             <%= link_to "Votre boutique", "#", class: "nav-link" %>
           </li>
           <li class="nav-item ">
             <%= link_to "Nous trouver", "#", class: "nav-link" %>
           </li>
-
         <% else %>
-
-          <div class="no-mobile">
-            <%= render 'shared/search_form' %>
-          </div>
-          <li class="nav-item">
-            <%= link_to "Réservations", current_bookings_path, class: "nav-link font-weight-bold" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Menu admin
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href=<%= current_bookings_path %>>Réservations</a>
+              <a class="dropdown-item" href=<%= new_product_path %>>Gestion des stocks</a>
+              <a class="dropdown-item" href=<%= bookers_path %>>Fichier clients</a>
+            </div>
           </li>
-          <li class="nav-item">
-            <%= link_to "Gestion des stocks", new_product_path, class: "nav-link font-weight-bold" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Fichier clients", bookers_path, class: "nav-link font-weight-bold" %>
-          </li>
-
         <% end %>
 
       </div>

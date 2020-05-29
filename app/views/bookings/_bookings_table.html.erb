@@ -1,43 +1,43 @@
 <section class="bookings-table">
-    <header class="bookings-head">
-          <div>Modèle</div>
-          <div>Dates</div>
-          <div>Coordonnées client</div>
-          <div>Actions</div>
-    </header>
-        <% @bookings.each do |booking| %>
-          <div class="bookings-table-row <%= booking.actual_state %>">
-            <div class="model-wrapper">
-              <div class="model no-border">
-                <%= link_to((image_tag(resize(booking.product.photos_urls.first, 100, 200))), product_path(booking.product.reference)) %>
-               <div class="no-border">
-                  <p class="font-weight-bold"><%= booking.product.reference %></p>
-                  <p>Taille: <strong><%= booking.variant.size %></strong></p>
-                  <p>( env. <%= booking.variant.stock %> en stock )</p>
-                </div>
-              </div>
-            </div>
-            <div class="booking-dates">
-               <p>du <strong><%= booking.starting_date.strftime("%d/%m") %></strong></p>
-               <p>jusqu'au <strong><%= booking.ending_date.strftime("%d/%m") %></strong></p>
-            </div>
-            <div>
-              <p class="font-weight-bold"><%= "#{booking.booker.last_name.upcase} #{booking.booker.first_name.capitalize}" %></p>
-              <p>Tél. <strong><%= booking.booker.phone_number %></strong></p>
-            </div>
-            <div class="actions-wrapper">
-              <% if (booking.actual_state == 'back') && (booking.former_state == 'closed') %>
-                <p><strong><%= 'Date dépassée, remise en vente'.upcase %></strong></p>
-              <% elsif booking.actual_state == 'picked' %>
-                <p><strong><%= 'Produit encaissé'.upcase %></strong></p>
-              <% elsif booking.actual_state == 'canceled' %>
-                <p><strong><%= 'Annulée, stock indisponible'.upcase %></strong></p>
-              <% elsif booking.actual_state == 'back' %>
-                <p><strong><%= 'Produit remis en vente'.upcase %></strong></p>
-              <% else %>
-                <%= render partial: 'actions', locals: { booking: booking } %>
-              <% end %>
-            </div>
+  <header class="bookings-head">
+    <div>Modèle</div>
+    <div>Coordonnées client</div>
+    <div>Dates</div>
+    <div>Actions</div>
+  </header>
+  <% @bookings.each do |booking| %>
+    <div class="bookings-table-row <%= booking.actual_state %>">
+      <div class="model-wrapper">
+        <div class="model no-border">
+          <%= link_to((image_tag(resize(booking.product.photos_urls.first, 100, 200))), product_path(booking.product.reference)) %>
+         <div class="no-border">
+            <p class="font-weight-bold"><%= booking.product.reference %></p>
+            <p>Taille: <strong><%= booking.variant.size %></strong></p>
+            <p>( ~ <%= booking.variant.stock %> en stock )</p>
           </div>
+        </div>
+      </div>
+      <div class="booker">
+        <p class="font-weight-bold"><%= "#{booking.booker.last_name.upcase} #{booking.booker.first_name.capitalize}" %></p>
+        <p>Tél. <strong><%= booking.booker.phone_number %></strong></p>
+      </div>
+      <div class="booking-dates">
+         <p>du <strong><%= booking.starting_date.strftime("%d/%m") %></strong></p>
+         <p>au <strong><%= booking.ending_date.strftime("%d/%m") %></strong></p>
+      </div>
+      <div class="actions-wrapper">
+        <% if (booking.actual_state == 'back') && (booking.former_state == 'closed') %>
+          <p><strong><%= 'Date dépassée, remise en vente'.upcase %></strong></p>
+        <% elsif booking.actual_state == 'picked' %>
+          <p><strong><%= 'Produit encaissé'.upcase %></strong></p>
+        <% elsif booking.actual_state == 'canceled' %>
+          <p><strong><%= 'Annulée, stock indisponible'.upcase %></strong></p>
+        <% elsif booking.actual_state == 'back' %>
+          <p><strong><%= 'Produit remis en vente'.upcase %></strong></p>
+        <% else %>
+          <%= render partial: 'actions', locals: { booking: booking } %>
         <% end %>
+      </div>
+    </div>
+  <% end %>
 </section>

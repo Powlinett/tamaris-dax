@@ -4,34 +4,35 @@
   <% else %>
     <h1>Fichier client</h1>
   <% end %>
-  <%= form_tag bookers_search_path, method: :get do %>
+  <%= form_tag bookers_search_path, method: :get, class:'bookers-search' do %>
     <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher parmi les client(e)s" %>
     <%= submit_tag "Search", class: "btn btn-primary", style: 'display: none' %>
   <% end %>
   <section class="bookers-table">
-      <header class="bookers-head">
-            <div><p>Nom Prénom</p></div>
-            <div><p>Téléphone</p></div>
-            <div>
-              <div class="no-border emails">
-                <p>E-mail</p>
-                <i class="fas fa-clipboard"></i>
-              </div>
+    <header class="bookers-head no-mobile">
+          <div><p>Nom Prénom</p></div>
+          <div><p>Téléphone</p></div>
+          <div>
+            <div class="no-border emails">
+              <p>E-mail</p>
+              <i class="fas fa-clipboard"></i>
             </div>
-      </header>
-          <% @bookers.each_with_index do |booker, index| %>
-            <div class="bookers-table-row <%= ' odd' if index.odd? %>">
-              <div>
-                <%= "#{booker.last_name.upcase} #{booker.first_name}" %>
-              </div>
-              <div>
-                <%= booker.phone_number %>
-              </div>
-              <div>
-                <%= booker.email %>
-              </div>
-            </div>
-          <% end %>
+          </div>
+    </header>
+    <% @bookers.each_with_index do |booker, index| %>
+      <div class="bookers-table-row <%= ' odd' if index.odd? %>">
+        <div class="d-flex">
+          <p class="only-mobile">Nom:</p>
+          <p class="font-weight-bold"><%= "#{booker.last_name.upcase} #{booker.first_name}" %></p>
+        </div>
+        <div>
+          <p class="only-mobile">Tel.</p><%= booker.phone_number %>
+        </div>
+        <div>
+          <p class="only-mobile">@:</p><%= booker.email %>
+        </div>
+      </div>
+    <% end %>
   </section>
   <%= paginate @bookers %>
 </div>

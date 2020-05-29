@@ -1,15 +1,12 @@
 @media screen and (max-width: 576px) {
-
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .products-container {
-    width: 100% !important;
-    max-width: calc(100vw - 1rem);
-
-    // .product-card-wrapper {
-    //   max-width: min-content;
-    // }
+    max-width: 100% !important;
 
     .index-title h1 {
       margin-top: 1rem;
@@ -17,17 +14,7 @@
     }
 
     .sub-container {
-      display: flex !important;
       flex-direction: column;
-    }
-
-    .products-grid {
-      grid-template-columns: repeat(2, 1fr);
-
-      .product-image img {
-        width: calc(50vw - 0.7rem);
-        height: unset;
-      }
     }
   }
 }
