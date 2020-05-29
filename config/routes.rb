@@ -10,9 +10,9 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
   get 'nous-trouver', to: 'pages#location', as: :location
+  get 'votre-boutique', to: 'pages#store', as: :store
 
   get 'products/recherche', to: 'products#search', as: :products_search
-  # get 'promotions', to: 'products#all_offers', as: :all_offers
   delete 'products', to: 'products#destroy', as: :products
 
   resources :products, param: :reference, only: [:index, :new, :show, :create] do

@@ -1,0 +1,17 @@
+@media screen and (max-width: 576px) {
+
+}
+
+@media (max-width: 768px) {
+  .pages-store .page-content {
+    width: 100% !important;
+  }
+
+  .paragraph {
+    flex-direction: column;
+
+    .paragraph-text, .store-image {
+      width: 100% !important;
+    }
+  }
+}
