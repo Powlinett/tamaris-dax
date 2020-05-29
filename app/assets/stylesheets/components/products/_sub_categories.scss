@@ -6,6 +6,8 @@
   text-transform: uppercase;
   font-family: 'Nunito';
   font-weight: 300;
+  position: sticky;
+  top: 4rem;
 
   p {
     color: $light-grey;
@@ -16,6 +18,8 @@
 .sub-categories {
   padding-left: 0;
   margin-top: 1rem;
+  width: max-content;
+  min-width: 12vw;
 
   .sub-category {
     text-decoration: none;

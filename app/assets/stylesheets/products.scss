@@ -19,18 +19,16 @@
 }
 
 .products-container {
-  width: 85vw;
+  max-width: 85%;
+  margin: 0 auto;
 
   .sub-container {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    width: max-content;
-    grid-gap: 1rem;
+    display: flex;
   }
 }
 
 .products-container .side-content {
-  width: 100%;
+  margin-right: 1.5rem;
 }
 
 .products-search .index-category h1 {
