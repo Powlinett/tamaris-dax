@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <% if !params[:category].nil? || !params[:sub_category].nil? %>
       <title><%= params.values.last.capitalize %> - Boutique Tamaris Saint-Paul-Lès-Dax</title>
-    <% elsif @product.persisted? %>
+    <% elsif !@product.nil? && @product.persisted? %>
       <title><%= "#{@product.model.capitalize} #{@product.color}" %> - Boutique Tamaris Saint-Paul-Lès-Dax</title>
     <% else %>
       <title>Boutique Tamaris - Saint-Paul-lès-Dax</title>
