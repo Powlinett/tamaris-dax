@@ -1,0 +1,41 @@
+@media screen and (max-width: 576px) {
+  .pages-location h1 {
+    display: none;
+  }
+
+  .location-container {
+    display: flex !important;
+    flex-direction: column-reverse;
+    margin: 0 !important;
+
+    .infos-content {
+      padding-left: 0 !important;
+      align-items: center;
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    .infos-content h3 {
+      text-align: center;
+    }
+  }
+
+  .map-container iframe {
+    width: 100%;
+  }
+
+  .contact {
+    padding-bottom: 1.5rem;
+  }
+
+  .address, .contact, .opening-hours {
+    width: 100% !important;
+    padding-top: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .location-container .infos-content {
+   padding-left: 1rem !important;
+  }
+}

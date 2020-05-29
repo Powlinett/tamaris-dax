@@ -1,18 +1,22 @@
 <div class="sub-categories-container">
-  <p class="no-mobile">shop by category</p>
+  <p class="no-mobile">categories</p>
   <ul class='sub-categories'>
     <li class='sub-category'>
-      <% if body_class.include? 'all_offers' %>
-        <%= link_to "Toutes les promotions", all_offers_path, class: 'nav-link' %>
-      <% elsif @product.category == 'chaussures' %>
-        <%= link_to "Toutes les chaussures", category_path(@product.category), class: 'nav-link' %>
+      <% if params[:category] == 'promotions' %>
+        <%= link_to "Toutes les promotions", category_path('promotions'), class: 'nav-link' %>
+      <% elsif @paginated_products.first.category == 'chaussures' %>
+        <%= link_to "Toutes les chaussures", category_path('chaussures'), class: 'nav-link' %>
       <% else %>
-        <%= link_to "Tous les accessoires", category_path(@product.category), class: 'nav-link' %>
+        <%= link_to "Tous les accessoires", category_path('accessoires'), class: 'nav-link' %>
       <% end %>
     </li>
     <% @sub_categories.each do |sub_category| %>
       <li class='sub-category'>
-        <%= link_to sub_category.capitalize, sub_category_path(slug(sub_category)), class: 'nav-link' %>
+      <% if params[:category].nil? %>
+        <%= link_to sub_category.capitalize, sub_category_path('promotions', slug(sub_category)), class: 'nav-link' %>
+      <% else %>
+        <%= link_to sub_category.capitalize, sub_category_path(params[:category], slug(sub_category)), class: 'nav-link' %>
+      <% end %>
       </li>
     <% end %>
   </ul>
