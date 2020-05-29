@@ -35,7 +35,7 @@
 
         <% unless user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Votre boutique", "#", class: "nav-link" %>
+            <%= link_to "Votre boutique", store_path, class: "nav-link" %>
           </li>
           <li class="nav-item ">
             <%= link_to "Nous trouver", location_path, class: "nav-link" %>
