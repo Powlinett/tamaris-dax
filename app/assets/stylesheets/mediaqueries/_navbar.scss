@@ -31,7 +31,7 @@
     min-width: 100vw;
     z-index: 10;
     position: absolute;
-    top: 4rem;
+    top: 3rem;
     left: 0;
     padding: 1rem 0;
     box-shadow: $base-box-shadow;
@@ -53,6 +53,10 @@
     .nav-link:hover {
       border-bottom: 1px solid transparent;
     }
+  }
+
+  .dropdown-menu {
+    text-align: center;
   }
 
   .products-search-form label img {
