@@ -33,6 +33,10 @@
 
 @media (max-width: 768px) {
 
+  .bookings-content {
+    width: 100% !important;
+  }
+
   .bookings-table-row div, .bookers-table-row div {
     padding: 0.25rem 0.5rem !important;
   }

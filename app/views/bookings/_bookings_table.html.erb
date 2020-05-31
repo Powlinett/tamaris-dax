@@ -9,7 +9,11 @@
     <div class="bookings-table-row <%= booking.actual_state %>">
       <div class="model-wrapper">
         <div class="model no-border">
-          <%= link_to((image_tag(resize(booking.product.photos_urls.first, 100, 200))), product_path(booking.product.reference)) %>
+          <% if booking.product.photos_urls.any? %>
+            <%= link_to((image_tag(resize(booking.product.photos_urls.first, 100, 200))), product_path(booking.product.reference)) %>
+          <% else %>
+            <%= link_to((image_tag 'trying-shoes.jpg', width: 100), product_path(booking.product.reference)) %>
+          <% end %>
          <div class="no-border">
             <p class="font-weight-bold"><%= booking.product.reference %></p>
             <p>Taille: <strong><%= booking.variant.size %></strong></p>

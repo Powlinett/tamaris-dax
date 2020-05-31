@@ -53,7 +53,7 @@ def scrap_product_page(html)
   end
   @sizes_array = html.search('.selection').map { |s| s.text.strip.to_i }
   @raw_features = html.search('.info-table').text
-  @description = html.search('.long-description').text.split("\n").last
+  @raw_description = html.search('.long-description').text.split("\n")
 
   @photos = html.search('.productthumbnail').map do |element|
     element.attribute('src').value.split('?')[0]
@@ -81,16 +81,18 @@ def product_data(reference)
 end
 
 def product_features(features_text)
-  array = features_text.split("\n").map do |x|
+  features_array = features_text.split("\n").map do |x|
             x.gsub(':', '').gsub(/\A\p{Space}*|\p{Space}*\z/, '')
           end
-  array = array.reject { |x| x.empty? }
+  features_array = features_array.reject { |x| x.empty? }
+  @features_hash = Hash[*features_array]
 
-  @features_hash = Hash[*array]
+  @raw_description.empty? ? description = "" : description = @raw_descrption.last.strip
+
   @product_features =
     {
       features_hash: @features_hash,
-      description: @description
+      description: description
     }
 end
 

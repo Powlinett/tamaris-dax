@@ -52,9 +52,9 @@ class Booking < ApplicationRecord
     return true
   end
 
-  def undo_state_change
-    self.actual_state = former_state
-  end
+  # def undo_state_change
+  #   self.actual_state = former_state
+  # end
 
   private
 

@@ -1,3 +1,7 @@
+.bookings-table .bookings-head :first-child {
+  width: 33%;
+}
+
 .bookings-table .booker {
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -30,7 +34,7 @@
   }
 }
 
-.bookings-table .model-wrapper {
+.bookings-table .bookings-table-row .model-wrapper {
   padding: 0;
   padding-left: 1rem;
 
