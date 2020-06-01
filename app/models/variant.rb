@@ -6,8 +6,9 @@ class Variant < ApplicationRecord
 
   validates :product, presence: true
   validates :stock, presence: true, inclusion: { in: 0..100 }
-  validates :size, presence: true, uniqueness: { scope: :product },
-                   inclusion: { in: PERMITTED_SIZES }
+  validates :size, presence: true, uniqueness: { scope: :product_id },
+                   inclusion: { in: PERMITTED_SIZES },
+                   case_sensitive: false
 
   def update_stock(new_stock)
     self.stock += new_stock

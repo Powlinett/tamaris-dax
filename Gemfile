@@ -33,6 +33,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -48,6 +49,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'capybara-email'
   gem 'chromedriver-helper'
+  gem 'database_cleaner-active_record'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
 end

@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   serialize :sizes_range, Array
   serialize :photos_urls, Array
 
-  validates :reference, presence: true, uniqueness: true
+  validates :reference, presence: true, uniqueness: true, case_sensitive: false
   validates :category, presence: true
   validates :sub_category, presence: true
   validates :model, presence: true
@@ -25,20 +25,8 @@ class Product < ApplicationRecord
                     tsearch: { prefix: true }
                   }
 
-  def set_variants
-    sizes_range.each do |size|
-      Variant.create(size: size, product: self)
-    end
-  end
-
-  def french_price
-    price = self.price.to_s
-    price.split('.').join(',')
-  end
-
-  def french_former_price
-    former_price = self.former_price.to_s
-    former_price.split('.').join(',')
+  def french_format(price)
+    price.to_s.split('.').join(',')
   end
 
   def common_ref
@@ -51,5 +39,13 @@ class Product < ApplicationRecord
     total_stock = 0
     variants.each { |variant| total_stock += variant.stock }
     total_stock.positive?
+  end
+
+  private
+
+  def set_variants
+    sizes_range.each do |size|
+      Variant.create(size: size, product: self)
+    end
   end
 end

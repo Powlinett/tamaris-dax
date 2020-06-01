@@ -7,4 +7,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  ActionDispatch::IntegrationTest
+    Capybara.server_port = 3001
+    Capybara.app_host = 'http://localhost:3001'
+  end
 end

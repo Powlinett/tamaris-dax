@@ -23,10 +23,10 @@
         </div>
         <div class="prices">
           <% if product.former_price > 0 %>
-            <h3 class="new-price"><%= product.french_price %> €</h3>
-            <h3 class="standard-price"><%= product.french_former_price %> €</h3>
+            <h3 class="new-price"><%= product.french_format(product.price) %> €</h3>
+            <h3 class="standard-price"><%= product.french_format(product.former_price) %> €</h3>
           <% else %>
-            <h3 class="sale-price"><%= product.french_price %> €</h3>
+            <h3 class="sale-price"><%= product.french_format(product.price) %> €</h3>
           <% end %>
         </div>
       </div>
