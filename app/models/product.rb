@@ -35,6 +35,12 @@ class Product < ApplicationRecord
     ref_array.join('-')
   end
 
+  def update_variant(params)
+    variant = self.variants.find_by(size: params[:size].to_i)
+
+    variant.update(stock: variant.stock += params[:stock].to_i)
+  end
+
   def still_any_stock?
     total_stock = 0
     variants.each { |variant| total_stock += variant.stock }

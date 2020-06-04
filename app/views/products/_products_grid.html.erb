@@ -3,7 +3,7 @@
   <% @paginated_products.each do |product| %>
 
     <li class="product-card-wrapper">
-      <%= link_to(product_path(product.reference), class: 'product-card') do %>
+      <%= link_to(product_path(product.reference), class: 'product-card', id: product.reference) do %>
 
         <% if product.photos_urls.any? %>
           <div class="product-card-content" style="<%= "background-image: url(#{resize(product.photos_urls[1], 450, 600)})" %>">

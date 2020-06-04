@@ -10,7 +10,7 @@ class Variant < ApplicationRecord
                    inclusion: { in: PERMITTED_SIZES },
                    case_sensitive: false
 
-  def update_stock(new_stock)
-    self.stock += new_stock
-  end
+  # def update_stock(new_stock)
+  #   self.stock += new_stock
+  # end
 end

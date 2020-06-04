@@ -119,8 +119,7 @@ end
 def update_variants
   Product.all.each do |product|
     product.variants.each do |variant|
-      variant.update_stock(rand(0..20))
-      variant.save
+      variant.update(stock: rand(0..20))
     end
   end
 end

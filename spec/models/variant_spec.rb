@@ -32,9 +32,9 @@ describe Variant do
     expect(@variant).to_not be_valid
   end
 
-  describe '#update_stock' do
-    it 'updates stock' do
-      expect { @variant.update_stock(2) }.to change { @variant.stock }.by(2)
-    end
-  end
+  # describe '#update_stock' do
+  #   it 'updates stock' do
+  #     expect { @variant.update_stock(2) }.to change { @variant.stock }.by(2)
+  #   end
+  # end
 end

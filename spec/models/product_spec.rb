@@ -44,6 +44,15 @@ describe Product do
     end
   end
 
+  describe '#update_variant' do
+    it "updates variant's stock" do
+      params = { size: 38, stock: 4 }
+
+      expect { @product.update_variant(params) }
+        .to change { @product.variants.find_by(size: 38).stock }.by(4)
+    end
+  end
+
   describe '#still_any_stock?' do
     it "returns false if product don't have any stock" do
       expect(@product.still_any_stock?).to eq(false)

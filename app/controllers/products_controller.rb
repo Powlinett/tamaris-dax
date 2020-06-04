@@ -46,8 +46,9 @@ class ProductsController < ApplicationController
     if @product.nil?
       @product = Product.new(product_data(product_params[:reference].strip))
     end
-    if @product.save && update_variant(variant_params, @product)
-      redirect_or_render_new
+
+    if @product.save && @product.update_variant(variant_params)
+      redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
     else
       flash.now[:alert] = 'Référence introuvable ou erreur lors de la récupération des données'
       render :new
@@ -55,14 +56,20 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @variant = @product.variants.find_by(size: variant_params[:size].to_i)
-    stock_to_remove = variant_params[:stock].to_i
-    if @variant.stock >= stock_to_remove
-      @variant.stock -= stock_to_remove
+    unless @product.nil?
+      @variant = @product.variants.find_by(size: variant_params[:size].to_i)
+      stock_to_remove = variant_params[:stock].to_i
+      if @variant.stock >= stock_to_remove
+        @variant.update(stock: @variant.stock -= stock_to_remove)
+      else
+        @variant.update(stock: 0)
+      end
+      redirect_to category_path(@product.category)
     else
-      @variant.stock = 0
+      @product = Product.new
+      flash.now[:alert] = 'Référence introuvable ou déjà supprimée'
+      render :new
     end
-    @variant.save ? (redirect_to category_path(@product.category)) : (render :new)
   end
 
   def search
@@ -92,28 +99,6 @@ class ProductsController < ApplicationController
 
   def variant_params
     product_params[:variants]
-  end
-
-  def update_variant(params, product)
-    @variant = product.variants.find_by(size: params[:size].to_i)
-
-    if @variant.nil? || params[:stock].to_i.zero?
-      @variant = Variant.new(
-        size: params[:size].to_i,
-        stock: params[:stock].to_i
-      )
-    else
-      @variant.update(stock: params[:stock].to_i)
-    end
-  end
-
-  def redirect_or_render_new
-    if @variant.persisted?
-      redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
-    else
-      flash.now[:alert] = 'Merci de vérifier la taille ou le stock'
-      render :new
-    end
   end
 
   def render_index_or_no_products
