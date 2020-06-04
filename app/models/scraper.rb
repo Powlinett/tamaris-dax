@@ -34,7 +34,7 @@ module Scraper
   def product_data(reference)
     return { reference: reference } if get_reference_page(reference).nil?
 
-    @product_features = ProductFeature.where(product_features(@raw_features))
+    product_features = ProductFeature.where(product_features(@raw_features))
                                       .first_or_create
 
     @product_data =
@@ -48,7 +48,7 @@ module Scraper
         former_price: @former_price.to_f,
         sizes_range: @sizes_array,
         photos_urls: @photos.uniq,
-        product_feature: @product_features
+        product_feature: product_features
       }
   end
 
@@ -57,13 +57,15 @@ module Scraper
               x.gsub(':', '').gsub(/\A\p{Space}*|\p{Space}*\z/, '')
             end
     features_array = features_array.reject { |x| x.empty? }
-    @features_hash = Hash[*features_array]
 
-    @raw_description.empty? ? description = "" : description = @raw_descrption.last.strip
+    features_hash = Hash[*features_array]
+    features_hash.delete("Numéro d'article")
+
+    @raw_description.empty? ? description = "" : description = @raw_description.last.strip
 
     @product_features =
       {
-        features_hash: @features_hash,
+        features_hash: features_hash,
         description: description
       }
   end

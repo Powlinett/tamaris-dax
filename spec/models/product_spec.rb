@@ -18,8 +18,7 @@ describe Product do
   it { should serialize :photos_urls }
 
   before(:all) do
-    @product = build(:product)
-    @product2 = create(:product, reference: "1-1-22107-24-003")
+    @product = create(:product, reference: "1-1-22107-24-002")
   end
 
   it 'should validate inclusion of price between 0 and 300 euros' do
@@ -28,15 +27,13 @@ describe Product do
 
   describe '#set_variants' do
     it "creates all the Variant instances" do
-      expect(@product2.variants).to_not be_empty
-      expect(@product2.variants.count).to eq(@product.sizes_range.count)
+      expect(@product.variants).to_not be_empty
+      expect(@product.variants.count).to eq(@product.sizes_range.count)
     end
   end
 
   describe '#french_format' do
     it 'tranforms the price to french format' do
-      @product.french_format(@product.price)
-
       expect(@product.french_format(@product.price)).to eq('59,95')
     end
   end
@@ -49,13 +46,13 @@ describe Product do
 
   describe '#still_any_stock?' do
     it "returns false if product don't have any stock" do
-      expect(@product2.still_any_stock?).to eq(false)
+      expect(@product.still_any_stock?).to eq(false)
     end
 
     it 'return true if product has stock' do
-      @product2.variants.first.stock = 1
+      @product.variants.first.stock = 1
 
-      expect(@product2.still_any_stock?).to eq(true)
+      expect(@product.still_any_stock?).to eq(true)
     end
   end
 end

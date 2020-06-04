@@ -17,7 +17,7 @@ FactoryBot.define do
   end
 
   factory :product do
-    reference { "1-1-22107-24-602" }
+    reference { "1-1-22107-24-601" }
     model { "Ballerine en cuir" }
     color { "sun" }
     category { "chaussures" }
@@ -44,7 +44,7 @@ FactoryBot.define do
 
   factory :booking do
 
-    product { build(:product) }
+    product { create(:product) }
     variant { product.variants.first }
     booker { build(:booker) }
   end

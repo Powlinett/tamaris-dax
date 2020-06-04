@@ -27,6 +27,7 @@ class Booking < ApplicationRecord
   def confirm
     self.former_state = actual_state
     self.actual_state = 'confirmed'
+    self.variant.update(stock: self.variant.stock - 1)
   end
 
   def cancel
@@ -42,14 +43,14 @@ class Booking < ApplicationRecord
   def back_in_stock
     self.former_state = actual_state
     self.actual_state = 'back'
+    self.variant.update(stock: self.variant.stock + 1) if self.former_state == 'confirmed'
   end
 
   def is_closed?
     return false if ending_date > Date.today
 
-    self.former_state = actual_state
-    self.actual_state = 'closed'
-    return true
+    self.update(former_state: self.actual_state)
+    self.update(actual_state: 'closed')
   end
 
   # def undo_state_change

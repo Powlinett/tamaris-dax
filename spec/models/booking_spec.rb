@@ -11,11 +11,30 @@ describe Booking do
   it { should validate_presence_of :variant }
 
   before(:all) do
-    @booking = build(:booking)
+    @booking = create(:booking)
+  end
+
+  describe '#set_defaults' do
+    it 'sets default starting_date' do
+      expect(@booking.starting_date.class).to eq(Date)
+    end
+
+    it 'sets default ending_date' do
+      expect(@booking.ending_date).to eq(@booking.starting_date + 3)
+    end
+
+    it 'sets booking duration to 3 days' do
+      expect(@booking.ending_date.class).to eq(Date)
+    end
+
+    it "sets default actual state to 'pending'" do
+      expect(@booking.actual_state).to eq('pending')
+    end
   end
 
   describe '#confirm' do
     it "can be confirmed" do
+      expect(@booking.variant).to_not eq(nil)
       @booking.confirm
 
       expect(@booking.actual_state).to eq('confirmed')
@@ -46,68 +65,51 @@ describe Booking do
   end
 
   describe '#back_in_stock' do
-    it "sets booking's state to 'back' when it was confirmed" do
-      @booking.actual_state = 'confirmed'
+    context 'when it was confirmed' do
+      it "sets booking's state to 'back'" do
+        @booking.actual_state = 'confirmed'
 
-      @booking.back_in_stock
+        @booking.back_in_stock
 
-      expect(@booking.actual_state).to eq('back')
-      expect(@booking.former_state).to eq('confirmed')
+        expect(@booking.actual_state).to eq('back')
+        expect(@booking.former_state).to eq('confirmed')
+      end
     end
 
-    it "sets a booking's state to 'back' when it was pending" do
-      @booking.actual_state = 'pending'
+    context 'when it was pending' do
+      it "sets a booking's state to 'back'" do
+        @booking.actual_state = 'pending'
 
-      @booking.back_in_stock
+        @booking.back_in_stock
 
-      expect(@booking.actual_state).to eq('back')
-      expect(@booking.former_state).to eq('pending')
+        expect(@booking.actual_state).to eq('back')
+        expect(@booking.former_state).to eq('pending')
+      end
     end
   end
 
   describe '#is_closed?' do
-    it 'closes a booking when ending date is passed' do
-      @booking.ending_date = Date.today - 1
+    context 'when ending date is passed' do
+      it "returns true" do
+        @booking.ending_date = Date.today - 1
+        @booking.actual_state = 'pending'
 
-      @booking.is_closed?
+        expect(@booking.is_closed?).to be true
+      end
 
-      expect(@booking.is_closed?).to eq(true)
-      expect(@booking.actual_state).to eq('closed')
-      expect(@booking.former_state).to eq('pending')
-    end
-  end
+      it "sets actual state as 'closed" do
+        expect(@booking.actual_state).to eq('closed')
+      end
 
-  describe '#set_defaults' do
-    booking = Booking.new
-
-    it 'sets default starting_date' do
-      expect(booking.starting_date).to be_present
-      expect(booking.starting_date.class).to eq(Date)
-    end
-
-    it 'sets default ending_date' do
-      expect(booking.ending_date).to eq(@booking.starting_date + 3)
-    end
-
-    it 'sets booking duration to 3 days' do
-      expect(booking.ending_date).to be_present
-      expect(booking.ending_date.class).to eq(Date)
-    end
-
-    it "sets default actual state to 'pending'" do
-      expect(booking.actual_state).to eq('pending')
+      it "sets former state as 'pending'" do
+        expect(@booking.former_state).to eq('pending')
+      end
     end
   end
 
   feature '#send_record_email' do
     it 'enqueues an e-mail when a booking is saved' do
-      product = build(:product, reference: "1-1-22107-24-002")
-      product.save
-      variant = product.variants.last
-
-      booking = create(:booking, product: product, variant: variant)
-
-      expect(booking).to be_valid
+      expect(@booking).to be_valid
       expect(enqueued_jobs.size).to eq(1)
     end
   end

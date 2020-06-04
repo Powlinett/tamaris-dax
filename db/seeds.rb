@@ -63,7 +63,7 @@ end
 def product_data(reference)
   return nil if get_reference_page(reference).nil?
 
-  @product_features = ProductFeature.where(product_features(@raw_features))
+  product_features = ProductFeature.where(product_features(@raw_features))
                                     .first_or_create
 
   Product.new(
@@ -76,7 +76,7 @@ def product_data(reference)
     sizes_range: @sizes_array,
     former_price: @former_price.to_f,
     photos_urls: @photos.uniq,
-    product_feature: @product_features
+    product_feature: product_features
   )
 end
 
@@ -85,13 +85,15 @@ def product_features(features_text)
             x.gsub(':', '').gsub(/\A\p{Space}*|\p{Space}*\z/, '')
           end
   features_array = features_array.reject { |x| x.empty? }
-  @features_hash = Hash[*features_array]
 
-  @raw_description.empty? ? description = "" : description = @raw_descrption.last.strip
+  features_hash = Hash[*features_array]
+  features_hash.delete("Numéro d'article")
+
+  @raw_description.empty? ? description = "" : description = @raw_description.last.strip
 
   @product_features =
     {
-      features_hash: @features_hash,
+      features_hash: features_hash,
       description: description
     }
 end
