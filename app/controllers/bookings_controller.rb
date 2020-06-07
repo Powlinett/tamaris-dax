@@ -31,7 +31,11 @@ class BookingsController < ApplicationController
       product: @product,
       variant: @variant
     )
-    @booker.save && @booking.save ? (redirect_to root_path) : (render :new)
+    if @booker.save && @booking.save
+      redirect_to root_path, notice: 'Votre réservation a bien été effectuée, nous vous avons envoyé un e-mail de confirmation'
+    else
+      render :new
+    end
   end
 
   def confirm

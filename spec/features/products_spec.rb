@@ -4,7 +4,7 @@ describe 'Product' do
   before(:all) do
     @product1 = create(:product, reference: "1-1-22107-24-003")
     @product2 = create(:product, reference: "1-1-22107-24-004", former_price: 79.95)
-    Product.all.each { |product| product.variants.update_all(stock: rand(0..10)) }
+    Product.all.each { |product| product.variants.find_by(size: 37).update(stock: 7) }
 
     @user = User.create(email: 'test@test.com', password: '123456')
   end
@@ -86,8 +86,6 @@ describe 'Product' do
     end
 
     scenario 'when a user enter a reference that already exists' do
-      @product1.variants.find_by(size: 37).update(stock: 7)
-
       within '#new_product' do
         fill_in 'product_reference', with: @product1.reference
         fill_in 'product_variants_size', with: 37
@@ -104,8 +102,6 @@ describe 'Product' do
 
   feature 'Delete a product' do
     before do
-      @product1.variants.find_by(size: 37).update(stock: 7)
-
       visit new_user_session_path
 
       fill_in 'Email', with: @user.email
