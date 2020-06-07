@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
       else
         @variant.update(stock: 0)
       end
-      redirect_to category_path(@product.category)
+      redirect_to category_path(@product.category), notice: 'Produit supprimé.'
     else
       @product = Product.new
       flash.now[:alert] = 'Référence introuvable ou déjà supprimée'

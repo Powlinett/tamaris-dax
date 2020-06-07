@@ -31,15 +31,19 @@ describe 'Product' do
       expect(page.find(:css, '.index-category .index-title h1').text).to eq(@product1.sub_category)
     end
 
-    # scenario "by searching", js: true do
-    #   visit root_path
+    scenario "by searching", js: true do
+      Capybara.current_driver = :selenium_chrome_headless
 
-    #   fill_in('query', with: @product1.sub_category, match: :first)
-    #   page.execute_script("$('form.products-search-form').submit()")
+      visit root_path
 
-    #   expect(page.current_url).to include(@product1.sub_category)
-    #   page.find(@product1.reference)
-    # end
+      page.execute_script("$('form.products-search-form label').click()")
+
+      fill_in('query', with: @product1.sub_category, match: :first)
+      page.execute_script("$('form.products-search-form').submit()")
+
+      expect(page.current_url).to include(@product1.sub_category)
+      page.find_by_id(@product1.reference, match: :first)
+    end
   end
 
   feature 'Show a product' do
@@ -59,23 +63,22 @@ describe 'Product' do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
-
       click_on 'Log in'
 
       expect(page).to have_content 'Signed in successfully.'
+
+      visit new_product_path
     end
 
     scenario 'when a user enter a new reference' do
       reference = '1-1-27153-34-941'
-
-      visit new_product_path
 
       within '#new_product' do
         fill_in 'product_reference', with: reference
         fill_in 'product_variants_size', with: 37
         fill_in 'product_variants_stock', with: 7
 
-        click_on 'Créer le produit'
+        expect { click_on 'Créer le produit' }.to change { Product.count }.by(1)
       end
 
       expect(page.current_url).to include(reference)
@@ -83,21 +86,63 @@ describe 'Product' do
     end
 
     scenario 'when a user enter a reference that already exists' do
-      reference = '1-1-27153-34-941'
-
-      visit new_product_path
+      @product1.variants.find_by(size: 37).update(stock: 7)
 
       within '#new_product' do
-        fill_in 'product_reference', with: reference
+        fill_in 'product_reference', with: @product1.reference
         fill_in 'product_variants_size', with: 37
         fill_in 'product_variants_stock', with: 7
 
-        click_on 'Créer le produit'
+        expect { click_on 'Créer le produit' }.to change { Product.count }.by(0)
+        expect(@product1.variants.find_by(size: 37).stock).to eq(14)
       end
 
-      expect(page.current_url).to include(reference)
+      expect(page.current_url).to include(@product1.reference)
       expect(page.find('.alert.alert-info.alert-dismissible').text).to include('Produit ajouté')
-      expect(Product.last.variants.find_by(size: 37).stock).to eq(14)
+    end
+  end
+
+  feature 'Delete a product' do
+    before do
+      @product1.variants.find_by(size: 37).update(stock: 7)
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: @user.password
+      click_on 'Log in'
+
+      expect(page).to have_content 'Signed in successfully.'
+
+      visit new_product_path
+    end
+
+    scenario 'when product stock > stock to remove' do
+      within '#delete_product' do
+        fill_in 'product_reference', with: @product1.reference
+        fill_in 'product_variants_size', with: 37
+        fill_in 'product_variants_stock', with: 6
+
+        expect { click_on 'Supprimer le produit' }
+          .to change { @product1.variants.find_by(size: 37).stock }.by(-6)
+      end
+
+      expect(page.current_url).to include(category_path('chaussures'))
+      expect(page.find('.alert.alert-info.alert-dismissible').text).to include('Produit supprimé')
+    end
+
+    scenario 'when product stock < stock to remove' do
+      within '#delete_product' do
+        fill_in 'product_reference', with: @product1.reference
+        fill_in 'product_variants_size', with: 37
+        fill_in 'product_variants_stock', with: 8
+        click_on 'Supprimer le produit'
+
+        expect(@product1.variants.find_by(size: 37).stock).to eq(0)
+      end
+
+      expect(page.current_url).to include(category_path('chaussures'))
+      expect(page.find('.alert.alert-info.alert-dismissible').text).to include('Produit supprimé')
     end
   end
 end

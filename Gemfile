@@ -48,10 +48,10 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'capybara-email'
-  gem 'chromedriver-helper'
   gem 'database_cleaner-active_record'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
   gem 'shoulda-matchers'
+  gem 'webdrivers', '~> 3.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
