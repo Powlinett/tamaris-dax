@@ -1,0 +1,23 @@
+<%= simple_form_for @home_page, url: home_pages_path, method: 'post' do |f| %>
+  <h2>Sélectionner 1 à 3 produits</h2>
+  <%= simple_fields_for :product do |f| %>
+    <% reference_collection = Product.pluck(:reference, :model, :color) %>
+    <% 3.times do %>
+      <%= f.input :reference, collection: reference_collection, value_method: :first,
+      label_method: lambda { |p_array| "[ #{p_array[0]} ] #{p_array[1]} - #{p_array[2]}" },
+        required: false %>
+    <% end %>
+  <% end %>
+
+  <h2>Ajouter une offre spéciale</h2>
+  <%= simple_fields_for :special_offer do |f| %>
+    <%= f.input :title, required: false %>
+    <%= f.input :description, required: false %>
+    <div class="d-flex special-offer-dates">
+      <%= f.input :starting_date, as: :date, html5: true, required: false %>
+      <%= f.input :ending_date, as: :date, html5: true, required: false %>
+    </div>
+  <% end %>
+
+  <%= f.submit "Générer la page d'acceuil", class: 'button simple-form-btn' %>
+<% end %>
