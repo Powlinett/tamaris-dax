@@ -3,58 +3,52 @@
     <%= image_tag 'logo-tamaris.svg' %>
   <% end %>
 
-  <div class='d-flex align-items-center'>
-<!--     <div class="only-mobile">
-      <%= render 'shared/search_form' %>
+  <div class="d-flex">
+    <%= render 'shared/search_form' %>
+
+    <div class='d-flex align-items-center'>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
- -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
 
-
-  <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto mobile-list">
-      <div class="nav-items mobile-list">
-        <li class="nav-item">
-          <%= link_to "Chaussures", category_path('chaussures'), class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Accessoires", category_path('accessoires'), class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Promotions", category_path('promotions'), class: "nav-link" %>
-        </li>
-      </div>
-
-      <div class="navbar-right-side mobile-list">
-        <div class="no-mobile">
-          <%= render 'shared/search_form' %>
+    <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mobile-list">
+        <div class="nav-items mobile-list">
+          <li class="nav-item">
+            <%= link_to "Chaussures", category_path('chaussures'), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Accessoires", category_path('accessoires'), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Promotions", category_path('promotions'), class: "nav-link" %>
+          </li>
         </div>
 
-        <% unless user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "Votre boutique", store_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item ">
-            <%= link_to "Nous trouver", location_path, class: "nav-link" %>
-          </li>
-        <% else %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Menu admin
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <%= link_to 'Réservations', current_bookings_path, class: 'dropdown-item' %>
-              <%= link_to 'Gestion des stocks', new_product_path, class: 'dropdown-item' %>
-              <%= link_to 'Fichier clients', bookers_path, class: 'dropdown-item' %>
-              <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
-            </div>
-          </li>
-        <% end %>
-
-      </div>
-    </ul>
+        <div class="navbar-right-side mobile-list">
+          <% unless user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Votre boutique", store_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item ">
+              <%= link_to "Nous trouver", location_path, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Menu admin
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to 'Réservations', current_bookings_path, class: 'dropdown-item' %>
+                <%= link_to 'Gestion des stocks', new_product_path, class: 'dropdown-item' %>
+                <%= link_to 'Fichier clients', bookers_path, class: 'dropdown-item' %>
+                <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              </div>
+            </li>
+          <% end %>
+        </div>
+      </ul>
+    </div>
   </div>
 </div>

@@ -13,6 +13,7 @@
     background-color: white;
     max-width: 100%;
     padding: 0.5rem 1rem;
+    justify-content: space-between !important;
 
     .navbar-toggler {
       display: block;
@@ -43,8 +44,8 @@
   }
 
   .nav-items, .nav-item {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   .navbar-collapse .nav-item {
@@ -60,8 +61,8 @@
   }
 
   .products-search-form label img {
-    height: 2rem;
-    width: 2rem;
+    height: 1.8rem;
+    width: 1.8rem;
   }
 
   @media (min-width: 768px) {
