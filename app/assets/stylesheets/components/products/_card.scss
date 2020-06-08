@@ -7,13 +7,18 @@
   padding: 0;
   margin: 0 auto;
   margin-bottom: 2rem;
+}
 
-  li.product-card-wrapper:hover {
+li.product-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  &:hover {
     .quick-booking {
       opacity: 1;
       transition: $base-transition;
-      background-color: white;
-      padding-top: 0.5rem;
     }
 
     .product-card-content > .product-card,
@@ -22,26 +27,24 @@
       transition: $base-transition;
     }
   }
+}
 
-  .product-card {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    transition: $base-transition;
-    background-size: contain;
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  transition: $base-transition;
 
-    &:hover {
-      text-decoration: none;
-    }
+  &:hover {
+    text-decoration: none;
+  }
 
-    .product-image {
-      flex-grow: 1;
-      overflow: hidden;
-    }
+  .product-image {
+    overflow: hidden;
+  }
 
-    img {
-      width: 100%;
-    }
+  img {
+    width: 100%;
   }
 }
 
@@ -49,6 +52,7 @@
   position: relative;
   background-position: center;
   background-size: cover;
+  height: 100%;
 
   .quick-booking {
     position: absolute;
@@ -58,8 +62,10 @@
     opacity: 0;
     text-align: center;
     transition: $base-transition;
+    background-color: white;
+    padding-top: 0.5rem;
 
-    p, .booking-link {
+    .booking-link {
       font-weight: bolder;
       letter-spacing: 0.025rem;
       color: $medium-grey;
@@ -72,7 +78,6 @@
     }
   }
 }
-
 
 .card-infos {
   width: 100%;

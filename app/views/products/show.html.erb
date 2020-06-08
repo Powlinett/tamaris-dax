@@ -9,10 +9,10 @@
     <div class="prices-wrapper">
       <div class="prices sale-prices">
         <% if @product.former_price != 0 %>
-          <h2 class="price new-price"><%= @product.french_price %> €</h2>
-          <h2 class="price standard-price"><%= @product.french_former_price %> €</h2>
+          <h2 class="price new-price"><%= @product.french_format(@product.price) %> €</h2>
+          <h2 class="price standard-price"><%= @product.french_format(@product.former_price) %> €</h2>
         <% else %>
-          <h2 class="price sale-price"><%= @product.french_price %> €</h2>
+          <h2 class="price sale-price"><%= @product.french_format(@product.price) %> €</h2>
         <% end %>
       </div>
       <p>T.T.C., retrait en magasin</p>
@@ -68,6 +68,14 @@
 <div class="product-show-description">
   <h5>Informations sur le produit</h5>
   <ul class="product-features">
+    <li class="feature">
+      <p class="feature-name">
+        Numéro d'article:
+      </p>
+      <p class="feature-value">
+        <%= @product.reference %>
+      </p>
+    </li>
     <% @product.product_feature.features_hash.each do |feature, value| %>
       <li class="feature">
         <p class="feature-name">

@@ -1,92 +1,133 @@
 require 'rails_helper'
+include ActiveJob::TestHelper
 
 describe Booking do
-  it { should belong_to(:booker) }
-  it { should belong_to(:product) }
-  it { should belong_to(:variant) }
+  it { should belong_to :booker }
+  it { should belong_to :product }
+  it { should belong_to :variant }
 
-  it { should validate_presence_of(:booker) }
-  it { should validate_presence_of(:product) }
-  it { should validate_presence_of(:variant) }
+  it { should validate_presence_of :booker }
+  it { should validate_presence_of :product }
+  it { should validate_presence_of :variant }
 
-  it 'validates presence and format of starting date' do
-    booking = Booking.new
-
-    expect(booking.starting_date.class).to eq(Date)
+  before(:all) do
+    @booking = create(:booking)
   end
 
-  it 'validates presence and format of ending_date' do
-    booking = Booking.new
+  describe '#set_defaults' do
+    it 'sets default starting_date' do
+      expect(@booking.starting_date.class).to eq(Date)
+    end
 
-    expect(booking.ending_date.class).to eq(Date)
+    it 'sets default ending_date' do
+      expect(@booking.ending_date).to eq(@booking.starting_date + 3)
+    end
+
+    it 'sets booking duration to 3 days' do
+      expect(@booking.ending_date.class).to eq(Date)
+    end
+
+    it "sets default actual state to 'pending'" do
+      expect(@booking.actual_state).to eq('pending')
+    end
   end
 
-  it 'validates if booking last 3 days' do
-    booking = Booking.new
+  describe '#confirm' do
+    it "confirms the booking" do
+      expect(@booking.variant).to_not eq(nil)
+      @booking.confirm
 
-    expect(booking.ending_date).to eq(booking.starting_date + 3)
+      expect(@booking.actual_state).to eq('confirmed')
+      expect(@booking.former_state).to eq('pending')
+    end
   end
 
-  it "validates if default actual state is 'pending'" do
-    booking = Booking.new
+  describe '#cancel' do
+    it "cancels the booking" do
+      @booking.actual_state = 'pending'
 
-    expect(booking.actual_state).to eq('pending')
+      @booking.cancel
+
+      expect(@booking.actual_state).to eq('canceled')
+      expect(@booking.former_state).to eq('pending')
+    end
   end
 
-  it "sets booking's actual state as 'confirmed'" do
-    booking = Booking.new
+  describe '#pick_up' do
+    it "updates booking's state to 'picked'" do
+      @booking.actual_state = 'confirmed'
 
-    booking.confirm
+      @booking.pick_up
 
-    expect(booking.actual_state).to eq('confirmed')
-    expect(booking.former_state).to eq('pending')
+      expect(@booking.actual_state).to eq('picked')
+      expect(@booking.former_state).to eq('confirmed')
+    end
   end
 
-  it "sets booking's actual state as 'canceled'" do
-    booking = Booking.new
+  describe '#back_in_stock' do
+    context 'when it was confirmed' do
+      it "sets booking's state to 'back'" do
+        @booking.actual_state = 'confirmed'
 
-    booking.cancel
+        @booking.back_in_stock
 
-    expect(booking.actual_state).to eq('canceled')
-    expect(booking.former_state).to eq('pending')
+        expect(@booking.actual_state).to eq('back')
+        expect(@booking.former_state).to eq('confirmed')
+      end
+    end
+
+    context 'when it was pending' do
+      it "sets booking's state to 'back'" do
+        @booking.actual_state = 'pending'
+
+        @booking.back_in_stock
+
+        expect(@booking.actual_state).to eq('back')
+        expect(@booking.former_state).to eq('pending')
+      end
+    end
   end
 
-  it "sets booking's actual state as 'picked'" do
-    booking = Booking.new
-    booking.actual_state = 'confirmed'
+  describe '#is_closed?' do
+    context 'when ending date is passed' do
+      it "returns true" do
+        @booking.ending_date = Date.today - 1
+        @booking.actual_state = 'pending'
 
-    booking.pick_up
+        expect(@booking.is_closed?).to be true
+      end
 
-    expect(booking.actual_state).to eq('picked')
-    expect(booking.former_state).to eq('confirmed')
+      it "sets actual state as 'closed'" do
+        expect(@booking.actual_state).to eq('closed')
+      end
+
+      it "sets former state as 'pending'" do
+        expect(@booking.former_state).to eq('pending')
+      end
+    end
+
+    context "when ending date isn't passed" do
+      it "returns false" do
+        @booking.reload
+        @booking.ending_date = Date.today + 1
+        @booking.actual_state = 'pending'
+
+        expect(@booking.is_closed?).to be false
+      end
+
+      it "keeps actual state as 'pending'" do
+        expect(@booking.actual_state).to eq('pending')
+      end
+
+      it "keeps former state as nil" do
+        expect(@booking.former_state).to be nil
+      end
+    end
   end
 
-  it "sets booking's actual state as 'back' when it was 'pending'" do
-    booking = Booking.new
-
-    booking.back_in_stock
-
-    expect(booking.actual_state).to eq('back')
-    expect(booking.former_state).to eq('pending')
-  end
-
-  it "sets booking's actual state as 'back' when it was 'confirmed'" do
-    booking = Booking.new
-    booking.actual_state = 'confirmed'
-
-    booking.back_in_stock
-
-    expect(booking.actual_state).to eq('back')
-    expect(booking.former_state).to eq('confirmed')
-  end
-
-  it 'closes a booking when ending date is passed' do
-    booking = Booking.new(starting_date: Date.today - 4)
-
-    booking.is_closed?
-
-    expect(booking.is_closed?).to eq(true)
-    expect(booking.former_state).to eq('pending')
-    expect(booking.actual_state).to eq('closed')
+  describe '#send_record_email' do
+    it 'enqueues an e-mail when a booking is created' do
+      expect{ create(:booking) }.to change { enqueued_jobs.size }.by(1)
+    end
   end
 end

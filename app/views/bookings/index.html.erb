@@ -9,7 +9,7 @@
     <h1>Résultats</h1>
   <% end %>
 
-  <%= form_tag bookings_search_path, method: :get, class: 'bookings-search' do %>
+  <%= form_tag bookings_search_path, method: :get, class: 'bookings-search', id: 'bookings-search' do %>
     <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher une réservation" %>
     <%= submit_tag "Search", class: "btn btn-primary", style: 'display: none' %>
   <% end %>

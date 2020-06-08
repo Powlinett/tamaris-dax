@@ -31,13 +31,16 @@ class BookingsController < ApplicationController
       product: @product,
       variant: @variant
     )
-    @booker.save && @booking.save ? (redirect_to root_path) : (render :new)
+    if @booker.save && @booking.save
+      redirect_to root_path, notice: 'Votre réservation a bien été effectuée, nous vous avons envoyé un e-mail de confirmation'
+    else
+      render :new
+    end
   end
 
   def confirm
     @booking.confirm
-    @booking.variant.stock -= 1
-    @booking.variant.save ? redirect : (render :current_bookings)
+    redirect
   end
 
   def cancel
@@ -47,14 +50,12 @@ class BookingsController < ApplicationController
 
   def pick_up
     @booking.pick_up
-    @booking.variant.stock -= 1
-    @booking.variant.save ? redirect : (render :current_bookings)
+    redirect
   end
 
   def back_in_stock
     @booking.back_in_stock
-    @booking.variant.stock += 1 if @booking.former_state == 'confirmed'
-    @booking.variant.save ? redirect : (render :current_bookings)
+    redirect
   end
 
   def search
@@ -82,7 +83,7 @@ class BookingsController < ApplicationController
   end
 
   def redirect
-    @booking.save ? (redirect_to current_bookings_path) : (render :current_bookings)
+    redirect_to current_bookings_path, notice: 'Réservation mise à jour'
   end
 
   def paginate_bookings

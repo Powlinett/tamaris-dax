@@ -1,30 +1,52 @@
 <ul class="thumbnails-pictures no-mobile">
-  <% @product.photos_urls.each_with_index do |photo, index| %>
-    <li class='thumbnail-picture'>
-      <%= image_tag resize(photo, 72, 96), data: { index: index } %>
+  <% if @product.photos_urls.any? %>
+    <% @product.photos_urls.each_with_index do |photo, index| %>
+      <li class='thumbnail-picture'>
+        <%= image_tag resize(photo, 72, 96), data: { index: index } %>
+      </li>
+    <% end %>
+  <% else %>
+    <li class="thumbnail-picture">
+      <%= image_tag 'trying-shoes.jpg', width: 72 %>
     </li>
   <% end %>
 </ul>
 
 <ul class="picture-wrapper no-mobile">
-  <% @product.photos_urls.each_with_index do |photo, index| %>
-    <li class="full-size-picture<%= " active" if index == 0 %>">
-      <%= image_tag resize(photo, 680, 900), data: { index: index } %>
+  <% if @product.photos_urls.any? %>
+    <% @product.photos_urls.each_with_index do |photo, index| %>
+      <li class="full-size-picture<%= " active" if index == 0 %>">
+        <%= image_tag resize(photo, 680, 900), data: { index: index } %>
+      </li>
+    <% end %>
+  <% else %>
+    <li class="full-size-picture active">
+      <%= image_tag 'trying-shoes.jpg' %>
     </li>
   <% end %>
 </ul>
 
-<div id="carouselExampleIndicators" class="carousel slide only-mobile w-100" data-ride="false" data-interval="false">
+<div id="carouselExampleIndicators" class="carousel slide only-mobile w-100" data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
-    <% @product.photos_urls.each_with_index do |photo, index| %>
-      <div class="carousel-item <%= " active" if index == 0 %>">
-        <%= image_tag resize(photo, 600, 800), data: { index: index }, class: 'd-block mx-auto w-100' %>
+    <% if @product.photos_urls.any? %>
+      <% @product.photos_urls.each_with_index do |photo, index| %>
+        <div class="carousel-item <%= " active" if index == 0 %>">
+          <%= image_tag resize(photo, 600, 800), data: { index: index }, class: 'd-block mx-auto w-100' %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="carousel-item active">
+        <%= image_tag 'trying-shoes.jpg', data: { index: 0}, class: 'd-block mx-auto w-100' %>
       </div>
     <% end %>
   </div>
   <ol class="carousel-indicators">
-    <% @product.photos_urls.each_with_index do |photo, index| %>
-      <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= "active" if index == 0 %>"></li>
+    <% if @product.photos_urls.any? %>
+      <% @product.photos_urls.each_with_index do |photo, index| %>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= "active" if index == 0 %>"></li>
+      <% end %>
+    <% else %>
+        <li data-target="#carouselExampleIndicators" data-slide-to=0 class="active"></li>
     <% end %>
   </ol>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -25,36 +25,47 @@ class Booking < ApplicationRecord
                   }
 
   def confirm
-    self.former_state = actual_state
-    self.actual_state = 'confirmed'
+    self.update(
+      former_state: self.actual_state,
+      actual_state: 'confirmed'
+    )
+    self.variant.update(stock: self.variant.stock - 1)
   end
 
   def cancel
-    self.former_state = actual_state
-    self.actual_state = 'canceled'
+    self.update(
+      former_state: self.actual_state,
+      actual_state: 'canceled'
+    )
   end
 
   def pick_up
-    self.former_state = actual_state
-    self.actual_state = 'picked'
+    self.update(
+      former_state: self.actual_state,
+      actual_state: 'picked'
+    )
   end
 
   def back_in_stock
-    self.former_state = actual_state
-    self.actual_state = 'back'
+    self.update(
+      former_state: self.actual_state,
+      actual_state: 'back'
+    )
+    self.variant.update(stock: self.variant.stock + 1) if self.former_state == 'confirmed'
   end
 
   def is_closed?
     return false if ending_date > Date.today
 
-    self.former_state = actual_state
-    self.actual_state = 'closed'
-    return true
+    self.update(
+      former_state: self.actual_state,
+      actual_state: 'closed'
+    )
   end
 
-  def undo_state_change
-    self.actual_state = former_state
-  end
+  # def undo_state_change
+  #   self.actual_state = former_state
+  # end
 
   private
 

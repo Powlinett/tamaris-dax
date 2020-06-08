@@ -18,7 +18,6 @@ gem 'nokogiri'
 gem 'pg'
 gem 'pg_search', '~> 2.3.0'
 gem 'postmark-rails'
-gem 'pry', '~> 0.12.2'
 gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.4'
 gem 'sass-rails', '~> 5.0'
@@ -34,11 +33,13 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'pry', '~> 0.12.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
@@ -46,9 +47,11 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'chromedriver-helper'
-  gem 'selenium-webdriver'
+  gem 'capybara-email'
+  gem 'database_cleaner-active_record'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
   gem 'shoulda-matchers'
+  gem 'webdrivers', '~> 3.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
