@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :variants, dependent: :destroy
 
   belongs_to :product_feature
+  belongs_to :home_page, optional: true
 
   serialize :sizes_range, Array
   serialize :photos_urls, Array
@@ -14,7 +15,6 @@ class Product < ApplicationRecord
   validates :price, presence: true, inclusion: { in: (0..300) }
   validates :color, presence: true
   validates :sizes_range, presence: true
-  # validates :photos_urls, presence: true
 
   after_save :set_variants
 

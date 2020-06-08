@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Product do
   it { should belong_to :product_feature }
+  it { should belong_to(:home_page).optional }
   it { should have_many :variants }
   it { should have_many :bookings }
 

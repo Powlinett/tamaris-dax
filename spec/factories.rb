@@ -1,9 +1,16 @@
 FactoryBot.define do
+  factory :special_offer do
+
+  end
+
+  factory :home_page do
+
+  end
+
 
   factory :product_feature do
     features_hash {
-      {"Numéro d'article"=>"1-1-22107-24-001",
-       "Hauteur de la tige"=>"6.5 cm",
+      {"Hauteur de la tige"=>"6.5 cm",
        "Type de talon"=>"Talon bloc",
        "Hauteur du talon"=>"10 mm",
        "Semelle intérieure"=>"Cuir",
@@ -44,7 +51,7 @@ FactoryBot.define do
 
   factory :booking do
 
-    product { Product.last }
+    product { create(:product) }
     variant { product.variants.first }
     booker { build(:booker) }
   end
