@@ -39,7 +39,8 @@ class BookingsController < ApplicationController
   end
 
   def confirm
-    @booking.confirm ? redirect : (render :current_bookings)
+    @booking.confirm
+    redirect
   end
 
   def cancel
@@ -53,7 +54,8 @@ class BookingsController < ApplicationController
   end
 
   def back_in_stock
-    @booking.back_in_stock ? redirect : (render :current_bookings)
+    @booking.back_in_stock
+    redirect
   end
 
   def search
@@ -81,7 +83,7 @@ class BookingsController < ApplicationController
   end
 
   def redirect
-    @booking.save ? (redirect_to current_bookings_path) : (render :current_bookings)
+    redirect_to current_bookings_path, notice: 'Réservation mise à jour'
   end
 
   def paginate_bookings

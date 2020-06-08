@@ -44,7 +44,7 @@ FactoryBot.define do
 
   factory :booking do
 
-    product { create(:product) }
+    product { Product.last }
     variant { product.variants.first }
     booker { build(:booker) }
   end

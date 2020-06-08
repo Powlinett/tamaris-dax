@@ -118,9 +118,9 @@ describe 'Product' do
         fill_in 'product_reference', with: @product1.reference
         fill_in 'product_variants_size', with: 37
         fill_in 'product_variants_stock', with: 6
+        click_on 'Supprimer le produit'
 
-        expect { click_on 'Supprimer le produit' }
-          .to change { @product1.variants.find_by(size: 37).stock }.by(-6)
+        expect(@product1.variants.find_by(size: 37).stock).to eq(1)
       end
 
       expect(page.current_url).to include(category_path('chaussures'))

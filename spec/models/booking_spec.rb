@@ -33,7 +33,7 @@ describe Booking do
   end
 
   describe '#confirm' do
-    it "can be confirmed" do
+    it "confirms the booking" do
       expect(@booking.variant).to_not eq(nil)
       @booking.confirm
 
@@ -43,7 +43,7 @@ describe Booking do
   end
 
   describe '#cancel' do
-    it "can be canceled" do
+    it "cancels the booking" do
       @booking.actual_state = 'pending'
 
       @booking.cancel
@@ -54,7 +54,7 @@ describe Booking do
   end
 
   describe '#pick_up' do
-    it "sets booking's state to 'confirmed'" do
+    it "updates booking's state to 'picked'" do
       @booking.actual_state = 'confirmed'
 
       @booking.pick_up
@@ -77,7 +77,7 @@ describe Booking do
     end
 
     context 'when it was pending' do
-      it "sets a booking's state to 'back'" do
+      it "sets booking's state to 'back'" do
         @booking.actual_state = 'pending'
 
         @booking.back_in_stock
@@ -97,7 +97,7 @@ describe Booking do
         expect(@booking.is_closed?).to be true
       end
 
-      it "sets actual state as 'closed" do
+      it "sets actual state as 'closed'" do
         expect(@booking.actual_state).to eq('closed')
       end
 
@@ -105,12 +105,29 @@ describe Booking do
         expect(@booking.former_state).to eq('pending')
       end
     end
+
+    context "when ending date isn't passed" do
+      it "returns false" do
+        @booking.reload
+        @booking.ending_date = Date.today + 1
+        @booking.actual_state = 'pending'
+
+        expect(@booking.is_closed?).to be false
+      end
+
+      it "keeps actual state as 'pending'" do
+        expect(@booking.actual_state).to eq('pending')
+      end
+
+      it "keeps former state as nil" do
+        expect(@booking.former_state).to be nil
+      end
+    end
   end
 
-  feature '#send_record_email' do
-    it 'enqueues an e-mail when a booking is saved' do
-      expect(@booking).to be_valid
-      expect(enqueued_jobs.size).to eq(1)
+  describe '#send_record_email' do
+    it 'enqueues an e-mail when a booking is created' do
+      expect{ create(:booking) }.to change { enqueued_jobs.size }.by(1)
     end
   end
 end

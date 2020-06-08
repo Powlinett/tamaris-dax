@@ -20,7 +20,7 @@ class Product < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_in_products,
-                  against: [:reference, :model, :category, :sub_category],
+                  against: [:reference, :model, :category, :sub_category, :color],
                   using: {
                     tsearch: { prefix: true }
                   }
