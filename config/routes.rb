@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   resources :bookers, only: [:index]
   get 'bookers/recherche', to: 'bookers#search', as: :bookers_search
 
-  resources :home_pages, only: [:edit, :update]
+  get 'home_page/edit', to: 'home_pages#edit', as: :edit_home_page
+  patch 'home_pages', to: 'home_pages#update', as: :home_pages
 
   get ':category/:sub_category', to: 'products#index_by_sub_category', as: :sub_category
   get ':category', to: 'products#index', as: :category

@@ -12,8 +12,7 @@ class HomePagesController < ApplicationController
   end
 
   def update
-    binding.pry
-    unless special_offer_params.empty?
+    unless special_offer_params[:title].blank?
       special_offer = SpecialOffer.new(special_offer_params)
       special_offer.home_page = @home_page
       special_offer.save
@@ -25,7 +24,8 @@ class HomePagesController < ApplicationController
     if @home_page.update(product: product)
       redirect_to root_path
     else
-      render :edit
+      render :edit, alert: "Erreur lors de la modification de la page d'accueil.
+                            Veuillez vérifier les champs du formulaire."
     end
   end
 
