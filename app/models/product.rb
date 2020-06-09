@@ -2,8 +2,9 @@ class Product < ApplicationRecord
   has_many :bookings, dependent: :nullify
   has_many :variants, dependent: :destroy
 
+  has_one :home_page
+
   belongs_to :product_feature
-  belongs_to :home_page, optional: true
 
   serialize :sizes_range, Array
   serialize :photos_urls, Array

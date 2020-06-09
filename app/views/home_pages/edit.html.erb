@@ -1,8 +1,8 @@
 <%= simple_form_for @home_page, url: home_pages_path, method: 'patch' do |f| %>
 
-  <details open>
+  <details class="product-part" open>
     <summary>
-      <h2>Sélectionner 1 à 3 produits</h2>
+      <h2>Sélectionner un produit</h2>
     </summary>
 
     <%= f.simple_fields_for @product do |p| %>
@@ -14,13 +14,16 @@
     <% end %>
   </details>
 
-  <details>
+  <details class="special-offer-part">
     <summary>
-      <h2>Ajouter une offre spéciale</h2>
+      <h2>Editer une offre spéciale</h2>
     </summary>
 
     <%= f.simple_fields_for @special_offer do |s| %>
-      <%= s.input :title, required: false, label: 'Titre' %>
+      <% if @special_offer.persisted? %>
+        <%= link_to 'Supprimer', special_offer_path(@special_offer), method: :delete %>
+      <% end %>
+      <%= s.input :title, label: 'Titre' %>
       <%= s.input :description, required: false %>
       <div class="d-flex special-offer-dates">
         <%= s.input :starting_date, as: :date, html5: true, required: false, label: 'Début' %>

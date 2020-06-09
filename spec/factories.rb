@@ -50,9 +50,13 @@ FactoryBot.define do
   end
 
   factory :booking do
-
     product { create(:product) }
     variant { product.variants.first }
     booker { build(:booker) }
+  end
+
+  factory :user do
+    email { "test@test.com" }
+    password { "123456" }
   end
 end

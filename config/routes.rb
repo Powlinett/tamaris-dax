@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   get 'home_page/edit', to: 'home_pages#edit', as: :edit_home_page
   patch 'home_pages', to: 'home_pages#update', as: :home_pages
 
+  resources :special_offers, only: [:destroy]
+
   get ':category/:sub_category', to: 'products#index_by_sub_category', as: :sub_category
   get ':category', to: 'products#index', as: :category
 

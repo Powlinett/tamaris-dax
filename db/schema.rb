@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_183719) do
+ActiveRecord::Schema.define(version: 2020_06_08_183305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,10 @@ ActiveRecord::Schema.define(version: 2020_06_08_183719) do
   end
 
   create_table "home_pages", force: :cascade do |t|
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_home_pages_on_product_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -73,8 +75,6 @@ ActiveRecord::Schema.define(version: 2020_06_08_183719) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "product_feature_id"
-    t.bigint "home_page_id"
-    t.index ["home_page_id"], name: "index_products_on_home_page_id"
     t.index ["product_feature_id"], name: "index_products_on_product_feature_id"
   end
 
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_183719) do
   add_foreign_key "bookings", "bookers"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "variants"
-  add_foreign_key "products", "home_pages"
+  add_foreign_key "home_pages", "products"
   add_foreign_key "products", "product_features"
   add_foreign_key "special_offers", "home_pages"
   add_foreign_key "variants", "products"
