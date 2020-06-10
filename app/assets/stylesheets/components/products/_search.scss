@@ -19,10 +19,13 @@
       border-radius: 0;
       transition: $base-transition;
       width: max-content;
+      background-color: transparent;
 
       &::placeholder {
-        color: $light-grey;
+        color: $medium-grey;
         transition: $base-transition;
+        font-size: 0.9rem;
+        letter-spacing: 0.02rem;
       }
     }
   }
@@ -30,7 +33,7 @@
   label {
     margin: 0;
     display: flex;
-    background-image: url('search.svg');
+    background-image: asset-url('search.svg');
     background-size: cover;
     height: 1.5rem;
     width: 1.5rem;

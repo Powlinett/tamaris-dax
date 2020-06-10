@@ -10,7 +10,7 @@
     transition: $base-transition;
 
     .navbar-brand {
-      background-image: url('logo-tamaris.svg');
+      background-image: asset-url('logo-tamaris.svg');
     }
 
     .nav-link {
@@ -18,11 +18,19 @@
     }
 
     .products-search-form label {
-      background-image: url('search.svg');
+      background-image: asset-url('search.svg');
     }
 
     .navbar-toggler-icon {
-      background-image: url('burger-menu.svg');
+      background-image: asset-url('burger-menu.svg');
+    }
+
+    .products-search-form input {
+      border-bottom: 1px solid $medium-grey !important;
+
+      &::placeholder {
+        color: $medium-grey !important;
+      }
     }
   }
 
@@ -31,14 +39,22 @@
   }
 
   .navbar-brand {
-    background-image: url('logo-tamaris-white.svg');
+    background-image: asset-url('logo-tamaris-white.svg');
   }
 
   .products-search-form label {
-    background-image: url('search-white.svg');
+    background-image: asset-url('search-white.svg');
+  }
+
+  .products-search-form input:focus {
+    border-bottom: 1px solid white;
+
+    &::placeholder {
+      color: white;
+    }
   }
 
   .navbar-toggler-icon {
-    background-image: url('burger-menu-white.svg');
+    background-image: asset-url('burger-menu-white.svg');
   }
 }

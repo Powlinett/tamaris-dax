@@ -49,7 +49,7 @@
 }
 
 .navbar-lewagon .navbar-brand {
-  background-image: url('logo-tamaris.svg');
+  background-image: asset-url('logo-tamaris.svg');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -84,7 +84,7 @@
 }
 
 .navbar.navbar-expand-md.navbar-light.navbar-lewagon .navbar-toggler-icon {
-  background-image: url('burger-menu.svg');
+  background-image: asset-url('burger-menu.svg');
   background-size: 80% 80%;
 }
 
