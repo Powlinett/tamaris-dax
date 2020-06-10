@@ -10,6 +10,8 @@ describe 'Booking' do
     @booking = create(:booking, booker: @booker)
 
     @user = create(:user)
+
+    HomePage.create(product: Product.last)
   end
 
   feature 'Create a booking' do

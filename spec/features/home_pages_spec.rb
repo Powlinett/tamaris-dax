@@ -4,7 +4,7 @@ describe HomePage do
   before do
     Capybara.current_driver = :selenium_chrome_headless
 
-    @home_page = HomePage.create(product: Product.last)
+    @home_page = HomePage.first
 
     @user = User.last
 

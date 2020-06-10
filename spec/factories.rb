@@ -32,6 +32,8 @@ FactoryBot.define do
     price { 59.95 }
     former_price { 0.0 }
     sizes_range { [35, 36, 37, 38, 39, 40, 41, 42] }
+    photos_urls { ["https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw3848993e/product-images/dw_001-20-27153-34-940_01.jpg",
+      "https://tamaris.com/dw/image/v2/BBHF_PRD/on/demandware.static/-/Sites-tamaris-master-catalog/default/dw3848993e/product-images/dw_001-20-27153-34-940_01.jpg"] }
     product_feature { create(:product_feature) }
   end
 

@@ -6,9 +6,11 @@
         <p class="special-offer-title"><%= @special_offer.title %></p>
       </div>
       <div class="carousel-item">
-        <p><%= "( #{@special_offer.description}, offre valable du
-        #{@special_offer.starting_date.strftime('%d/%m/%Y')}
-        au #{@special_offer.ending_date.strftime('%d/%m/%Y')} )" %></p>
+        <% if !@special_offer.description.nil? && !@special_offer.starting_date.nil? && !@special_offer.ending_date.nil? %>
+          <p><%= "( #{@special_offer.description}, offre valable du
+          #{@special_offer.starting_date.strftime('%d/%m/%Y')}
+          au #{@special_offer.ending_date.strftime('%d/%m/%Y')} )" %></p>
+        <% end %>
       </div>
     </div>
   </div>
