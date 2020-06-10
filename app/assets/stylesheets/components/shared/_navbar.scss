@@ -79,6 +79,11 @@
   z-index: 5;
 }
 
+.navbar.navbar-expand-md.navbar-light.navbar-lewagon .navbar-toggler-icon {
+  background-image: url('burger-menu.svg');
+  background-size: 80% 80%;
+}
+
 .dropdown-menu {
   left: unset;
   right: 0;

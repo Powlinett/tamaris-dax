@@ -25,6 +25,10 @@
     .products-search-form label {
       background-image: url('search.svg');
     }
+
+    .navbar-toggler-icon {
+      background-image: url('burger-menu.svg');
+    }
   }
 
   .nav-link {
@@ -37,6 +41,10 @@
 
   .products-search-form label {
     background-image: url('search-white.svg');
+  }
+
+  .navbar-toggler-icon {
+    background-image: url('burger-menu-white.svg');
   }
 }
 
