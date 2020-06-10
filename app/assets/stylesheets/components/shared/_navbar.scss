@@ -1,3 +1,9 @@
+.top-content {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
 .navbar.navbar-expand-md.navbar-light.navbar-lewagon {
   position: sticky;
   top: 0;
