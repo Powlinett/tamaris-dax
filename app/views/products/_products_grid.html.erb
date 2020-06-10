@@ -6,9 +6,9 @@
       <%= link_to(product_path(product.reference), class: 'product-card', id: product.reference) do %>
 
         <% if product.photos_urls.any? %>
-          <div class="product-card-content" style="<%= "background-image: url(#{resize(product.photos_urls[1], 450, 600)})" %>">
+          <div class="product-card-content" style="background-image: url(<%= resize(product.photos_urls[1], 450, 600) %>)">
         <% else %>
-          <div class="product-card-content" style="<%= "background-image: url(#{image_path 'trying-shoes.jpg'})" %>">
+          <div class="product-card-content" style="background-image: url(<%= image_path 'trying-shoes.jpg' %>)">
         <% end %>
 
             <div class="product-image">

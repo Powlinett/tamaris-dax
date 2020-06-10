@@ -44,8 +44,13 @@
     }
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-lewagon .navbar-brand {
+  background-image: url('logo-tamaris.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 1.5rem;
+  width: 10rem;
   vertical-align: unset;
 }
 

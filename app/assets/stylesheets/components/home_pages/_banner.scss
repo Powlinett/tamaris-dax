@@ -5,31 +5,51 @@
 
 .pages-home .navbar.navbar-expand-md.navbar-light.navbar-lewagon {
   box-shadow: none;
-  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.075), rgba(0,0,0,0.05), transparent);
+  background: linear-gradient(rgba(0,0,0,0.225), rgba(0,0,0,0.15), rgba(0,0,0,0.075), transparent);
   transition: $base-transition;
 
   &:hover {
     box-shadow: $base-box-shadow;
-    background-color: white;
+    background-color: white !important;
     background: none;
     transition: $base-transition;
+
+    .navbar-brand {
+      background-image: url('logo-tamaris.svg');
+    }
+
+    .nav-link {
+      color: $medium-grey !important;
+    }
+
+    .products-search-form label {
+      background-image: url('search.svg');
+    }
+  }
+
+  .nav-link {
+    color: white !important;
+  }
+
+  .navbar-brand {
+    background-image: url('logo-tamaris-white.svg');
+  }
+
+  .products-search-form label {
+    background-image: url('search-white.svg');
   }
 }
 
 .home-page-banner {
   height: 80vh;
-  width: 100vw;
   background-color: #f7f5f6;
   background-size: inherit;
   background-position: center 80%;
   background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
+  margin-top: -5rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  transform: scaleX(-1);
 
   &:hover {
     text-decoration: none;
@@ -38,7 +58,6 @@
 
 .banner-content {
   padding-left: 10rem;
-  transform: scaleX(-1);
   width: 100%;
 }
 
