@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>
       <% content_for(:site_page_title,
-        (params[:sub_category].capitalize if !params[:sub_category].nil?) ||
-        (params[:category].capitalize if !params[:category].nil?) ||
-        "#{@product.model.capitalize} - #{@product.color}") %>
+        (params[:sub_category].capitalize unless params[:sub_category].nil?) ||
+        (params[:category].capitalize unless params[:category].nil?) ||
+        ("#{@product.model.capitalize} - #{@product.color}" unless @product.nil?) ||
+        "Bienvenue") %>
 
       <%= page_title(app_name: 'Boutique Tamaris - Saint-Paul-Lès-Dax',
         page_title_symbol: :site_page_title, separator: " | ", reverse: true) %>

@@ -3,51 +3,6 @@
   width:100%;
 }
 
-.pages-home .navbar.navbar-expand-md.navbar-light.navbar-lewagon {
-  box-shadow: none;
-  background: linear-gradient(rgba(0,0,0,0.225), rgba(0,0,0,0.15), rgba(0,0,0,0.075), transparent);
-  transition: $base-transition;
-
-  &:hover {
-    box-shadow: $base-box-shadow;
-    background-color: white !important;
-    background: none;
-    transition: $base-transition;
-
-    .navbar-brand {
-      background-image: url('logo-tamaris.svg');
-    }
-
-    .nav-link {
-      color: $medium-grey !important;
-    }
-
-    .products-search-form label {
-      background-image: url('search.svg');
-    }
-
-    .navbar-toggler-icon {
-      background-image: url('burger-menu.svg');
-    }
-  }
-
-  .nav-link {
-    color: white !important;
-  }
-
-  .navbar-brand {
-    background-image: url('logo-tamaris-white.svg');
-  }
-
-  .products-search-form label {
-    background-image: url('search-white.svg');
-  }
-
-  .navbar-toggler-icon {
-    background-image: url('burger-menu-white.svg');
-  }
-}
-
 .home-page-banner {
   height: 80vh;
   background-color: #f7f5f6;
