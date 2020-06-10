@@ -9,16 +9,34 @@
     background: none;
     transition: $base-transition;
 
-    .navbar-brand {
-      background-image: asset-url('logo-tamaris.svg');
+    .navbar-brand:after {
+        background-image: asset-url('logo-tamaris.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        vertical-align: unset;
+        display: block;
+        opacity: 1;
+        height: initial;
+        width: inherit;
+        transition: 0.3s ease-in-out opacity;
     }
 
     .nav-link {
       color: $medium-grey !important;
     }
 
-    .products-search-form label {
-      background-image: asset-url('search.svg');
+    .products-search-form label:after {
+        background-image: asset-url('search.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        vertical-align: unset;
+        display: block;
+        opacity: 1;
+        height: initial;
+        width: inherit;
+        transition: 0.3s ease-in-out opacity;
     }
 
     .navbar-toggler-icon {
@@ -39,11 +57,28 @@
   }
 
   .navbar-brand {
+    display: flex;
     background-image: asset-url('logo-tamaris-white.svg');
+    opacity: 1;
+
+    &:after {
+      content: "";
+      opacity: 0;
+      height: 0;
+      width: 0;
+    }
   }
 
   .products-search-form label {
     background-image: asset-url('search-white.svg');
+    opacity: 1;
+
+    &:after {
+      content: "";
+      opacity: 0;
+      height: 0;
+      width: 0;
+    }
   }
 
   .products-search-form input:focus {

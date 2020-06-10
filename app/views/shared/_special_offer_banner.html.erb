@@ -3,7 +3,10 @@
   <div id="carouselExampleSlidesOnly" class="carousel slide special-offer-container vertical" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <p class="special-offer-title"><%= @special_offer.title %></p>
+        <div class="carousel-item-content">
+          <%= image_tag 'discount.svg' %>
+          <p class="special-offer-title"><%= @special_offer.title %></p>
+        </div>
       </div>
       <div class="carousel-item">
         <% if !@special_offer.description.nil? && !@special_offer.starting_date.nil? && !@special_offer.ending_date.nil? %>
