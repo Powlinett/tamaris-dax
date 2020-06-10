@@ -1,0 +1,86 @@
+.pages-home .products-grid {
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  padding: 0 10rem;
+
+  .product-image {
+    transform: scaleX(-1);
+    transition: $base-transition;
+
+    &:hover {
+      filter: brightness(0.9);
+      transition: $base-transition;
+    }
+  }
+
+  .card-infos {
+    margin-top: 1rem;
+  }
+}
+
+.pages-home .handwritten-title {
+  margin: 3rem;
+}
+
+.pages-home .products-grid.back-in-stock {
+  grid-auto-flow: column;
+  padding: 2rem;
+  overflow-x: scroll;
+
+  .product-card-wrapper {
+    min-width: 18vw;
+  }
+}
+
+.home_pages-edit summary {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  box-shadow: $base-box-shadow;
+  border: 0.1rem solid $super-light-grey;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-bottom: 0;
+  }
+}
+
+.home_pages-edit form.edit_home_page {
+  margin-top: 2rem;
+  min-width: 40vw;
+
+  div.input {
+    padding: 0 1rem;
+  }
+}
+
+.home_pages-edit .special-offer-part a {
+  display: block;
+  text-align: right;
+  padding-right: 1rem;
+  color: $dark-grey;
+  margin-top: -1rem;
+
+  &:hover {
+    text-decoration :none;
+
+    p {
+      background-color: $dark-grey;
+      color: white;
+    }
+  }
+
+  p {
+    display: inline;
+    border: 0.01rem solid $dark-grey;
+    padding: 0.2rem 0.5rem;
+    background-color: white;
+  }
+}
+
+.special-offer-form {
+  border: 0.01rem solid $super-light-grey;
+}

@@ -34,11 +34,15 @@ html, body {
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
+*:focus {
+  outline: 0.1rem solid $light-grey;
+  border-radius: none;
+}
+
 .page-content, .content-width {
   flex-grow: 1;
   max-width: 1800px;
   margin: 0 auto;
-
 }
 
 p {

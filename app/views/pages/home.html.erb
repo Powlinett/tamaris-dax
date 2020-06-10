@@ -3,12 +3,11 @@
   <div class="banner-content">
     <h1 class="category-banner"><%= @product.sub_category %></h1>
     <div class="button banner-btn">Acheter maintenant</div>
-    <%= image_tag 'tamaris_label_no_background.gif', class: 'tamaris-gif' %>
   </div>
 </a>
 
 <h2 class='handwritten-title'>C'est de saison...</h2>
-<ul class='products-grid sub-categories-grid'>
+<ul class='products-grid'>
   <% sub_categories_by_weight('chaussures').first(4).each do |sub_category, weight| %>
     <li class='product-card-wrapper'>
       <%= link_to sub_category_path('chaussures', sub_category), class: 'product-card' do %>
@@ -26,7 +25,7 @@
 </ul>
 
 <h2 class='handwritten-title'>Les revoilà!</h2>
-<ul class='products-grid'>
+<ul class='products-grid back-in-stock'>
   <% Product.where.not(photos_urls: []).order(updated_at: :asc).last(8).each do |product| %>
     <%= render partial: 'products/partials/product_card', locals: { product: product } %>
   <% end %>

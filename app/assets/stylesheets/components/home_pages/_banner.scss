@@ -9,7 +9,7 @@
   background-size: inherit;
   background-position: center 80%;
   background-repeat: no-repeat;
-  margin-top: -5rem;
+  margin-top: -5.1rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -27,6 +27,7 @@
 h1.category-banner {
   text-transform: uppercase;
   font-size: 2.8rem;
+  font-weight: 600;
 }
 
 .banner-btn {
@@ -40,12 +41,4 @@ h1.category-banner {
     color: white;
     transition: $base-transition;
   }
-}
-
-.tamaris-gif {
-  position: absolute;
-  top: -100%;
-  right: 25%;
-  // width: 150px;
-
 }

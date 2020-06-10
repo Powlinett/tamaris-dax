@@ -42,6 +42,10 @@
         border-bottom: 1px solid $medium-grey;
         transition: $base-transition;
     }
+
+    &:focus {
+      outline :none;
+    }
 }
 
 .navbar-lewagon .navbar-brand {

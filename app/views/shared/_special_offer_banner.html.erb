@@ -1,0 +1,15 @@
+<% unless SpecialOffer.count.zero? %>
+  <% @special_offer = SpecialOffer.last %>
+  <div id="carouselExampleSlidesOnly" class="carousel slide special-offer-container vertical" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <p class="special-offer-title"><%= @special_offer.title %></p>
+      </div>
+      <div class="carousel-item">
+        <p><%= "( #{@special_offer.description}, offre valable du
+        #{@special_offer.starting_date.strftime('%d/%m/%Y')}
+        au #{@special_offer.ending_date.strftime('%d/%m/%Y')} )" %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
