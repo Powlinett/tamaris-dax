@@ -1,7 +1,3 @@
-@media screen and (max-width: 576px) {
-
-}
-
 @media (max-width: 768px) {
   .bookers-content .bookers-table {
     margin-top: 0 !important;
@@ -11,4 +7,8 @@
       padding: 0.5rem 0;
     }
   }
+}
+
+@media screen and (max-width: 576px) {
+
 }

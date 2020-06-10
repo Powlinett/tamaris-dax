@@ -1,3 +1,27 @@
+@media (max-width: 768px) {
+
+  .bookings-content {
+    width: 100% !important;
+  }
+
+  .bookings-table-row div, .bookers-table-row div {
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  .actions-wrapper {
+    text-align: center;
+  }
+
+  .bookers-table .bookers-table-row {
+    display: flex;
+    flex-direction: column;
+
+    .only-mobile {
+      padding-right: 0.5rem;
+    }
+  }
+}
+
 @media screen and (max-width: 576px) {
   .bookings-head {
     display: none !important;
@@ -27,30 +51,6 @@
 
     .booking-dates {
       display: flex;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-
-  .bookings-content {
-    width: 100% !important;
-  }
-
-  .bookings-table-row div, .bookers-table-row div {
-    padding: 0.25rem 0.5rem !important;
-  }
-
-  .actions-wrapper {
-    text-align: center;
-  }
-
-  .bookers-table .bookers-table-row {
-    display: flex;
-    flex-direction: column;
-
-    .only-mobile {
-      padding-right: 0.5rem;
     }
   }
 }

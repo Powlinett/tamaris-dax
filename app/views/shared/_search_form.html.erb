@@ -1,9 +1,8 @@
 <div class="nav-item">
   <%= form_tag products_search_path, method: :get, class: 'products-search-form' do %>
     <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un produit" %>
-    <%= label_tag :query do %>
-      <%= image_tag("search.svg") %>
-    <% end %>
+    <label for="query"></label>
+
     <%= submit_tag "Search", class: "btn btn-primary", style: 'display: none' %>
   <% end %>
 </div>

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=PT+Sans:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Seaweed+Script&display=swap');
+
+@font-face {
+   font-family: 'Lemon Tuesday';
+   src: url('lemon_tuesday.otf');
+}
 
 @import 'variables.scss';
 
@@ -8,6 +14,7 @@
 @import 'components/shared/*';
 @import 'components/products/*';
 @import 'components/bookings/*';
+@import 'components/home_pages/*';
 @import 'mediaqueries/*';
 
 @import '/*';
@@ -27,11 +34,15 @@ html, body {
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
+*:focus {
+  outline: 0.1rem solid $light-grey;
+  border-radius: none;
+}
+
 .page-content, .content-width {
   flex-grow: 1;
   max-width: 1800px;
   margin: 0 auto;
-
 }
 
 p {
@@ -54,10 +65,15 @@ li {
   list-style: none;
 }
 
-// .flex-content {
-//   display: flex;
-// }
-
 .only-mobile {
   display: none;
+}
+
+.handwritten-title {
+  font-family: 'Lemon Tuesday', 'Homemade Apple', 'Seaweed Script', cursive;
+  letter-spacing: 0.1rem;
+  color: $dark-grey;
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 0;
 }

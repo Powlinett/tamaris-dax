@@ -48,6 +48,10 @@ body.products-show, body.variants-show {
     border: 1px solid $super-light-grey;
     width: fit-content;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     img {
       height: 83px;
     }

@@ -1,9 +1,3 @@
-@media screen and (max-width: 576px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
   .products-container {
     max-width: 100% !important;
@@ -16,5 +10,11 @@
     .sub-container {
       flex-direction: column;
     }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

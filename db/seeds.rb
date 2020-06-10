@@ -1,6 +1,7 @@
 require 'open-uri'
 
 # User.destroy_all
+HomePage.destroy_all
 Booking.destroy_all
 Booker.destroy_all
 Variant.destroy_all
@@ -159,3 +160,5 @@ update_variants
 create_bookers
 
 create_bookings
+
+HomePage.create(product: Product.last)

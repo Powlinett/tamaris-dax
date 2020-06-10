@@ -1,0 +1,41 @@
+<%= simple_form_for @home_page, url: home_pages_path, method: 'patch' do |f| %>
+
+  <details class="product-part" open>
+    <summary>
+      <h2>Sélectionner un produit</h2>
+    </summary>
+
+    <%= f.simple_fields_for @product do |p| %>
+      <% reference_collection = Product.pluck(:reference, :model, :color) %>
+
+      <%= p.input :reference, collection: reference_collection, value_method: :first,
+        label_method: lambda { |p_array| "[ #{p_array[0]} ] #{p_array[1]} - #{p_array[2]}" },
+        label: 'Produit' %>
+    <% end %>
+  </details>
+
+  <details class="special-offer-part">
+    <summary>
+      <h2>Editer une offre spéciale</h2>
+    </summary>
+
+    <div class="special-offer-form">
+      <%= f.simple_fields_for @special_offer do |s| %>
+        <% if @special_offer.persisted? %>
+          <%= link_to special_offer_path(@special_offer), method: :delete do %>
+            <p>Supprimer</p>
+          <% end %>
+        <% end %>
+        <%= s.input :title, label: 'Titre' %>
+        <%= s.input :description, required: false %>
+        <div class="d-flex special-offer-dates">
+          <%= s.input :starting_date, as: :date, html5: true, required: false, label: 'Début' %>
+          <%= s.input :ending_date, as: :date, html5: true, required: false, label: 'Fin' %>
+        </div>
+      <% end %>
+    </div>
+  </details>
+
+  <%= f.submit "Générer la page d'accueil", class: 'button simple-form-btn' %>
+
+<% end %>

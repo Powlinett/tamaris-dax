@@ -1,4 +1,16 @@
-ActiveRecord::Schema.define(version: 2020_05_22_173911) do
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 2020_06_08_183305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +37,13 @@ ActiveRecord::Schema.define(version: 2020_05_22_173911) do
     t.index ["booker_id"], name: "index_bookings_on_booker_id"
     t.index ["product_id"], name: "index_bookings_on_product_id"
     t.index ["variant_id"], name: "index_bookings_on_variant_id"
+  end
+
+  create_table "home_pages", force: :cascade do |t|
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_home_pages_on_product_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -59,6 +78,17 @@ ActiveRecord::Schema.define(version: 2020_05_22_173911) do
     t.index ["product_feature_id"], name: "index_products_on_product_feature_id"
   end
 
+  create_table "special_offers", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.date "starting_date"
+    t.date "ending_date"
+    t.bigint "home_page_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["home_page_id"], name: "index_special_offers_on_home_page_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -84,6 +114,8 @@ ActiveRecord::Schema.define(version: 2020_05_22_173911) do
   add_foreign_key "bookings", "bookers"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "variants"
+  add_foreign_key "home_pages", "products"
   add_foreign_key "products", "product_features"
+  add_foreign_key "special_offers", "home_pages"
   add_foreign_key "variants", "products"
 end

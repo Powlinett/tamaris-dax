@@ -11,7 +11,8 @@ describe Booking do
   it { should validate_presence_of :variant }
 
   before(:all) do
-    @booking = create(:booking)
+    product = create(:product, reference: "1-1-22107-24-607")
+    @booking = create(:booking, product: product)
   end
 
   describe '#set_defaults' do
@@ -127,7 +128,7 @@ describe Booking do
 
   describe '#send_record_email' do
     it 'enqueues an e-mail when a booking is created' do
-      expect{ create(:booking) }.to change { enqueued_jobs.size }.by(1)
+      expect{ create(:booking, product: Product.last) }.to change { enqueued_jobs.size }.by(1)
     end
   end
 end

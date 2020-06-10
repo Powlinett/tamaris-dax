@@ -2,16 +2,21 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <% if !params[:category].nil? || !params[:sub_category].nil? %>
-      <title><%= params.values.last.capitalize %> - Boutique Tamaris Saint-Paul-Lès-Dax</title>
-    <% elsif !@product.nil? && @product.persisted? %>
-      <title><%= "#{@product.model.capitalize} #{@product.color}" %> - Boutique Tamaris Saint-Paul-Lès-Dax</title>
-    <% else %>
-      <title>Boutique Tamaris - Saint-Paul-lès-Dax</title>
-    <% end %>
+    <title>
+      <% content_for(:site_page_title,
+        (params[:sub_category].capitalize unless params[:sub_category].nil?) ||
+        (params[:category].capitalize unless params[:category].nil?) ||
+        ("#{@product.model.capitalize} - #{@product.color}" if (!@product.nil? && @product.persisted?)) ||
+        "Bienvenue") %>
+
+      <%= page_title(app_name: 'Boutique Tamaris - Saint-Paul-Lès-Dax',
+        page_title_symbol: :site_page_title, separator: " | ", reverse: true) %>
+    </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%= favicon_link_tag asset_path('logo-tamaris.png') %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -20,8 +25,10 @@
 
   <body class="<%= body_class %>">
 
-
-    <%= render 'shared/navbar' %>
+    <div class="top-content">
+      <%= render 'shared/special_offer_banner' %>
+      <%= render 'shared/navbar' %>
+    </div>
 
 
     <div class="page-content">

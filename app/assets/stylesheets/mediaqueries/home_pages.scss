@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+  .pages.pages-home .products-grid {
+    padding: 4rem 2rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .pages.pages-home .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 1rem;
+  }
+}

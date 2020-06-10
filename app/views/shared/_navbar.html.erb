@@ -1,7 +1,5 @@
 <div class="navbar navbar-expand-md navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag 'logo-tamaris.svg' %>
-  <% end %>
+  <a href="<%= root_path %>" class="navbar-brand"></a>
 
   <div class="d-flex">
     <%= render 'shared/search_form' %>
@@ -43,6 +41,7 @@
                 <%= link_to 'Réservations', current_bookings_path, class: 'dropdown-item' %>
                 <%= link_to 'Gestion des stocks', new_product_path, class: 'dropdown-item' %>
                 <%= link_to 'Fichier clients', bookers_path, class: 'dropdown-item' %>
+                <%= link_to "Modifier page d'accueil", edit_home_page_path, class: 'dropdown-item' %>
                 <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
               </div>
             </li>

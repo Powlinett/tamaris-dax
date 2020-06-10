@@ -9,8 +9,4 @@ class Variant < ApplicationRecord
   validates :size, presence: true, uniqueness: { scope: :product_id },
                    inclusion: { in: PERMITTED_SIZES },
                    case_sensitive: false
-
-  # def update_stock(new_stock)
-  #   self.stock += new_stock
-  # end
 end

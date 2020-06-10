@@ -9,7 +9,9 @@ describe 'Booking' do
 
     @booking = create(:booking, booker: @booker)
 
-    @user = User.create(email: 'test@test.com', password: '123456')
+    @user = create(:user)
+
+    HomePage.create(product: Product.last)
   end
 
   feature 'Create a booking' do

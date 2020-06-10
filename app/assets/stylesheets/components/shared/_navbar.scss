@@ -4,7 +4,7 @@
   z-index: 4;
   box-shadow: $base-box-shadow;
   background: rgba(250, 250, 250, 0.97);
-  padding: 1rem 1rem;
+  padding: 1.3rem 1rem;
   justify-content: space-between;
 
   .navbar-center {
@@ -42,10 +42,19 @@
         border-bottom: 1px solid $medium-grey;
         transition: $base-transition;
     }
+
+    &:focus {
+      outline :none;
+    }
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-lewagon .navbar-brand {
+  background-image: url('logo-tamaris.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 1.5rem;
+  width: 10rem;
   vertical-align: unset;
 }
 
@@ -72,6 +81,11 @@
   display: flex;
   align-items: center;
   z-index: 5;
+}
+
+.navbar.navbar-expand-md.navbar-light.navbar-lewagon .navbar-toggler-icon {
+  background-image: url('burger-menu.svg');
+  background-size: 80% 80%;
 }
 
 .dropdown-menu {
