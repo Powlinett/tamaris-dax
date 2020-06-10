@@ -10,16 +10,16 @@
     transition: $base-transition;
 
     .navbar-brand:after {
-        background-image: asset-url('logo-tamaris.svg');
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        vertical-align: unset;
-        display: block;
-        opacity: 1;
-        height: initial;
-        width: inherit;
-        transition: 0.3s ease-in-out opacity;
+      background-image: asset-url('logo-tamaris.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      vertical-align: unset;
+      display: block;
+      opacity: 1;
+      height: initial;
+      width: inherit;
+      transition: 0.3s ease-in-out opacity;
     }
 
     .nav-link {
@@ -27,16 +27,16 @@
     }
 
     .products-search-form label:after {
-        background-image: asset-url('search.svg');
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        vertical-align: unset;
-        display: block;
-        opacity: 1;
-        height: initial;
-        width: inherit;
-        transition: 0.3s ease-in-out opacity;
+      background-image: asset-url('search.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      vertical-align: unset;
+      display: block;
+      opacity: 1;
+      height: initial;
+      width: inherit;
+      transition: 0.3s ease-in-out opacity;
     }
 
     .navbar-toggler-icon {
@@ -59,25 +59,23 @@
   .navbar-brand {
     display: flex;
     background-image: asset-url('logo-tamaris-white.svg');
-    opacity: 1;
 
     &:after {
       content: "";
       opacity: 0;
       height: 0;
-      width: 0;
+      transition: $base-transition;
     }
   }
 
   .products-search-form label {
     background-image: asset-url('search-white.svg');
-    opacity: 1;
 
     &:after {
       content: "";
       opacity: 0;
       height: 0;
-      width: 0;
+      transition: $base-transition;
     }
   }
 

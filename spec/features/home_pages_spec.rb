@@ -22,7 +22,7 @@ describe HomePage do
       visit edit_home_page_path
 
       select("1-1-22107-24-005", from: 'home_page_product_reference')
-      click_on "Générer la page d'accueil"
+      click_on "Mettre à jour la page d'accueil"
 
       @home_page.reload
 
@@ -36,7 +36,7 @@ describe HomePage do
       page.execute_script("$('details.special-offer-part summary').click()")
 
       fill_in 'home_page_special_offer_title', with: 'Lorem ipsum duis ut minim.'
-      click_on "Générer la page d'accueil"
+      click_on "Mettre à jour la page d'accueil"
 
       @home_page.reload
 
@@ -50,12 +50,12 @@ describe HomePage do
       page.execute_script("$('details.special-offer-part summary').click()")
 
       fill_in 'home_page_special_offer_description', with: 'Lorem ipsum duis ut minim.'
-      click_on "Générer la page d'accueil"
+      click_on "Mettre à jour la page d'accueil"
 
       @home_page.reload
 
       expect(page).to_not have_content "Page d'accueil mise à jour"
-      expect(@home_page.special_offer.title).to eq('Lorem ipsum duis ut minim.')
+      expect(@home_page.special_offer.nil?).to be true
     end
 
 

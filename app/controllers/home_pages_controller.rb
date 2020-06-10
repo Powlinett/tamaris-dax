@@ -19,8 +19,10 @@ class HomePagesController < ApplicationController
     if @home_page.update(product: @product) && special_offer
       redirect_to root_path, notice: "Page d'accueil mise à jour"
     else
-      render :edit, alert: "Erreur lors de la modification de la page d'accueil.
+      @special_offer = SpecialOffer.new(special_offer_params)
+      flash.now[:alert] = "Erreur lors de la modification de la page d'accueil.
                             Veuillez vérifier les champs du formulaire."
+      render :edit
     end
   end
 
@@ -44,8 +46,12 @@ class HomePagesController < ApplicationController
     @home_page = HomePage.first
   end
 
+  def sum_of_values(params)
+    params[:title] + params[:description] + params[:starting_date].to_s + params[:ending_date].to_s
+  end
+
   def update_or_create_special_offer(params)
-    return true if params[:title].empty?
+    return true if sum_of_values(params).empty?
 
     if @home_page.special_offer.nil?
       @special_offer = SpecialOffer.new(params)
