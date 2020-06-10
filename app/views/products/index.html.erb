@@ -19,7 +19,7 @@
     </div>
 
     <div class="side-content">
-      <%= render 'sub_categories_list' %>
+      <%= render 'products/partials/sub_categories_list' %>
     </div>
 
     <div class="main-content">
@@ -42,7 +42,11 @@
         <%= link_to_prev_page @paginated_products, 'produits précédents', class: 'button pagination-link' %>
       </div>
 
-      <%= render 'products_grid' %>
+      <ul class="products-grid">
+        <% @paginated_products.each do |product| %>
+          <%= render partial: 'products/partials/product_card', locals: { product: product } %>
+        <% end %>
+      </ul>
 
       <div class="pagination-wrapper">
         <%= link_to_next_page @paginated_products, 'produits suivants', class: 'button pagination-link' %>

@@ -6,7 +6,7 @@
       <% content_for(:site_page_title,
         (params[:sub_category].capitalize unless params[:sub_category].nil?) ||
         (params[:category].capitalize unless params[:category].nil?) ||
-        ("#{@product.model.capitalize} - #{@product.color}" unless @product.nil?) ||
+        ("#{@product.model.capitalize} - #{@product.color}" if (!@product.nil? && @product.persisted?)) ||
         "Bienvenue") %>
 
       <%= page_title(app_name: 'Boutique Tamaris - Saint-Paul-Lès-Dax',
