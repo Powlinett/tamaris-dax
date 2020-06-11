@@ -5,7 +5,7 @@
       <div class="carousel-item active">
         <div class="carousel-item-content">
           <%= image_tag 'discount.svg' %>
-          <p class="special-offer-title"><%= @special_offer.title %></p>
+          <p><%= @special_offer.title %></p>
         </div>
       </div>
       <% if !@special_offer.description.nil? && !@special_offer.description.empty? %>
