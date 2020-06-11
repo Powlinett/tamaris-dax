@@ -67,10 +67,6 @@
   margin: 0;
 }
 
-// .navbar-light .navbar-brand {
-//   position: relative;
-// }
-
 .navbar-nav.mr-auto {
   align-items: center;
 }
@@ -97,4 +93,6 @@
 .dropdown-menu {
   left: unset;
   right: 0;
+  border: 1px solid $super-light-grey;
+  border-radius: 0.1rem;
 }

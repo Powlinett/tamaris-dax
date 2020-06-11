@@ -1,12 +1,45 @@
 @media (max-width: 768px) {
+  .pages.pages-home .top-content .special-offer-container {
+    display: none;
+  }
+
+  .carousel-item {
+    padding: 0 0.5rem;
+
+    p {
+      line-height: normal;
+    }
+  }
+
+  .carousel-item-content img {
+    margin-right: 0.1rem;
+  }
+
+  .only-mobile .special-offer-container {
+    width: 100vw;
+  }
+
   .pages.pages-home .products-grid {
-    padding: 4rem 2rem;
+    width: 95vw;
+
+    .card-infos {
+      padding-top: 0.1rem;
+      padding-bottom: 0;
+    }
+  }
+
+  .pages-home .products-grid.back-in-stock .product-card-wrapper {
+    min-width: 21vw !important;
   }
 }
 
 @media screen and (max-width: 576px) {
   .pages.pages-home .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    padding: 2rem 1rem;
+    grid-column-gap: 0.5rem;
+  }
+
+  .pages.pages-home .products-grid.back-in-stock .product-card-wrapper {
+    min-width: 44vw !important;
   }
 }

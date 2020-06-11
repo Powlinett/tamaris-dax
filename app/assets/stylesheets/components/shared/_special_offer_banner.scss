@@ -3,14 +3,9 @@
   top: 0;
   width: 100%;
   background-color: #333333;
-  padding: 0.5rem;
-  min-height: 3.2rem;
+  height: 3.2rem;
   display: flex;
   align-items: center;
-
-  .special-offer-title {
-    font-size: 1rem;
-  }
 
   p {
     color: white;
@@ -23,12 +18,16 @@
   }
 }
 
+.carousel-item {
+  padding: 0 10rem;
+}
+
 .carousel-item-content {
   display: flex;
   justify-content: center;
 }
 
-.carousel-item img {
+.carousel-item-content img {
     width: 1rem;
     margin-right: 1rem;
 }

@@ -84,10 +84,14 @@ li.product-card-wrapper {
   background-color: white;
   color: $medium-grey;
   padding-bottom: 1rem;
+  padding-top: 0.5rem;
 
   p {
     margin-bottom: 0;
-    padding-top: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    height: 1.3rem;
   }
 }
 

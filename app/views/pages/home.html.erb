@@ -6,6 +6,10 @@
   </div>
 </a>
 
+<div class="only-mobile">
+  <%= render 'shared/special_offer_banner' %>
+</div>
+
 <h2 class='handwritten-title'>C'est de saison...</h2>
 <ul class='products-grid'>
   <% sub_categories_by_weight('chaussures').first(4).each do |sub_category, weight| %>
