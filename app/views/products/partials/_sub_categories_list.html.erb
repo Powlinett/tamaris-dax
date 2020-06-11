@@ -11,13 +11,7 @@
       <% end %>
     </li>
 
-    <% if params[:query].present? %>
-      <% sub_categories = sub_categories_for_results(@products) %>
-    <% else %>
-      <% sub_categories = sub_categories_by_weight(params[:category]) %>
-    <% end %>
-
-    <% sub_categories.each do |sub_category| %>
+    <% @sub_categories.each do |sub_category| %>
       <li class='sub-category'>
       <% if params[:category] == 'promotions' %>
         <%= link_to sub_category.capitalize, sub_category_path('promotions', slug(sub_category)), class: 'nav-link' %>
