@@ -4,18 +4,25 @@
     <li class='sub-category'>
       <% if params[:category] == 'promotions' %>
         <%= link_to "Toutes les promotions", category_path('promotions'), class: 'nav-link' %>
-      <% elsif @paginated_products.first.category == 'chaussures' %>
+      <% elsif params[:category] == 'chaussures' %>
         <%= link_to "Toutes les chaussures", category_path('chaussures'), class: 'nav-link' %>
-      <% else %>
+      <% elsif params[:category] == 'accessoires' %>
         <%= link_to "Tous les accessoires", category_path('accessoires'), class: 'nav-link' %>
       <% end %>
     </li>
-    <% @sub_categories.each do |sub_category| %>
+
+    <% if params[:query].present? %>
+      <% sub_categories = sub_categories_for_results(@products) %>
+    <% else %>
+      <% sub_categories = sub_categories_by_weight(params[:category]) %>
+    <% end %>
+
+    <% sub_categories.each do |sub_category| %>
       <li class='sub-category'>
-      <% if params[:category].nil? %>
+      <% if params[:category] == 'promotions' %>
         <%= link_to sub_category.capitalize, sub_category_path('promotions', slug(sub_category)), class: 'nav-link' %>
       <% else %>
-        <%= link_to sub_category.capitalize, sub_category_path(params[:category], slug(sub_category)), class: 'nav-link' %>
+        <%= link_to sub_category.capitalize, sub_category_path(category_for(sub_category), slug(sub_category)), class: 'nav-link' %>
       <% end %>
       </li>
     <% end %>

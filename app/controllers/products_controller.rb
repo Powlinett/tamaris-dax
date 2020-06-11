@@ -16,7 +16,6 @@ class ProductsController < ApplicationController
     else
       @products = Product.where(category: params[:category])
     end
-    set_sub_categories
     render_index_or_no_products
   end
 
@@ -27,8 +26,6 @@ class ProductsController < ApplicationController
       @products_by_category = Product.where(category: params[:category])
     end
     @products = @products_by_category.where(sub_category: unslug(params[:sub_category]))
-
-    @sub_categories = @products_by_category.pluck(:sub_category).uniq
     render_index_or_no_products
   end
 
@@ -57,13 +54,7 @@ class ProductsController < ApplicationController
 
   def destroy
     unless @product.nil?
-      @variant = @product.variants.find_by(size: variant_params[:size].to_i)
-      stock_to_remove = variant_params[:stock].to_i
-      if @variant.stock >= stock_to_remove
-        @variant.update(stock: @variant.stock -= stock_to_remove)
-      else
-        @variant.update(stock: 0)
-      end
+      update_variant_stock
       redirect_to category_path(@product.category), notice: 'Produit supprimé.'
     else
       @product = Product.new
@@ -77,7 +68,6 @@ class ProductsController < ApplicationController
     if @products.empty?
       render :no_results
     else
-      set_sub_categories
       paginate_products
       render :index
     end
@@ -101,11 +91,20 @@ class ProductsController < ApplicationController
     product_params[:variants]
   end
 
+  def update_variant_stock
+    variant = @product.variants.find_by(size: variant_params[:size].to_i)
+    stock_to_remove = variant_params[:stock].to_i
+    if variant.stock >= stock_to_remove
+      variant.update(stock: @variant.stock -= stock_to_remove)
+    else
+      variant.update(stock: 0)
+    end
+  end
+
   def render_index_or_no_products
-    if @products.empty?
+    if paginate_products.empty?
       render :no_products
     else
-      paginate_products
       render :index
     end
   end
@@ -118,9 +117,5 @@ class ProductsController < ApplicationController
   def paginate_products
     @paginated_products = Kaminari.paginate_array(collect_only_in_stock)
                                   .page(params[:page])
-  end
-
-  def set_sub_categories
-    @sub_categories = @products.pluck(:sub_category).uniq
   end
 end

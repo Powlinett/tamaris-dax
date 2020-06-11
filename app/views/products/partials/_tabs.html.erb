@@ -1,4 +1,8 @@
-<% @product = @paginated_products.first unless @paginated_products.nil? %>
+<% if !params[:sub_category].nil? %>
+  <% @product = Product.where(sub_category: unslug(params[:sub_category])).first %>
+<% elsif !params[:category].nil? %>
+  <% @product = Product.where(category: params[:category]).first %>
+<% end %>
 
 <ul class="list-inline tabs-links no-mobile">
   <li class="tab-link root-link">
@@ -15,7 +19,7 @@
     <% end %>
   </li>
 
-  <% unless body_class == 'products products-index' %>
+  <% unless (body_class == 'products products-index') || !params[:query].nil? %>
     <li class="tab-link subcategory-link">
       <%= link_to @product.sub_category.capitalize, sub_category_path(@product.category, slug(@product.sub_category)) %>
     </li>

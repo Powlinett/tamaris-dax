@@ -12,7 +12,7 @@
 
 <h2 class='handwritten-title'>C'est de saison...</h2>
 <ul class='products-grid'>
-  <% sub_categories_by_weight('chaussures').first(4).each do |sub_category, weight| %>
+  <% sub_categories_by_weight('chaussures').first(4).each do |sub_category| %>
     <li class='product-card-wrapper'>
       <%= link_to sub_category_path('chaussures', sub_category), class: 'product-card' do %>
         <div class="product-image">
