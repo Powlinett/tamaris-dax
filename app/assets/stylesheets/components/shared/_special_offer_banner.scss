@@ -23,6 +23,16 @@
   }
 }
 
+.carousel-item-content {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-item img {
+    width: 1rem;
+    margin-right: 1rem;
+}
+
 .carousel.slide.vertical .carousel-item-next.carousel-item-left,
 .carousel.slide.vertical .carousel-item-prev.carousel-item-right {
     -webkit-transform: translate3d(0, 0, 0);
