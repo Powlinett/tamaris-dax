@@ -5,7 +5,6 @@ class Variant < ApplicationRecord
   belongs_to :product
   has_many :bookings, dependent: :nullify
 
-  validates :product, presence: true
   validates :stock, presence: true, inclusion: { in: 0..100 }
   validates :size, presence: true, uniqueness: { scope: :product_id }
                    # inclusion: { in: PERMITTED_SIZES }

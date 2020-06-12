@@ -37,8 +37,11 @@ class Product < ApplicationRecord
   end
 
   def update_variant(params)
-    variant = self.variants.find_by(size: params[:size].to_i)
-
+    if (self.category == 'accessoires') && (params[:size].to_i == 1)
+      variant = self.variants.first
+    else
+      variant = self.variants.find_by(size: params[:size].to_i)
+    end
     variant.update(stock: variant.stock += params[:stock].to_i)
   end
 

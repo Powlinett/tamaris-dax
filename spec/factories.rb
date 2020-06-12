@@ -40,7 +40,7 @@ FactoryBot.define do
   factory :variant do
     stock { 10 }
     size { 38 }
-    product { build(:product) }
+    product { Product.last }
   end
 
   factory :booker do

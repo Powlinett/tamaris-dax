@@ -1,18 +1,19 @@
 require 'rails_helper'
 
-PERMITTED_SIZES = [1, (35..43).to_a, (70..130).select { |i| (i % 5).zero? }].flatten.freeze
+# SHOES_PERMITTED_SIZES = (35..43).to_a
+# BELT_PERMITTED_SIZES = (70..130).select { |i| (i % 5).zero? }
 
 describe Variant do
   it { should belong_to :product }
   it { should have_many :bookings }
 
-  it { should validate_presence_of :product }
   it { should validate_presence_of :stock }
   it { should validate_presence_of(:size) }
   it { should validate_uniqueness_of(:size).scoped_to(:product_id).case_insensitive }
 
   before(:all) do
     @variant = build(:variant)
+    @variant.product.variants.destroy_all
   end
 
   it 'should validate that stock is between 0 and 100' do
@@ -21,14 +22,39 @@ describe Variant do
     @variant.stock = 102
 
     expect(@variant).to_not be_valid
+
+    @variant.stock = -2
+
+    expect(@variant).to_not be_valid
+
+    @variant.stock = 22
+
+    expect(@variant).to be_valid
   end
 
-  it 'should validate that size are in permitted_sizes constant' do
-    expect(PERMITTED_SIZES).to include(@variant.size)
+  it 'should validate that size are in permitted_sizes for shoes' do
+    @variant.product.category = 'chaussures'
+    @variant.size = 37
 
-    @variant.size = 13
+    expect(@variant).to be_valid
 
-    expect(PERMITTED_SIZES).to_not include(@variant.size)
+    @variant.size = 48
+
+    expect(@variant).to_not be_valid
+  end
+
+  it 'should validate that size are in permitted_sizes for accessories' do
+    @variant.product.category = 'accessoires'
+    @variant.size = 115
+
+    expect(@variant).to be_valid
+
+    @variant.size = 39
+
+    expect(@variant).to_not be_valid
+
+    @variant.size = 112
+
     expect(@variant).to_not be_valid
   end
 

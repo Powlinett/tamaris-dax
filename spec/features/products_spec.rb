@@ -48,7 +48,7 @@ describe 'Product' do
 
   feature 'Show a product' do
     scenario 'from the index' do
-      visit products_path
+      visit category_path('chaussures')
 
       click_link(@product1.reference)
 

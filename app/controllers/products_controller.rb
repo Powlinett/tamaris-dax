@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
 
   def destroy
     unless @product.nil?
-      update_variant_stock
+      subtract_stock_to_variant
       redirect_to category_path(@product.category), notice: 'Produit supprimé.'
     else
       @product = Product.new
@@ -92,12 +92,12 @@ class ProductsController < ApplicationController
     product_params[:variants]
   end
 
-  def update_variant_stock
+  def subtract_stock_to_variant
     variant = @product.variants.find_by(size: variant_params[:size].to_i)
     stock_to_remove = variant_params[:stock].to_i
 
     if variant.stock >= stock_to_remove
-      variant.update(stock: @variant.stock -= stock_to_remove)
+      variant.update(stock: variant.stock -= stock_to_remove)
     else
       variant.update(stock: 0)
     end
