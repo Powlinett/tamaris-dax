@@ -6,9 +6,9 @@ describe Booking do
   it { should belong_to :product }
   it { should belong_to :variant }
 
-  it { should validate_presence_of :booker }
-  it { should validate_presence_of :product }
-  it { should validate_presence_of :variant }
+  it { should validate_presence_of :starting_date }
+  it { should validate_presence_of :ending_date }
+  it { should validate_presence_of :actual_state }
 
   before(:all) do
     product = create(:product, reference: "1-1-22107-24-607")

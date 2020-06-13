@@ -47,13 +47,13 @@ class ProductsController < ApplicationController
     if @product.save && @product.update_variant(variant_params)
       redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
     else
-      flash.now[:alert] = 'Référence introuvable ou erreur lors de la récupération des données'
+      flash.now[:alert] = 'Erreur lors de la récupération des données: merci de vérifier la référence et/ou la taille'
       render :new
     end
   end
 
   def destroy
-    unless @product.nil?
+    if @product.present?
       subtract_stock_to_variant
       redirect_to category_path(@product.category), notice: 'Produit supprimé.'
     else
@@ -92,14 +92,29 @@ class ProductsController < ApplicationController
     product_params[:variants]
   end
 
-  def subtract_stock_to_variant
-    variant = @product.variants.find_by(size: variant_params[:size].to_i)
-    stock_to_remove = variant_params[:stock].to_i
-
-    if variant.stock >= stock_to_remove
-      variant.update(stock: variant.stock -= stock_to_remove)
+  def find_variant(size)
+    if (@product.category == 'accessoires') && (size == 1)
+      @variant = @product.variants.first
     else
-      variant.update(stock: 0)
+      @variant = @product.variants.find_by(size: size)
+    end
+  end
+
+  def subtract_stock_to_variant
+    find_variant(variant_params[:size].to_i)
+
+    if @variant.present?
+      remove_stock(variant_params[:stock].to_i)
+    else
+      false
+    end
+  end
+
+  def remove_stock(stock_to_remove)
+    if @variant.stock >= stock_to_remove
+      @variant.update(stock: @variant.stock -= stock_to_remove)
+    else
+      @variant.update(stock: 0)
     end
   end
 

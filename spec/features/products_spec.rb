@@ -108,8 +108,6 @@ describe 'Product' do
       fill_in 'Password', with: @user.password
       click_on 'Log in'
 
-      expect(page).to have_content 'Signed in successfully.'
-
       visit new_product_path
     end
 
