@@ -9,14 +9,12 @@ class ProductsController < ApplicationController
                      only: [:index, :show, :all_offers, :search, :index_by_sub_category]
 
   def index
-    if params[:category].nil?
-      @products = Product.all
-    elsif params[:category] == 'promotions'
+    if params[:category] == 'promotions'
       @products = Product.where.not(former_price: 0.0)
     else
       @products = Product.where(category: params[:category])
     end
-    set_sub_categories
+    @sub_categories = sub_categories_by_weight(params[:category])
     render_index_or_no_products
   end
 
@@ -26,9 +24,8 @@ class ProductsController < ApplicationController
     else
       @products_by_category = Product.where(category: params[:category])
     end
+    @sub_categories = sub_categories_by_weight(params[:category])
     @products = @products_by_category.where(sub_category: unslug(params[:sub_category]))
-
-    @sub_categories = @products_by_category.pluck(:sub_category).uniq
     render_index_or_no_products
   end
 
@@ -50,20 +47,14 @@ class ProductsController < ApplicationController
     if @product.save && @product.update_variant(variant_params)
       redirect_to product_path(@product.reference), notice: 'Produit ajouté :)'
     else
-      flash.now[:alert] = 'Référence introuvable ou erreur lors de la récupération des données'
+      flash.now[:alert] = 'Erreur lors de la récupération des données: merci de vérifier la référence et/ou la taille'
       render :new
     end
   end
 
   def destroy
-    unless @product.nil?
-      @variant = @product.variants.find_by(size: variant_params[:size].to_i)
-      stock_to_remove = variant_params[:stock].to_i
-      if @variant.stock >= stock_to_remove
-        @variant.update(stock: @variant.stock -= stock_to_remove)
-      else
-        @variant.update(stock: 0)
-      end
+    if @product.present?
+      subtract_stock_to_variant
       redirect_to category_path(@product.category), notice: 'Produit supprimé.'
     else
       @product = Product.new
@@ -74,10 +65,10 @@ class ProductsController < ApplicationController
 
   def search
     @products = Product.search_in_products(params[:query])
+    @sub_categories = sub_categories_for_results(@products)
     if @products.empty?
       render :no_results
     else
-      set_sub_categories
       paginate_products
       render :index
     end
@@ -101,11 +92,36 @@ class ProductsController < ApplicationController
     product_params[:variants]
   end
 
+  def find_variant(size)
+    if (@product.category == 'accessoires') && (size == 1)
+      @variant = @product.variants.first
+    else
+      @variant = @product.variants.find_by(size: size)
+    end
+  end
+
+  def subtract_stock_to_variant
+    find_variant(variant_params[:size].to_i)
+
+    if @variant.present?
+      remove_stock(variant_params[:stock].to_i)
+    else
+      false
+    end
+  end
+
+  def remove_stock(stock_to_remove)
+    if @variant.stock >= stock_to_remove
+      @variant.update(stock: @variant.stock -= stock_to_remove)
+    else
+      @variant.update(stock: 0)
+    end
+  end
+
   def render_index_or_no_products
-    if @products.empty?
+    if paginate_products.empty?
       render :no_products
     else
-      paginate_products
       render :index
     end
   end
@@ -118,9 +134,5 @@ class ProductsController < ApplicationController
   def paginate_products
     @paginated_products = Kaminari.paginate_array(collect_only_in_stock)
                                   .page(params[:page])
-  end
-
-  def set_sub_categories
-    @sub_categories = @products.pluck(:sub_category).uniq
   end
 end

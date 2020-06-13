@@ -1,6 +1,5 @@
-<% @product = @paginated_products.first unless @paginated_products.nil? %>
-
 <ul class="list-inline tabs-links no-mobile">
+
   <li class="tab-link root-link">
     <%= link_to 'Tamaris', root_path %>
   </li>
@@ -8,20 +7,23 @@
   <li class="tab-link category-link">
     <% if body_class.include? 'products-search' %>
         Recherche
-    <% elsif params[:category] == 'promotions' %>
+    <% elsif @product.nil? %>
         <%= link_to params[:category].capitalize, category_path(params[:category])  %>
     <% else %>
         <%= link_to @product.category.capitalize, category_path(@product.category)  %>
     <% end %>
   </li>
 
-  <% unless body_class == 'products products-index' %>
+  <% if params[:sub_category].present? %>
     <li class="tab-link subcategory-link">
-      <%= link_to @product.sub_category.capitalize, sub_category_path(@product.category, slug(@product.sub_category)) %>
+      <%= link_to params[:sub_category].capitalize, sub_category_path(params[:category], slug(params[:sub_category])) %>
     </li>
   <% end %>
 
-  <% if @paginated_products.nil? %>
+  <% if @product.present? %>
+    <li class="tab-link subcategory-link">
+      <%= link_to @product.sub_category.capitalize, sub_category_path(@product.category, slug(@product.sub_category)) %>
+    </li>
     <li class="tab-link product-model">
       <%= "#{@product.model.capitalize}" %>
     </li>

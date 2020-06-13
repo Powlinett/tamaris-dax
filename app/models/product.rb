@@ -4,7 +4,7 @@ class Product < ApplicationRecord
 
   has_one :home_page
 
-  belongs_to :product_feature
+  belongs_to :product_feature, required: true
 
   serialize :sizes_range, Array
   serialize :photos_urls, Array
@@ -37,9 +37,16 @@ class Product < ApplicationRecord
   end
 
   def update_variant(params)
-    variant = self.variants.find_by(size: params[:size].to_i)
-
-    variant.update(stock: variant.stock += params[:stock].to_i)
+    if (self.category == 'accessoires') && (params[:size].to_i == 1)
+      variant = self.variants.first
+    else
+      variant = self.variants.find_by(size: params[:size].to_i)
+    end
+    if variant.present?
+      variant.update(stock: variant.stock += params[:stock].to_i)
+    else
+      false
+    end
   end
 
   def still_any_stock?

@@ -1,13 +1,10 @@
 class Booking < ApplicationRecord
-  belongs_to :booker
-  belongs_to :product
-  belongs_to :variant
+  belongs_to :booker, required: true
+  belongs_to :product, required: true
+  belongs_to :variant, required: true
 
   after_initialize :set_defaults, unless: :persisted?
 
-  validates :booker, presence: true
-  validates :product, presence: true
-  validates :variant, presence: true
   validates :starting_date, presence: true
   validates :ending_date, presence: true
   validates :actual_state, presence: true
