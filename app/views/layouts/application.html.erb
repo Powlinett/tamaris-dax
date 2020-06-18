@@ -19,7 +19,7 @@
     <%= favicon_link_tag asset_path('tamaris_brand.png') %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
     <script src="https://kit.fontawesome.com/de5affd924.js" crossorigin="anonymous"></script>
   </head>
 
