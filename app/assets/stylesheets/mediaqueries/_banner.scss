@@ -6,6 +6,16 @@
   .banner-content {
     padding-left: 4rem;
   }
+
+  .banner-btn {
+    background-color: white;
+    color: $dark-grey;
+
+    &:hover {
+      background-color: $dark-grey;
+      color: white;
+    }
+  }
 }
 
 @media screen and (max-width: 576px) {
