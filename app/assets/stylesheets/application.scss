@@ -37,7 +37,7 @@ html, body {
 
 *:focus {
   outline: 0.1rem solid $light-grey;
-  border-radius: none;
+  border-radius: 0;
 }
 
 .page-content, .content-width {

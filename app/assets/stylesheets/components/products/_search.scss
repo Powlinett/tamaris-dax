@@ -12,6 +12,13 @@
     transition: $base-transition;
     width: 0;
 
+    &::placeholder {
+      font-size: 0.9rem;
+      transition: $base-transition;
+      letter-spacing: 0.02rem;
+      color: $medium-grey !important;
+    }
+
     &:focus {
       border: 0px;
       box-shadow: none;
@@ -22,10 +29,6 @@
       background-color: transparent;
 
       &::placeholder {
-        color: $medium-grey;
-        transition: $base-transition;
-        font-size: 0.9rem;
-        letter-spacing: 0.02rem;
       }
     }
   }
