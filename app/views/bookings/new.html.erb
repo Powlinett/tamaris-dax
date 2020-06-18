@@ -9,11 +9,11 @@
     <a href="<%= product_path(product.reference)%>" class="product-card">
       <% if product.photos_urls.any? %>
         <div class='product-image' style="background-image: url(<%= resize(product.photos_urls[1], 500, 700) %>">
-          <%= image_tag resize(product.photos_urls[0], 500, 700) %>
+          <%= image_tag resize(product.photos_urls[0], 500, 700), alt: full_model(product) %>
         </div>
       <% else %>
         <div class='product-image' style="background-image: url(<%= image_path 'trying-shoes.jpg' %>">
-          <%= image_tag 'trying-shoes.jpg' %>
+          <%= image_tag 'trying-shoes.jpg', alt: "Pas d'image disponible" %>
         </div>
       <% end %>
       <div class="card-infos">

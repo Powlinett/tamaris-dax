@@ -10,9 +10,11 @@
       <div class="model-wrapper">
         <div class="model no-border">
           <% if booking.product.photos_urls.any? %>
-            <%= link_to((image_tag(resize(booking.product.photos_urls.first, 100, 200))), product_path(booking.product.reference)) %>
+            <%= link_to((image_tag resize(booking.product.photos_urls.first, 100, 200),
+            alt: full_model(booking.product)), product_path(booking.product.reference)) %>
           <% else %>
-            <%= link_to((image_tag 'trying-shoes.jpg', width: 100), product_path(booking.product.reference)) %>
+            <%= link_to((image_tag 'trying-shoes.jpg', width: 100, alt: "Pas d'image disponible"),
+             product_path(booking.product.reference)) %>
           <% end %>
          <div class="no-border">
             <p class="font-weight-bold"><%= booking.product.reference %></p>

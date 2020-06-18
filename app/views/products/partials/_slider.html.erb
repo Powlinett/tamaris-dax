@@ -2,12 +2,13 @@
   <% if @product.photos_urls.any? %>
     <% @product.photos_urls.each_with_index do |photo, index| %>
       <li class='thumbnail-picture'>
-        <%= image_tag resize(photo, 72, 96), data: { index: index } %>
+        <%= image_tag resize(photo, 72, 96),
+        alt: "#{full_model(@product)} (#{index + 1})", data: { index: index } %>
       </li>
     <% end %>
   <% else %>
     <li class="thumbnail-picture">
-      <%= image_tag 'trying-shoes.jpg', width: 72 %>
+      <%= image_tag 'trying-shoes.jpg', alt: "Pas d'image disponible", width: 72 %>
     </li>
   <% end %>
 </ul>
@@ -16,12 +17,13 @@
   <% if @product.photos_urls.any? %>
     <% @product.photos_urls.each_with_index do |photo, index| %>
       <li class="full-size-picture<%= " active" if index == 0 %>">
-        <%= image_tag resize(photo, 680, 900), data: { index: index } %>
+        <%= image_tag resize(photo, 680, 900),
+        alt: "#{full_model(@product)} (#{index + 1})", data: { index: index } %>
       </li>
     <% end %>
   <% else %>
     <li class="full-size-picture active">
-      <%= image_tag 'trying-shoes.jpg' %>
+      <%= image_tag 'trying-shoes.jpg', alt: "Pas d'image disponible" %>
     </li>
   <% end %>
 </ul>
@@ -31,12 +33,14 @@
     <% if @product.photos_urls.any? %>
       <% @product.photos_urls.each_with_index do |photo, index| %>
         <div class="carousel-item <%= " active" if index == 0 %>">
-          <%= image_tag resize(photo, 600, 800), data: { index: index }, class: 'd-block mx-auto w-100' %>
+          <%= image_tag resize(photo, 600, 800), alt: "#{full_model(@product)} (#{index + 1})",
+          data: { index: index }, class: 'd-block mx-auto w-100' %>
         </div>
       <% end %>
     <% else %>
       <div class="carousel-item active">
-        <%= image_tag 'trying-shoes.jpg', data: { index: 0}, class: 'd-block mx-auto w-100' %>
+        <%= image_tag 'trying-shoes.jpg', alt: "Pas d'image disponible",
+        data: { index: 0}, class: 'd-block mx-auto w-100' %>
       </div>
     <% end %>
   </div>
