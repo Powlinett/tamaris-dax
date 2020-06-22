@@ -3,6 +3,10 @@ module ProductsHelper
     photo_url + "?sw=#{width}&sh=#{height}&sm=fit"
   end
 
+  def full_model(product)
+    "#{product.model} - #{product.color}"
+  end
+
   def slug(sub_category)
     sub_category.gsub(' ', '-')
   end

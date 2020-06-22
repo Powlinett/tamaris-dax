@@ -9,16 +9,14 @@
 
         <div class="product-image">
           <% if product.photos_urls.any? %>
-            <%= image_tag resize(product.photos_urls.first, 450, 600), class: 'first-picture' %>
+            <%= image_tag resize(product.photos_urls.first, 450, 600), alt: full_model(product), class: 'first-picture' %>
           <% else %>
-            <%= image_tag 'trying-shoes.jpg' %>
+            <%= image_tag 'trying-shoes.jpg', alt: "Pas d'image disponible" %>
           <% end %>
         </div>
         <div class="quick-booking no-mobile">
-          <% if (product.variants.count == 1) && (product.variants[0].stock) > 0 %>
+          <% if product.variants.count == 1 %>
             <%= link_to 'Réserver en magasin', new_product_booking_path(product.reference, product.variants[0].size), class: 'booking-link' %>
-          <% elsif product.variants.count == 1 %>
-            <p class="unavailable">épuisé</p>
           <% else %>
             <p class="booking-link">Réserver en magasin</p>
             <ul class="all-sizes product-card-sizes">

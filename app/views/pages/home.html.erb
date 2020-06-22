@@ -17,7 +17,7 @@
       <%= link_to sub_category_path('chaussures', sub_category), class: 'product-card' do %>
         <div class="product-image">
           <% product = Product.where(sub_category: sub_category).where.not(color: 'black').first %>
-          <%= image_tag resize(product.photos_urls.first, 450, 600), class: 'first-picture' %>
+          <%= image_tag resize(product.photos_urls.first, 450, 600), alt: full_model(product), class: 'first-picture' %>
         </div>
 
         <div class="card-infos">

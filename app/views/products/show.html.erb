@@ -34,7 +34,7 @@
         <ul class="all-sizes">
           <% @product.variants.order(:size).each do |variant| %>
             <%= link_to(product_size_path(@product.reference, variant.size),
-            class: "variant-box #{"is-selected" if !@variant.nil? && variant.size == @variant.size}
+            class: "variant-box #{"is-selected" if @variant.present? && variant.size == @variant.size}
               #{' unavailable' if variant.stock <= 0}") do %>
               <li class="size<%= " unavailable" if variant.stock <= 0 %>">
                 <%= variant.size %>
@@ -42,7 +42,7 @@
             <% end %>
           <% end %>
         </ul>
-        <% if !@variant.nil? && @variant.stock < 10 && @variant.stock > 0 %>
+        <% if @variant.present? && @variant.stock < 10 && @variant.stock > 0 %>
           <p class="last-stocks">
             Plus que <%= pluralize(@variant.stock, "exemplaire") %> en stock
           </p>
@@ -51,12 +51,12 @@
     <% end %>
 
     <% if @product.category == 'chaussures' %>
-      <a class='show-size-modal' href='#sizes-modal'>Quelle taille est faite pour vous?</a>
+      <span class='show-size-modal'>Quelle taille est faite pour vous?</span>
     <% end %>
 
     <% if @product.variants.count == 1 && @product.variants[0].size > 0 %>
       <%= link_to 'Réserver en boutique', new_product_booking_path(@product.reference, @product.variants[0].size), class: 'button booking-btn' %>
-    <% elsif !@variant.nil? %>
+    <% elsif @variant.present? %>
       <%= link_to "Réserver en boutique", new_product_booking_path(@product.reference, @variant.size), class: "button booking-btn" %>
     <% else %>
       <div class="button booking-btn no-size-selected no-mobile">Réserver en boutique</div>

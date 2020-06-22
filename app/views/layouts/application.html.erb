@@ -2,23 +2,25 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag asset_path('tamaris_brand.png') %>
+
     <title>
       <% content_for(:site_page_title,
         (params[:sub_category].capitalize unless params[:sub_category].nil?) ||
         (params[:category].capitalize unless params[:category].nil?) ||
-        ("#{@product.model.capitalize} - #{@product.color}" if (!@product.nil? && @product.persisted?)) ||
+        ("#{@product.model.capitalize} - #{@product.color}" if (@product.present? && @product.persisted?)) ||
         "Bienvenue") %>
 
       <%= page_title(app_name: 'Boutique Tamaris - Saint-Paul-Lès-Dax',
         page_title_symbol: :site_page_title, separator: " | ", reverse: true) %>
     </title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= favicon_link_tag asset_path('tamaris_brand.png') %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
     <script src="https://kit.fontawesome.com/de5affd924.js" crossorigin="anonymous"></script>
   </head>
@@ -39,14 +41,7 @@
 
     </div>
 
-
     <%= render 'shared/footer' %>
 
-
-    <%= javascript_pack_tag 'application' %>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 </html>
