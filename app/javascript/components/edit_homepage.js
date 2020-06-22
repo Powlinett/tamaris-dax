@@ -8,6 +8,7 @@ const initChoicesSelectMenu = () => {
       searchPlaceholderValue: 'Rechercher un produit par référence ou nom',
       searchResultLimit: 6,
       noResultsText: 'Aucun produit correspondant',
+      itemSelectText: "Cliquer pour sélectionner"
     });
   };
 };
