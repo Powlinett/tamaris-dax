@@ -1,6 +1,9 @@
-import 'bootstrap'
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
+import 'bootstrap';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
-import '../components/slider'
-import '../components/edit_homepage'
+import { initClickableThumbnails } from '../components/slider';
+import { initChoicesSelectMenu } from '../components/edit_homepage';
+
+initClickableThumbnails();
+initChoicesSelectMenu();
