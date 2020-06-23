@@ -22,7 +22,7 @@
       <p class="color-choice"><%= @product.color %></p>
       <div class="other-colors">
         <% @other_colors.each do |product| %>
-          <%= link_to(product_path(product.reference), class: "variant-box #{product.color.split('/').join(' ')}") do %>
+          <%= link_to(product_path(product.reference), class: "variant-box #{color_for_class_name(product.color)}") do %>
             <div class="underline <%= "is-selected" if product.color == @product.color %>"></div>
           <% end %>
         <% end %>

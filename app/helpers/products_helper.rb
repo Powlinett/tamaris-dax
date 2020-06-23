@@ -19,6 +19,10 @@ module ProductsHelper
     Product.where(sub_category: sub_category).first.category
   end
 
+  def color_for_class_name(color)
+    color.gsub('/', ' ').gsub('-', ' ').gsub('.', ' ')
+  end
+
   def sub_categories_by_weight(category)
     if category == 'promotions'
       products = Product.where.not(former_price: 0.0)
