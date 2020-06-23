@@ -12,7 +12,7 @@
 
   .product-side-content {
     min-width: 100%;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     padding-bottom: 1.5rem;
     background-color: white;
   }
@@ -29,12 +29,12 @@
   }
 
   .product-show-description, .product-features, .long-description {
-    margin: 0;
+    padding: 0;
     width: 100%;
   }
 
   .product-show-description {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
   }
 
   .carousel-indicators {
