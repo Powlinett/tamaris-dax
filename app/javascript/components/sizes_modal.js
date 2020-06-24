@@ -40,5 +40,4 @@ const closeSizesModal = () => {
   };
 };
 
-export { showSizesModal };
-export { closeSizesModal };
+export { showSizesModal, closeSizesModal };
