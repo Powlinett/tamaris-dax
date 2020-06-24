@@ -37,7 +37,7 @@ const getNextPhoto = () => {
         };
       });
       getNextPhoto();
-    })
+    });
   };
 };
 

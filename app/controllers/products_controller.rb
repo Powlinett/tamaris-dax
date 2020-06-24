@@ -32,6 +32,10 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find_by(reference: params[:reference])
     @other_colors = Product.where('reference like ?', "%#{@product.common_ref}%")
+    respond_to do |format|
+      format.html
+      format.json { render json: @product }
+     end
   end
 
   def new
