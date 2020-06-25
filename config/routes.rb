@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'products/recherche', to: 'products#search', as: :products_search
   delete 'products', to: 'products#destroy', as: :products
+  get 'products/refresh_variant_partial/:reference/:size', to: 'products#refresh_variant_partial'
 
   resources :products, param: :reference, only: [:new, :show, :create] do
     resources :bookings, path: '/:size/bookings', only: [:new, :create, :update]

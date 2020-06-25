@@ -1,7 +1,8 @@
 import { initClickableThumbnails, getNextPhoto } from '../components/slider';
+import { refreshVariantPartial } from '../components/change_variants_partial';
 
 const getAnotherColor = () => {
-  const colorLinks = document.querySelectorAll('.variant-box.color');
+  const colorLinks = document.querySelectorAll('.variant-box-color');
 
   if (colorLinks) {
     colorLinks.forEach(colorLink => {
@@ -12,11 +13,12 @@ const getAnotherColor = () => {
         fetch(url, { headers: { accept: 'application/json' } })
           .then(response => response.json())
           .then(data => {
-            underlineNewColor(data['reference']);
-            renderNewThumbnails(data);
-            renderNewFullsizePhotos(data);
-            updateDescription(data['reference']);
-            changeUrlReference(data['reference']);
+            underlineNewColor(data['product']['reference']);
+            renderNewThumbnails(data['product']);
+            renderNewFullsizePhotos(data['product']);
+            updateDescription(data['product']['reference']);
+            refreshVariantPartial(data['product']['reference'], data['variants']);
+            changeUrlReference(data['product']['reference']);
           });
       });
     });
@@ -86,7 +88,7 @@ const renderNewFullsizePhotos = (productData) => {
 const updateDescription = (reference) => {
   const formerReference = document.querySelector('.feature-value');
 
-  formerReference.innerHTML = `${reference}`;
+  formerReference.innerText = `${reference}`;
 };
 
 const changeUrlReference = (reference) => {

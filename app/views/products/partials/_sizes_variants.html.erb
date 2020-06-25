@@ -1,0 +1,20 @@
+<% if product.variants.count > 1 %>
+  <div class="sizes-content">
+    <ul class="all-sizes">
+      <% product.variants.order(:size).each do |product_variant| %>
+        <%= link_to(product_size_path(product.reference, product_variant.size),
+        class: "variant-box variant-box-size #{"is-selected" if variant.present? && product_variant.size == variant.size}
+          #{' unavailable' if product_variant.stock <= 0}") do %>
+          <li class="size<%= " unavailable" if product_variant.stock <= 0 %>" data-size="<%= product_variant.size %>">
+            <%= product_variant.size %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+    <% if variant.present? && variant.stock < 10 && variant.stock > 0 %>
+      <p class="last-stocks">
+        Plus que <%= pluralize(variant.stock, "exemplaire") %> en stock
+      </p>
+    <% end %>
+  </div>
+<% end %>

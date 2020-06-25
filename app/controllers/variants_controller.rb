@@ -7,6 +7,7 @@ class VariantsController < ApplicationController
     @variant = @product.variants.find_by(size: params[:size])
     respond_to do |format|
       format.html { render file: 'products/show' }
+      format.json { render json: { product: @product, variant: @variant } }
     end
   end
 

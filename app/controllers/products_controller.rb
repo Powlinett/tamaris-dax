@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
     @other_colors = Product.where('reference like ?', "%#{@product.common_ref}%")
     respond_to do |format|
       format.html
-      format.json { render json: @product }
+      format.json { render json: { product: @product, variants: @product.variants } }
      end
   end
 
