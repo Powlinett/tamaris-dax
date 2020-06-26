@@ -92,7 +92,6 @@ const updateDescription = (reference) => {
 };
 
 const changeUrlReference = (reference) => {
-  const newreference = reference;
   const state = history.state
   const title = history.title
 

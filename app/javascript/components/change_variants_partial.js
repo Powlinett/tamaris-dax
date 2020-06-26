@@ -27,6 +27,7 @@ const refreshVariantPartial = (reference, variants) => {
     link.appendChild(listItem);
     allSizes.appendChild(link);
   });
+  getVariantStock();
 };
 
 const getVariantStock = () => {
@@ -40,29 +41,41 @@ const getVariantStock = () => {
       fetch(url, { headers: { accept: 'application/json' } })
         .then(response => response.json())
         .then(data => {
-          displayLastStocks(variantBox, data['variant']['size'])
+          displayLastStocks(variantBox, data['variant'])
+          updateUrl(data['product']['reference'], data['variant']['size']);
         });
     });
   });
 };
 
-const displayLastStocks = (variantBox, variantSize) => {
-  if (variantSize < 10) {
-    variantBox.addEventListener('click', (event) => {
-      event.preventDefault();
-      const sizesContent = document.querySelector('.sizes-content');
+const displayLastStocks = (variantBox, variant) => {
+  removeFormerLastStocks();
+  if (variant['stock'] < 10) {
+    const sizesContent = document.querySelector('.sizes-content');
 
-      const lastStocks = document.create('p');
-      lastStocks.setAttribute('class', 'last-stocks');
-      if (variantStock > 1) {
-        lastStock.innterText = `Plus que ${variantStock} exemplaires en stock`;
-      } else {
-        lastStocks.innerText = `Plus que ${variantStock} exemplaire en stock`;
-      };
-
-      sizesContent.insertAdjacentHTML('beforeend', lastStocks)
-    });
+    const lastStocks = document.createElement('p');
+    lastStocks.setAttribute('class', 'last-stocks');
+    if (variant['stock'] > 1) {
+      lastStocks.innerText = `Plus que ${variant['stock']} exemplaires en stock`;
+    } else {
+      lastStocks.innerText = `Plus que ${variant['stock']} exemplaire en stock`;
+    };
+    sizesContent.appendChild(lastStocks);
   };
 };
 
-export { refreshVariantPartial, getVariantStock };
+const removeFormerLastStocks = () => {
+  const lastStocks = document.querySelector('.last-stocks');
+  if (lastStocks) {
+    lastStocks.remove();
+  };
+};
+
+const updateUrl = (reference, variantSize) => {
+  const state = history.state
+  const title = history.title
+
+  window.history.replaceState(state, title, `${reference}/${variantSize}`);
+};
+
+export { refreshVariantPartial };
