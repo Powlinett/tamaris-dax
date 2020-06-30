@@ -95,7 +95,16 @@ const changeUrlReference = (reference) => {
   const state = history.state
   const title = history.title
 
-  window.history.replaceState(state, title, `${reference}`);
+  const path = window.location.pathname
+  const count = path.match(/\//g).length
+
+  if (count == 3) {
+    const size = path.slice(-2);
+    console.log(size);
+    window.history.replaceState(state, title, `${reference}/${size}`);
+  } else {
+    window.history.replaceState(state, title, `${reference}`);
+  }
 };
 
 export { getAnotherColor };
