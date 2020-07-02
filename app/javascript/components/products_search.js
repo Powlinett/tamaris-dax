@@ -1,4 +1,5 @@
-import LogoTamaris from '../../assets/images/logo-tamaris';
+import LogoTamaris from '../../assets/images/logo-tamaris.svg';
+import CircleLogo from '../../assets/images/tamaris_brand_circle.gif';
 
 const changeBrandLogoOnMobile = () => {
   const input = document.querySelector('#query');
@@ -6,12 +7,11 @@ const changeBrandLogoOnMobile = () => {
 
   if (window.innerWidth < 576 && input) {
     input.addEventListener('focus', () => {
-      logo.style.backgroundImage = "url('https://tamaris.com/on/demandware.static/Sites-FR-Site/-/default/dw70c61ea2/images/favicon-tamaris.ico')";
+      logo.style.backgroundImage = `url(${CircleLogo})`;
     });
 
     input.addEventListener('blur', () => {
-      console.log(LogoTamaris);
-      logo.style.backgroundImage = LogoTamaris;
+      logo.style.backgroundImage = `url(${LogoTamaris})`;
     });
   };
 };
