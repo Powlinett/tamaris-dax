@@ -26,10 +26,7 @@
       border-radius: 0;
       transition: $base-transition;
       width: max-content;
-      background-color: transparent;
-
-      &::placeholder {
-      }
+      background-color: white;
     }
   }
 

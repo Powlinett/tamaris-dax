@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+}
+
+@media screen and (max-width: 576px) {
+  .products-search-form input:focus {
+    width: 55vw;
+    margin-left: 0.5rem;
+  }
+}
