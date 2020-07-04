@@ -32,6 +32,7 @@ class BookingsController < ApplicationController
       variant: @variant
     )
     if @booker.save && @booking.save
+      BookingMailer.with(booking: @booking).registration.deliver_later
       redirect_to root_path, notice: 'Votre réservation a bien été effectuée, nous vous avons envoyé un e-mail de confirmation'
     else
       render :new
@@ -40,11 +41,13 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking.confirm
+    BookingMailer.with(booking: @booking).confirmation.deliver_later
     redirect
   end
 
   def cancel
     @booking.cancel
+    BookingMailer.with(booking: @booking).cancel.deliver_later
     redirect
   end
 
