@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=PT+Sans:wght@400;700&family=Nunito:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap">
+    <script src="https://kit.fontawesome.com/de5affd924.js" crossorigin="anonymous"></script>
+    <style>
+      p {
+        margin: 0.1rem;
+      }
+      @media screen and (max-width: 425px) {
+        .picture {
+          display: none;
+          width: 100% !important;
+        }
+        .content {
+          padding-right: 0 !important;
+          width: 100% !important;
+        }
+        .only-mobile {
+          display: block !important;
+        }
+        .footer-content {
+          display: block !important;
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+          padding-top: 1.5rem;
+        }
+        .rs {
+          padding-top: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="max-width: 600px; width: fit-content; font-family: 'Cabin', 'PT Sans', 'Nunito', 'Roboto', sans-serif;
+    color: rgba(0, 0, 0, 0.85); font-weight: 400; font-size: 0.95rem; margin: 0 auto; text-align: center;">
+      <table align="center" style="border-collapse: separate; border-spacing: 1rem 2rem;">
+
+        <thead>
+          <tr>
+            <td colspan="2" style="height: 260px; background-position: bottom;
+            background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url('<%= image_path('vitrine-horizontal.jpg') %>');
+            background-size: cover; background-repeat: no-repeat;">
+              <p style="color: white; font-size: 2rem; font-weight: bold; text-transform: uppercase;">
+                Votre réservation
+              </p>
+            </td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td colspan="2" class="content" style="padding-right: 1rem; text-align: justify;">
+              <p style="padding-bottom: 1.5rem;">
+                Bonjour <%= @booker.first_name.capitalize %>,
+              </p>
+              <p style="padding-bottom: 1.5rem;">
+                Malheureusement, nous n'avons plus le modèle que vous souhaitiez réserver, veuillez nous en excuser.
+              </p>
+              <p>
+                Si vous souhaitez connaître la date de son retour en boutique, nous vous invitons à nous joindre:
+                <ul style="padding-bottom: 2rem; text-align: left;">
+                  <li>
+                    par téléphone:
+                    <a href="tel:+33967066396" style="padding-left: 0.2rem; color: rgba(0, 0, 0, 0.85);">
+                      09 67 06 63 96
+                    </a>
+                  </li>
+                  <li>
+                    par mail:
+                    <a href="mailto:service-client@tamaris-saintpaullesdax.com" style="padding-left: 0.2rem; color: rgba(0, 0, 0, 0.85);">
+                      service-client@tamaris-saintpaullesdax.com
+                    </a>
+                  </li>
+                </ul>
+              </p>
+              <p style="padding-bottom: 2rem;">
+                Et bien-sûr, vous retrouvez toujours l'ensemble de notre collection sur
+                <br>
+                <a href="https://www.tamaris-saintpaullesdax.com" style="color: rgba(0, 0, 0, 0.85);">tamaris-saintpaullesdax.com</a>.
+              </p>
+              <p style="font-size: 0.8rem; color: rgba(0, 0, 0, 0.6); text-align: right; font-style: italic; padding-bottom: 2rem;">
+                Votre équipe Tamaris - Saint-Paul-lès-Dax
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <p style="text-transform: uppercase; font-weight: bold; font-size: 1.2rem;">
+                D'autres articles similaires ...
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <% other_products = Product.where(sub_category: @product.sub_category).sample(4) %>
+            <% other_products.each_with_index do |product, index| %>
+              <% if index.odd? %>
+                <td>
+                  <%= link_to(product_url(product.reference), target: '_blank', style: 'text-decoration: none') do %>
+                    <%= image_tag("#{product.photos_urls[1]}", width: '100%') %>
+                    <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
+                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85);">
+                        <%= product.model %> - <%= product.color %>
+                        <br>
+                        <strong><%= product.price %> €</strong>
+                      </p>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+          <tr>
+            <% other_products.each_with_index do |product, index| %>
+              <% if index.even? %>
+                <td>
+                  <%= link_to(product_url(product.reference), target: '_blank', style: 'text-decoration: none') do %>
+                    <%= image_tag("#{product.photos_urls[1]}", width: '100%') %>
+                    <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
+                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85); text-decoration: none;">
+                        <%= product.model %> - <%= product.color %>
+                        <br>
+                        <strong><%= product.price %> €</strong>
+                      </p>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <%= link_to(sub_category_url(@product.category, slug(@product.sub_category)), target: '_blank',
+              style: 'color: white; background-color: rgba(0, 0, 0, 0.85); padding: 1rem 1.5rem;
+              text-transform: uppercase; font-weight: bold; font-size: 1.1rem; text-decoration: none;') do %>
+                Voir plus de modèles
+              <% end %>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <p style="color: rgba(0, 0, 0, 0.6); padding-top: 1rem;">
+                Une remarque ou une question?
+                <a href="mailto:service-client@tamaris-saintpaullesdax.com" style="color: rgba(0, 0, 0, 0.6);">
+                  Contactez-nous
+                </a>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+
+        <tfoot style="background-color: rgba(0, 0, 0, 0.85); color: white; padding-top: 3rem;">
+          <tr>
+            <td colspan="2" align="center" style="padding-bottom: 1.5rem;">
+              <div style="font-size: 0.9rem;">
+                <div class="footer-content" style="display: table-cell; padding-right: 1rem;">
+                  <p style="padding-bottom: 0.4rem; text-decoration: underline;"><strong>Boutique</strong></p>
+                  <p>Boutique Tamaris</p>
+                  <p>Centre Commercial</p><p>"Le Grand Mail"</p>
+                  <p>Route de Mont de Marsan</p>
+                  <p>40990 Saint-Paul-lès-Dax</p>
+                  <a href="tel:+33967066396" style="color: white; text-decoration: none;">Tél.: 09 67 06 63 96</a>
+                </div>
+
+                <div class="footer-content" style="display: table-cell; padding-left: 1rem;">
+                  <p style="padding-bottom: 0.4rem; text-decoration: underline;"><strong>Horaires</strong></p>
+                  <p>Lundi: 9h30 - 20h00</p>
+                  <p>Mardi: 9h30 - 20h00</p>
+                  <p>Mercredi: 9h30 - 20h00</p>
+                  <p>Jeudi: 9h30 - 20h00</p>
+                  <p>Vendredi: 9h30 - 20h00</p>
+                  <p>Samedi: 9h30 - 20h00</p>
+                </div>
+              </div>
+              <div class="rs" style="padding-bottom: 0.75rem;">
+                <p style="margin: 0;">Suivez-nous sur</p>
+                <a href="https://www.facebook.com/tamaris.saintpaullesdax/" target="_blank" style="color: white; padding: 0 1rem; text-decoration :none; font-weight: bold;">
+                  <i class="fab fa-facebook" style="padding-right: 0.1rem;"></i>acebook
+                </a>
+                &
+                <a href="#" target="_blank" style="color: white; padding: 0 1rem; text-decoration :none; font-weight: bold;">
+                  <i class="fab fa-instagram" style="padding-right: 0.2rem;"></i>Instagram
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </body>
+</html>
