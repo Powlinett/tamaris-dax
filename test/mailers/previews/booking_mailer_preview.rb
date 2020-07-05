@@ -5,4 +5,14 @@ class BookingMailerPreview < ActionMailer::Preview
     booking = Booking.last
     BookingMailer.with(booking: booking).registration
   end
+
+  def confirmation
+    booking = Booking.where(actual_state: 'confirmed').last
+    BookingMailer.with(booking: booking).confirmation
+  end
+
+  def cancel
+    booking = Booking.where(actual_state: 'canceled').last
+    BookingMailer.with(booking: booking).cancel
+  end
 end

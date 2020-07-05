@@ -1,1 +1,54 @@
-confirmation.txt.erb
+Votre Réservation:
+
+
+<%= @product.model %> - <%= @product.color %>
+(Réf.: <%= @product.reference %>)
+Taille: <%= @variant.size %>
+
+
+Bonjour <%= @booker.first_name.capitalize %>,
+
+Votre réservation en boutique est confirmée.
+
+Nous la gardons de côté pour vous jusqu'au <%= @booking.ending_date.strftime("%d/%m/%Y") %> inclus.
+
+Lors de votre venue, il vous suffit de signaler votre nom et/ou votre adresse e-mail.
+
+Votre équipe Tamaris - Saint-Paul-lès-Dax
+
+
+------------------------------------------------------------------------
+
+Une remarque ou une question? service-client@tamaris-saintpaullesdax.com
+
+-------------------------------------------------------------------------
+
+BOUTIQUE
+
+Boutique Tamaris
+
+Centre Commercial
+
+"Le Grand Mail"
+
+Route de Mont de Marsan
+
+40990 Saint-Paul-lès-Dax
+
+Tél.: 09 67 06 63 96
+
+
+HORAIRES
+
+Lundi: 9h30 - 20h00
+
+Mardi: 9h30 - 20h00
+
+Mercredi: 9h30 - 20h00
+
+Jeudi: 9h30 - 20h00
+
+Vendredi: 9h30 - 20h00
+
+Samedi: 9h30 - 20h00
+

@@ -1,5 +1,165 @@
-<h1 class='handwritten-title'>Bonjour <%= @booker.first_name %>,</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=PT+Sans:wght@400;700&family=Nunito:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap">
+    <script src="https://kit.fontawesome.com/de5affd924.js" crossorigin="anonymous"></script>
+    <style>
+      p {
+        margin: 0.1rem;
+      }
+      @media screen and (max-width: 425px) {
+        .picture {
+          display: none;
+          width: 100% !important;
+        }
+        .content {
+          padding-right: 0 !important;
+          width: 100% !important;
+        }
+        .only-mobile {
+          display: block !important;
+        }
+        .footer-content {
+          display: block !important;
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+          padding-top: 1.5rem;
+        }
+        .rs {
+          padding-top: 1.5rem;
+        }
+      }
+    </style>
+  </head>
 
-<p>
-  Votre réservation sur Tamaris-Dax.com est confirmée!
-</p>
+  <body>
+    <div style="max-width: 600px; width: fit-content; font-family: 'Cabin', 'PT Sans', 'Nunito', 'Roboto', sans-serif;
+    color: rgba(0, 0, 0, 0.85); font-weight: 400; font-size: 0.95rem; margin: 0 auto; text-align: center;">
+      <table align="center" style="border-collapse: separate; border-spacing: 1rem 2rem;">
+
+        <thead>
+          <tr>
+            <td colspan="2" style="height: 260px; background-position: bottom;
+            background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url('<%= image_path('vitrine-horizontal.jpg') %>');
+            background-size: cover; background-repeat: no-repeat;">
+              <p style="color: white; font-size: 2.5rem; font-weight: bold;">Votre réservation</p>
+            </td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="picture" align="right" style="width: 50%; padding-left: 1rem; padding-top: 1rem;">
+              <div style="height: 40vh; width: 100%; background-image: url(<%= @product.photos_urls[1] %>);
+              background-position: center; background-size: contain;">
+                <%= image_tag('test.png', height: '50%', style: 'padding-right: 2rem;') %>
+              </div>
+              <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
+                <p style="margin: 0; font-size: 0.9rem;">
+                  <%= @product.model %> - <%= @product.color %>
+                  <br>
+                  Taille: <%= @variant.size %>
+                </p>
+              </div>
+            </td>
+
+            <td class="content" style="width: 50%; padding-right: 1rem; text-align: justify;">
+              <p style="padding-bottom: 1.5rem;">
+                Bonjour <%= @booker.first_name.capitalize %>,
+              </p>
+              <p style="padding-bottom: 1.5rem;">
+                Votre réservation en boutique est confirmée.
+              </p>
+              <p style="padding-bottom: 1.5rem;">
+                Nous la gardons de côté pour vous jusqu'au
+                <strong>
+                  <%= @booking.ending_date.strftime("%d/%m/%Y") %> inclus
+                </strong>.
+              </p>
+              <p style="padding-bottom: 2rem;">
+                Lors de votre venue, il vous suffit de signaler votre nom et/ou votre adresse e-mail.
+              </p>
+              <p style="font-size: 0.8rem; color: rgba(0, 0, 0, 0.6); text-align: right; font-style: italic; padding-bottom: 2rem;">
+                Votre équipe Tamaris - Saint-Paul-lès-Dax
+              </p>
+
+              <div class="only-mobile" style="display: none; width: 100%; padding-top: 1rem;">
+                <div style="height: 40vh; width: 70%; background-image: url(<%= @product.photos_urls[1] %>);
+                background-position: center; background-size: contain; text-align: right; margin: 0 auto;">
+                  <%= image_tag('test.png', height: '50%', style: 'padding-right: 2rem;') %>
+                </div>
+                <div style="text-align: left; width: 70%; padding-bottom: 1rem; padding-top: 0.2rem; margin: 0 auto;">
+                  <p style="margin: 0; font-size: 0.9rem;">
+                    <%= @product.model %> - <%= @product.color %>
+                    <br>
+                    Taille: <%= @variant.size %>
+                  </p>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <p style="display: inline-block; font-size: 1.1rem; font-weight: bold; vertical-align: middle; padding-right: 0.2rem; padding-top: 0.4rem;">
+                À bientôt chez
+              </p>
+              <%= image_tag('logo-tamaris.svg', height: '18px', style: "display: inline-block; vertical-align: middle;") %>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <p style="color: rgba(0, 0, 0, 0.6);">
+                Une remarque ou une question?
+                <a href="mailto:service-client@tamaris-saintpaullesdax.com" style="color: rgba(0, 0, 0, 0.6);">
+                  Contactez-nous
+                </a>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+
+        <tfoot style="background-color: rgba(0, 0, 0, 0.85); color: white; padding-top: 3rem;">
+          <tr>
+            <td colspan="2" align="center" style="padding-bottom: 1.5rem;">
+              <div style="font-size: 0.9rem;">
+                <div class="footer-content" style="display: table-cell; padding-right: 1rem;">
+                  <p style="padding-bottom: 0.4rem; text-decoration: underline;"><strong>Boutique</strong></p>
+                  <p>Boutique Tamaris</p>
+                  <p>Centre Commercial</p><p>"Le Grand Mail"</p>
+                  <p>Route de Mont de Marsan</p>
+                  <p>40990 Saint-Paul-lès-Dax</p>
+                  <p>Tél.: 09 67 06 63 96</p>
+                </div>
+
+                <div class="footer-content" style="display: table-cell; padding-left: 1rem;">
+                  <p style="padding-bottom: 0.4rem; text-decoration: underline;"><strong>Horaires</strong></p>
+                  <p>Lundi: 9h30 - 20h00</p>
+                  <p>Mardi: 9h30 - 20h00</p>
+                  <p>Mercredi: 9h30 - 20h00</p>
+                  <p>Jeudi: 9h30 - 20h00</p>
+                  <p>Vendredi: 9h30 - 20h00</p>
+                  <p>Samedi: 9h30 - 20h00</p>
+                </div>
+              </div>
+              <div class="rs" style="padding-bottom: 0.75rem;">
+                <p style="margin: 0;">Suivez-nous sur</p>
+                <a href="https://www.facebook.com/tamaris.saintpaullesdax/" target="_blank" style="color: white; padding: 0 1rem; text-decoration :none; font-weight: bold;">
+                  <i class="fab fa-facebook" style="padding-right: 0.1rem;"></i>acebook
+                </a>
+                &
+                <a href="#" target="_blank" style="color: white; padding: 0 1rem; text-decoration :none; font-weight: bold;">
+                  <i class="fab fa-instagram" style="padding-right: 0.2rem;"></i>Instagram
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </body>
+</html>
