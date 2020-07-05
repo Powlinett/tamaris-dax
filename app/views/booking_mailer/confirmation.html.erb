@@ -72,14 +72,16 @@
                 Bonjour <%= @booker.first_name.capitalize %>,
               </p>
               <p style="padding-bottom: 1.5rem;">
-                Nous venons d'enregistrer votre réservation en ligne.
+                Votre réservation en boutique est confirmée.
               </p>
               <p style="padding-bottom: 1.5rem;">
-                Vous recevrez un mail de confirmation dès que le modèle aura été mis de côté pour vous,
-                généralement en quelques heures.
+                Nous la gardons de côté pour vous jusqu'au
+                <strong>
+                  <%= @booking.ending_date.strftime("%d/%m/%Y") %> inclus
+                </strong>.
               </p>
               <p style="padding-bottom: 2rem;">
-                Nous vous remercions pour votre confiance.
+                Lors de votre venue, il vous suffit de signaler votre nom et/ou votre adresse e-mail.
               </p>
               <p style="font-size: 0.8rem; color: rgba(0, 0, 0, 0.6); text-align: right; font-style: italic; padding-bottom: 2rem;">
                 Votre équipe Tamaris - Saint-Paul-lès-Dax

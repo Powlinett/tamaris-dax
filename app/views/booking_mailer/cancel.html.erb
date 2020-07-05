@@ -53,66 +53,99 @@
 
         <tbody>
           <tr>
-            <td class="picture" align="right" style="width: 50%; padding-left: 1rem; padding-top: 1rem;">
-              <div style="height: 35vh; width: 100%; background-image: url(<%= @product.photos_urls[1] %>);
-              background-position: center; background-size: contain;">
-                <%= image_tag('test.png', height: '50%', style: 'padding-right: 2rem;') %>
-              </div>
-              <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
-                <p style="margin: 0; font-size: 0.9rem;">
-                  <%= @product.model %> - <%= @product.color %>
-                  <br>
-                  Taille: <%= @variant.size %>
-                </p>
-              </div>
-            </td>
-
-            <td class="content" style="width: 50%; padding-right: 1rem; text-align: justify;">
+            <td colspan="2" class="content" style="padding-right: 1rem; text-align: justify;">
               <p style="padding-bottom: 1.5rem;">
                 Bonjour <%= @booker.first_name.capitalize %>,
               </p>
               <p style="padding-bottom: 1.5rem;">
-                Nous venons d'enregistrer votre réservation en ligne.
+                Malheureusement, nous n'avons plus le modèle que vous souhaitiez réserver, veuillez nous en excuser.
               </p>
-              <p style="padding-bottom: 1.5rem;">
-                Vous recevrez un mail de confirmation dès que le modèle aura été mis de côté pour vous,
-                généralement en quelques heures.
+              <p>
+                Si vous souhaitez connaître la date de son retour en boutique, nous vous invitons à nous joindre:
+                <ul style="padding-bottom: 2rem; text-align: left;">
+                  <li>
+                    par téléphone:
+                    <a href="tel:+33967066396" style="padding-left: 0.2rem; color: rgba(0, 0, 0, 0.85);">
+                      09 67 06 63 96
+                    </a>
+                  </li>
+                  <li>
+                    par mail:
+                    <a href="mailto:service-client@tamaris-saintpaullesdax.com" style="padding-left: 0.2rem; color: rgba(0, 0, 0, 0.85);">
+                      service-client@tamaris-saintpaullesdax.com
+                    </a>
+                  </li>
+                </ul>
               </p>
               <p style="padding-bottom: 2rem;">
-                Nous vous remercions pour votre confiance.
+                Et bien-sûr, vous retrouvez toujours l'ensemble de notre collection sur
+                <br>
+                <a href="https://www.tamaris-saintpaullesdax.com" style="color: rgba(0, 0, 0, 0.85);">tamaris-saintpaullesdax.com</a>.
               </p>
               <p style="font-size: 0.8rem; color: rgba(0, 0, 0, 0.6); text-align: right; font-style: italic; padding-bottom: 2rem;">
                 Votre équipe Tamaris - Saint-Paul-lès-Dax
               </p>
-
-              <div class="only-mobile" style="display: none; width: 100%; padding-top: 1rem;">
-                <div style="height: 40vh; width: 70%; background-image: url(<%= @product.photos_urls[1] %>);
-                background-position: center; background-size: contain; text-align: right; margin: 0 auto;">
-                  <%= image_tag('test.png', height: '50%', style: 'padding-right: 2rem;') %>
-                </div>
-                <div style="text-align: left; width: 70%; padding-bottom: 1rem; padding-top: 0.2rem; margin: 0 auto;">
-                  <p style="margin: 0; font-size: 0.9rem;">
-                    <%= @product.model %> - <%= @product.color %>
-                    <br>
-                    Taille: <%= @variant.size %>
-                  </p>
-                </div>
-              </div>
             </td>
           </tr>
 
           <tr>
             <td colspan="2">
-              <p style="display: inline-block; font-size: 1.1rem; font-weight: bold; vertical-align: middle; padding-right: 0.2rem; padding-top: 0.4rem;">
-                À bientôt chez
+              <p style="text-transform: uppercase; font-weight: bold; font-size: 1.2rem;">
+                D'autres articles similaires ...
               </p>
-              <%= image_tag('logo-tamaris.svg', height: '18px', style: "display: inline-block; vertical-align: middle;") %>
+            </td>
+          </tr>
+          <tr>
+            <% other_products = Product.where(sub_category: @product.sub_category).sample(4) %>
+            <% other_products.each_with_index do |product, index| %>
+              <% if index.odd? %>
+                <td>
+                  <%= link_to(product_url(product.reference), target: '_blank', style: 'text-decoration: none') do %>
+                    <%= image_tag("#{product.photos_urls[1]}", width: '100%') %>
+                    <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
+                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85);">
+                        <%= product.model %> - <%= product.color %>
+                        <br>
+                        <strong><%= product.price %> €</strong>
+                      </p>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+          <tr>
+            <% other_products.each_with_index do |product, index| %>
+              <% if index.even? %>
+                <td>
+                  <%= link_to(product_url(product.reference), target: '_blank', style: 'text-decoration: none') do %>
+                    <%= image_tag("#{product.photos_urls[1]}", width: '100%') %>
+                    <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
+                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85); text-decoration: none;">
+                        <%= product.model %> - <%= product.color %>
+                        <br>
+                        <strong><%= product.price %> €</strong>
+                      </p>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <%= link_to(sub_category_url(@product.category, slug(@product.sub_category)), target: '_blank',
+              style: 'color: white; background-color: rgba(0, 0, 0, 0.85); padding: 1rem 1.5rem;
+              text-transform: uppercase; font-weight: bold; font-size: 1.1rem; text-decoration: none;') do %>
+                Voir plus de modèles
+              <% end %>
             </td>
           </tr>
 
           <tr>
             <td colspan="2">
-              <p style="color: rgba(0, 0, 0, 0.6);">
+              <p style="color: rgba(0, 0, 0, 0.6); padding-top: 1rem;">
                 Une remarque ou une question?
                 <a href="mailto:service-client@tamaris-saintpaullesdax.com" style="color: rgba(0, 0, 0, 0.6);">
                   Contactez-nous

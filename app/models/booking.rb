@@ -9,8 +9,6 @@ class Booking < ApplicationRecord
   validates :ending_date, presence: true
   validates :actual_state, presence: true
 
-  after_create :send_record_email
-
   include PgSearch::Model
   pg_search_scope :search_in_bookings,
                   associated_against: {
@@ -70,9 +68,5 @@ class Booking < ApplicationRecord
     self.actual_state = 'pending'
     self.starting_date = Date.today if self.starting_date.nil?
     self.ending_date = starting_date + 3
-  end
-
-  def send_record_email
-    BookingMailer.with(booking: self).registration.deliver_later
   end
 end

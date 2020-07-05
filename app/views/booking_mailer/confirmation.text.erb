@@ -7,12 +7,11 @@ Taille: <%= @variant.size %>
 
 Bonjour <%= @booker.first_name.capitalize %>,
 
-Nous venons d'enregistrer votre réservation en ligne.
+Votre réservation en boutique est confirmée.
 
-Vous recevrez un mail de confirmation dès que le modèle aura été mis de côté pour vous,
-généralement en quelques heures.
+Nous la gardons de côté pour vous jusqu'au <%= @booking.ending_date.strftime("%d/%m/%Y") %> inclus.
 
-Nous vous remercions pour votre confiance.
+Lors de votre venue, il vous suffit de signaler votre nom et/ou votre adresse e-mail.
 
 Votre équipe Tamaris - Saint-Paul-lès-Dax
 
