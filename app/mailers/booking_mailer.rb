@@ -22,6 +22,10 @@ class BookingMailer < ApplicationMailer
   end
 
   def cancel
+    @other_products = Product.where(sub_category: @product.sub_category).where.not(id: @product.id)
+    if @other_products.count >= 4
+      @other_products = @other_products.sample(4)
+    end
     mail(to: @booker.email, subject: "Votre réservation n'a pas pu être confirmée") do |format|
       format.html { render :cancel }
       format.text { render :cancel }

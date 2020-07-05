@@ -7,7 +7,11 @@ Taille: <%= @variant.size %>
 
 Bonjour <%= @booker.first_name.capitalize %>,
 
-Malheureusement, nous n'avons plus le modèle que vous souhaitiez réserver, veuillez nous en excuser.
+Le modèle que vous souhaitiez réserver:
+
+<%= @product.model %> - <%= @product.color %> (<%= @variant.size %>)
+
+n'est plus disponible, veuillez nous en excuser.
 
 Si vous souhaitez connaître la date de retour en boutique, nous vous invitons à nous joindre:
   - par téléphone: 09 67 06 63 96
