@@ -34,7 +34,7 @@
     </style>
   </head>
 
-  <body>
+  <body style="background-color: white;">
     <div style="max-width: 600px; width: fit-content; font-family: 'Cabin', 'PT Sans', 'Nunito', 'Roboto', sans-serif;
     color: rgba(0, 0, 0, 0.85); font-weight: 400; font-size: 0.95rem; margin: 0 auto; text-align: center;">
       <table align="center" style="border-collapse: separate; border-spacing: 1rem 2rem;">
@@ -43,7 +43,7 @@
           <tr>
             <td colspan="2" style="height: 260px; background-position: bottom;
             background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url('<%= image_path('vitrine-horizontal.jpg') %>');
-            background-size: cover; background-repeat: no-repeat;">
+            background-size: cover; background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.85);">
               <p style="color: white; font-size: 2rem; font-weight: bold; text-transform: uppercase;">
                 Votre réservation
               </p>
@@ -58,7 +58,9 @@
                 Bonjour <%= @booker.first_name.capitalize %>,
               </p>
               <p style="padding-bottom: 1.5rem;">
-                Malheureusement, nous n'avons plus le modèle que vous souhaitiez réserver, veuillez nous en excuser.
+                Le modèle que vous souhaitiez réserver,
+                <strong><%= @product.model %> - <%= @product.color %> (<%= @variant.size %>)</strong>,
+                n'est plus disponible, veuillez nous en excuser.
               </p>
               <p>
                 Si vous souhaitez connaître la date de son retour en boutique, nous vous invitons à nous joindre:
@@ -96,16 +98,16 @@
             </td>
           </tr>
           <tr>
-            <% other_products = Product.where(sub_category: @product.sub_category).sample(4) %>
-            <% other_products.each_with_index do |product, index| %>
+            <% @other_products.each_with_index do |product, index| %>
               <% if index.odd? %>
                 <td>
                   <%= link_to(product_url(product.reference), target: '_blank', style: 'text-decoration: none') do %>
                     <%= image_tag("#{product.photos_urls[1]}", width: '100%') %>
-                    <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
-                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85);">
+                    <div style="text-align: left; padding-top: 0.2rem;">
+                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85); max-height: 1.1rem; overflow: hidden;">
                         <%= product.model %> - <%= product.color %>
-                        <br>
+                      </p>
+                      <p style="color: rgba(0, 0, 0, 0.85);">
                         <strong><%= product.price %> €</strong>
                       </p>
                     </div>
@@ -115,15 +117,16 @@
             <% end %>
           </tr>
           <tr>
-            <% other_products.each_with_index do |product, index| %>
+            <% @other_products.each_with_index do |product, index| %>
               <% if index.even? %>
                 <td>
                   <%= link_to(product_url(product.reference), target: '_blank', style: 'text-decoration: none') do %>
                     <%= image_tag("#{product.photos_urls[1]}", width: '100%') %>
                     <div style="text-align: left; padding-bottom: 1rem; padding-top: 0.2rem;">
-                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85); text-decoration: none;">
+                      <p style="margin: 0; font-size: 0.9rem; color: rgba(0, 0, 0, 0.85); max-height: 1.1rem; overflow: hidden;">
                         <%= product.model %> - <%= product.color %>
-                        <br>
+                      </p>
+                      <p style="color: rgba(0, 0, 0, 0.85);">
                         <strong><%= product.price %> €</strong>
                       </p>
                     </div>
@@ -181,11 +184,11 @@
               <div class="rs" style="padding-bottom: 0.75rem;">
                 <p style="margin: 0;">Suivez-nous sur</p>
                 <a href="https://www.facebook.com/tamaris.saintpaullesdax/" target="_blank" style="color: white; padding: 0 1rem; text-decoration :none; font-weight: bold;">
-                  <i class="fab fa-facebook" style="padding-right: 0.1rem;"></i>acebook
+                  Facebook
                 </a>
                 &
                 <a href="#" target="_blank" style="color: white; padding: 0 1rem; text-decoration :none; font-weight: bold;">
-                  <i class="fab fa-instagram" style="padding-right: 0.2rem;"></i>Instagram
+                  Instagram
                 </a>
               </div>
             </td>
