@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   require 'open-uri'
+  require 'csv'
   include ProductsHelper
   include Scraper
 
@@ -72,6 +73,19 @@ class ProductsController < ApplicationController
       paginate_products
       render :index
     end
+  end
+
+  def csv_import
+    csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
+    csv_file = params[:csv][:file].path
+
+    CSV.foreach(csv_file, csv_options) do |row|
+      product = Product.find_by(reference: "#{row[1]}-#{row[2]}")
+      @variant = product.variants.find_by(size: row[3])
+      stock_to_remove = row[0].to_i
+      remove_stock(stock_to_remove)
+    end
+    redirect_to root_path, notice: 'Les stocks ont été modifiés'
   end
 
   private

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'products/recherche', to: 'products#search', as: :products_search
   delete 'products', to: 'products#destroy', as: :products
+  post 'csv_import', to: 'products#csv_import', as: :csv_import
 
   resources :products, param: :reference, only: [:new, :show, :create] do
     resources :bookings, path: '/:size/bookings', only: [:new, :create, :update]

@@ -1,16 +1,36 @@
-<div class="change-stock-forms">
-  <div class="form-container">
-
-    <%= simple_form_for @product, url: products_path, method: 'post' do |f| %>
-      <%= f.input :reference %>
-      <%= f.simple_fields_for :variants, @variant do |f| %>
-        <%= f.input :size %>
-        <%= f.input :stock %>
-        <% end %>
-      <%= f.submit 'Créer le produit', class: 'button simple-form-btn' %>
-    <% end %>
-
+<div class="change-stock-forms-container">
+  <div class="form-title">
+    Charger un fichier de caisse
   </div>
+  <div class="change-stock-forms csv-form">
+    <div class="form-container">
+      <%= simple_form_for :csv, multipart: true, url: csv_import_path, method: 'post' do |f| %>
+        <%= f.input :file, label: 'Fichier', as: :file %>
+        <%= f.submit 'Importer le fichier', class: 'button simple-form-btn' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-  <%= render 'products/partials/delete_form' %>
+<div class="form-separator">
+  OU
+</div>
+
+<div class="change-stock-forms-container">
+  <div class="form-title">
+    Gérer les stocks vous-même
+  </div>
+  <div class="change-stock-forms">
+    <div class="form-container">
+      <%= simple_form_for @product, url: products_path, method: 'post' do |f| %>
+        <%= f.input :reference, label: 'Référence' %>
+        <%= f.simple_fields_for :variants, @variant do |f| %>
+          <%= f.input :size, label: 'Taille' %>
+          <%= f.input :stock %>
+          <% end %>
+        <%= f.submit 'Créer le produit', class: 'button simple-form-btn' %>
+      <% end %>
+    </div>
+    <%= render 'products/partials/delete_form' %>
+  </div>
 </div>
