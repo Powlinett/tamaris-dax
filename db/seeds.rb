@@ -77,7 +77,7 @@ end
 def get_product_color_and_photos(reference)
   xml = get_reference_xml(reference)
 
-  @color = xml.search('.product-variations .label').text.strip
+  @color = xml.search('.product-variations .label').text.gsub('#', '').strip
   @photos = xml.search('.primary-image').map do |element|
     el = element.attr('src') || el = element.attr('data-src')
     el.split('?').first
@@ -94,7 +94,7 @@ def product_data(reference)
     reference: reference,
     category: @category.downcase,
     sub_category: @sub_category.downcase,
-    model: @model.downcase,
+    model: @model,
     color: @color.downcase,
     price: @price.to_f,
     sizes_range: @sizes_array,

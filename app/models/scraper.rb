@@ -42,7 +42,7 @@ module Scraper
   def get_product_color_and_photos(reference)
     xml = get_reference_xml(reference)
 
-    @color = xml.search('.product-variations .label').text.strip
+    @color = xml.search('.product-variations .label').text.gsub('#', '').strip
     @photos = xml.search('.primary-image').map do |element|
       el = element.attr('src') || el = element.attr('data-src')
       el.split('?').first
