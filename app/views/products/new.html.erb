@@ -14,3 +14,8 @@
 
   <%= render 'products/partials/delete_form' %>
 </div>
+
+<%= simple_form_for :csv, multipart: true, url: csv_import_path, method: 'post' do |f| %>
+  <%= f.input :file, as: :file %>
+  <%= f.submit 'Importer le fichier' %>
+<% end %>
