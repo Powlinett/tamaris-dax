@@ -38,7 +38,7 @@ class Product < ApplicationRecord
 
   def color_ref
     ref_array = reference.split('-')
-    color = ref_array[-1]
+    ref_array[-1]
   end
 
   def update_variant(params)
