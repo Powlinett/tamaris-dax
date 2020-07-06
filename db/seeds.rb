@@ -4,8 +4,8 @@ require 'open-uri'
 HomePage.destroy_all
 Booking.destroy_all
 Booker.destroy_all
-# Product.destroy_all
-Product.where(category: 'chaussures').destroy_all
+Product.destroy_all
+# Product.where(category: 'chaussures').destroy_all
 
 # User.create(
 #   email: 'test@test.com',

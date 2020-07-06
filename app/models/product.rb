@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   validates :color, presence: true
   validates :sizes_range, presence: true
 
-  after_save :set_variants
+  after_create :set_variants
 
   include PgSearch::Model
   pg_search_scope :search_in_products,
