@@ -1,9 +1,9 @@
 <div class="form-container">
 
   <%= simple_form_for :product, url: products_path, method: 'delete', html: { id: 'delete_product' } do |f| %>
-    <%= f.input :reference %>
+    <%= f.input :reference, label: 'Référence' %>
     <%= f.simple_fields_for :variants, @variant do |f| %>
-      <%= f.input :size %>
+      <%= f.input :size, label: 'Taille' %>
       <%= f.input :stock %>
       <% end %>
     <%= f.submit 'Supprimer le produit', class: 'button simple-form-btn' %>

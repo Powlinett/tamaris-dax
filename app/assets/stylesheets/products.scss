@@ -39,4 +39,32 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 2rem;
+  // margin: 2rem auto;
+}
+
+.products-new .form-title {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.change-stock-forms.csv-form {
+  grid-template-columns: repeat(1, 1fr);
+
+  .form-container {
+    width: 100%;
+  }
+}
+
+.products-new .change-stock-forms-container {
+  border: 1px solid $super-light-grey;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.form-separator {
+  text-align: center;
+  font-size: 1.1rem;
+  font-family: 'Cabin', sans-serif;
+  font-weight: bold;
 }
