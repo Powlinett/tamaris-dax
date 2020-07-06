@@ -4,8 +4,8 @@ require 'open-uri'
 HomePage.destroy_all
 Booking.destroy_all
 Booker.destroy_all
-Variant.destroy_all
-Product.destroy_all
+# Product.destroy_all
+Product.where(category: 'chaussures').destroy_all
 
 # User.create(
 #   email: 'test@test.com',
@@ -24,7 +24,12 @@ def scrap_all_products(category)
 
     reference = reference.text.strip
     product = product_data(reference)
+    puts "Product is valid" if product.valid?
     product.save unless product.nil?
+    unless product.persisted?
+      puts "Product not saved"
+      puts product.inspect
+    end
     get_other_colors(reference, html)
   end
 end
@@ -33,20 +38,32 @@ def get_reference_page(reference)
   url = "https://tamaris.com/fr-FR/recherche/?q=#{reference}&lang=fr_FR"
   html = Nokogiri::HTML.parse(open(url))
 
-  if html.title.include?(reference)
+  if html.title.include?(common_ref(reference))
     scrap_product_page(html)
-  elsif html.search('.tile-link').last != nil
-    new_url = html.search('.tile-link').last.attribute('href').value
-    html = Nokogiri::HTML.parse(open(new_url))
-    scrap_product_page(html)
+    get_product_color_and_photos(reference)
+  else
+    retrieve_reference_page(reference)
   end
+end
+
+def retrieve_reference_page(reference)
+  xml = get_reference_xml(reference)
+  new_url = xml.at("meta[itemprop='url']").attr('content')
+
+  html = Nokogiri::HTML.parse(open(new_url))
+  scrap_product_page(html)
+  get_product_color_and_photos(reference)
+end
+
+def get_reference_xml(reference)
+  url = "https://tamaris.com/on/demandware.store/Sites-FR-Site/fr_FR/Product-Variation?pid=#{common_ref(reference)}&format=ajax&dwvar_#{common_ref(reference)}_color=#{color_ref(reference)}"
+  Nokogiri::HTML.parse(open(url))
 end
 
 def scrap_product_page(html)
   @category = html.search('.breadcrumb-element')[1].text.strip
   @sub_category = html.search('.breadcrumb-element')[2].text.strip
-  @model = html.title.split('-')[0].strip[/\D*/]
-  @color = html.search('div.label').text.gsub('#', '').strip
+  @model = html.title.split('-')[0].strip[/\D*/].strip
   @price = html.search('.price-sales').first['data-sale-price']
   @former_price = html.search('.price-standard').text.split(' ')[0]
   unless @former_price.nil?
@@ -55,9 +72,15 @@ def scrap_product_page(html)
   @sizes_array = html.search('.selection').map { |s| s.text.strip.to_i }
   @raw_features = html.search('.info-table').text
   @raw_description = html.search('.long-description').text.split("\n")
+end
 
-  @photos = html.search('.productthumbnail').map do |element|
-    element.attribute('src').value.split('?')[0]
+def get_product_color_and_photos(reference)
+  xml = get_reference_xml(reference)
+
+  @color = xml.search('.product-variations .label').text.strip
+  @photos = xml.search('.primary-image').map do |element|
+    el = element.attr('src') || el = element.attr('data-src')
+    el.split('?').first
   end
 end
 
@@ -71,7 +94,7 @@ def product_data(reference)
     reference: reference,
     category: @category.downcase,
     sub_category: @sub_category.downcase,
-    model: @model,
+    model: @model.downcase,
     color: @color.downcase,
     price: @price.to_f,
     sizes_range: @sizes_array,
@@ -100,21 +123,26 @@ def product_features(features_text)
 end
 
 def get_other_colors(reference, html)
-  model_ref = model_reference(reference)
-  colors = html.search('masked-link.swatchanchor').map do |element|
-    element.attribute('data-color').value
+  xml = get_reference_xml(reference)
+  colors = xml.search('masked-link.swatchanchor').map do |color|
+    color.attr('data-color')
   end
   colors.each do |color|
-    color_ref = model_ref + "-#{color}"
-    product = product_data(color_ref)
+    color_reference = common_ref(reference) + "-#{color}"
+    product = product_data(color_reference)
     product.save unless product.nil?
   end
 end
 
-def model_reference(reference)
+def common_ref(reference)
   ref_array = reference.split('-')
-  ref_array = ref_array.reject { |x| ref_array.index(x) == ref_array.index(ref_array.last) }
+  ref_array = ref_array[0...-1]
   ref_array.join('-')
+end
+
+def color_ref(reference)
+  ref_array = reference.split('-')
+  ref_array = ref_array[-1]
 end
 
 def update_variants
@@ -156,9 +184,7 @@ scrap_all_products('chaussures')
 scrap_all_products('accessoires')
 
 update_variants
-
 create_bookers
-
 create_bookings
 
 HomePage.create(product: Product.last)

@@ -3,20 +3,32 @@ module Scraper
     url = "https://tamaris.com/fr-FR/recherche/?q=#{reference}&lang=fr_FR"
     html = Nokogiri::HTML.parse(open(url))
 
-    if html.title.include?(reference)
+    if html.title.include?(common_ref(reference))
       scrap_product_page(html)
-    elsif html.search('.tile-link').last != nil
-      new_url = html.search('.tile-link').last.attribute('href').value
-      html = Nokogiri::HTML.parse(open(new_url))
-      scrap_product_page(html)
+      get_product_color_and_photos(reference)
+    else
+      retrieve_reference_page(reference)
     end
+  end
+
+  def get_reference_xml(reference)
+    url = "https://tamaris.com/on/demandware.store/Sites-FR-Site/fr_FR/Product-Variation?pid=#{common_ref(reference)}&format=ajax&dwvar_#{common_ref(reference)}_color=#{color_ref(reference)}"
+    Nokogiri::HTML.parse(open(url))
+  end
+
+  def retrieve_reference_page(reference)
+    xml = get_reference_xml(reference)
+    new_url = xml.at("meta[itemprop='url']").attr('content')
+
+    html = Nokogiri::HTML.parse(open(new_url))
+    scrap_product_page(html)
+    get_product_color_and_photos(reference)
   end
 
   def scrap_product_page(html)
     @category = html.search('.breadcrumb-element')[1].text.strip
     @sub_category = html.search('.breadcrumb-element')[2].text.strip
     @model = html.title.split('-')[0].strip[/\D*/].strip
-    @color = html.search('div.label').text.gsub('#', '').strip
     @price = html.search('.price-sales').first['data-sale-price']
     @former_price = html.search('.price-standard').text.split(' ')[0]
     unless @former_price.nil?
@@ -25,10 +37,27 @@ module Scraper
     @sizes_array = html.search('.selection').map { |s| s.text.strip.to_i }
     @raw_features = html.search('.info-table').text
     @raw_description = html.search('.long-description').text.split("\n")
+  end
 
-    @photos = html.search('.productthumbnail').map do |element|
-      element.attribute('src').value.split('?')[0]
+  def get_product_color_and_photos(reference)
+    xml = get_reference_xml(reference)
+
+    @color = xml.search('.product-variations .label').text.strip
+    @photos = xml.search('.primary-image').map do |element|
+      el = element.attr('src') || el = element.attr('data-src')
+      el.split('?').first
     end
+  end
+
+  def common_ref(reference)
+    ref_array = reference.split('-')
+    ref_array = ref_array[0...-1]
+    ref_array.join('-')
+  end
+
+  def color_ref(reference)
+    ref_array = reference.split('-')
+    ref_array = ref_array[-1]
   end
 
   def product_data(reference)

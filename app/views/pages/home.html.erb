@@ -1,5 +1,13 @@
+<% if @product.photos_urls.count == 1 %>
+  <% product_photo = resize(@product.photos_urls.first, 1100, 1200) %>
+<% elsif @product.photos_urls.empty? %>
+  <% product_photo = image_path('trying-shoes.jpg') %>
+<% else %>
+  <% product_photo = resize(@product.photos_urls.second, 1100, 1200) %>
+<% end %>
+
 <a href="<%= sub_category_path(@product.category, @product.sub_category) %>"
-  class="home-page-banner" style="background-image: url(<%= resize(@product.photos_urls.second, 1100, 1200) %>)">
+  class="home-page-banner" style="background-image: url(<%= product_photo %>)">
   <div class="banner-content">
     <h1 class="category-banner"><%= @product.sub_category %></h1>
     <div class="button banner-btn">Acheter maintenant</div>
