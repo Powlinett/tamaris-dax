@@ -32,8 +32,13 @@ class Product < ApplicationRecord
 
   def common_ref
     ref_array = reference.split('-')
-    ref_array = ref_array.reject { |x| ref_array.index(x) == ref_array.index(ref_array.last) }
+    ref_array = ref_array[0...-1]
     ref_array.join('-')
+  end
+
+  def color_ref
+    ref_array = reference.split('-')
+    color = ref_array[-1]
   end
 
   def update_variant(params)
