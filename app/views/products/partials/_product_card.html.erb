@@ -6,15 +6,15 @@
     <% elsif product.photos_urls.any? %>
       <div class="product-card-content" style="background-image: url(<%= resize(product.photos_urls[1], 450, 600) %>)">
     <% else %>
-      <div class="product-card-content" style="background-image: url(<%= image_path 'trying-shoes.jpg' %>)">
+      <div class="product-card-content" style="background-image: url(<%= image_path 'photo-indisponible.jpg' %>)">
     <% end %>
 
         <div class="product-image">
           <% if product.photos_urls.any? %>
             <%= image_tag resize(product.photos_urls.first, 450, 600), alt: full_model(product), class: 'first-picture' %>
           <% else %>
-            <%= image_tag 'trying-shoes.jpg', alt: "Pas d'image disponible" %>
-          <% end %>
+<!--             <%= image_tag 'photo-indisponible.jpg', alt: "Pas d'image disponible" %>
+ -->          <% end %>
         </div>
         <div class="quick-booking no-mobile">
           <% if product.variants.count == 1 %>
