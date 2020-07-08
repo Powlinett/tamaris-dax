@@ -1,66 +1,196 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+  <html>
+    <head>
+      <title>Page introuvable - Boutique Tamaris Saint-Paul-Lès-Dax</title>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <script src="https://kit.fontawesome.com/de5affd924.js" crossorigin="anonymous"></script>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=PT+Sans:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;700;800&display=swap');
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+        html, body {
+          min-height: 100vh;
+          font-size: 1.2rem;
+          display: flex;
+          margin: 0;
+          flex-direction: column;
+          justify-content: center;
+          background-color: white;
+          font-family: 'Nunito', 'Cabin', 'PT Sans', 'Roboto', 'Gill Sans Nova',
+            -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+            Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        }
+        p {
+          margin: 0;
+        }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+        .navbar.navbar-expand-md.navbar-light.navbar-lewagon {
+          position: sticky;
+          top: 0;
+          z-index: 4;
+          box-shadow: 0px 7px 9px -9px rgba(0,0,0,0.2);
+          background: rgba(250, 250, 250, 0.97);
+          padding: 1.3rem 1rem;
+          display: flex;
+          justify-content: center;
+        }
+        .navbar-lewagon .navbar-brand {
+          background-image: url('images/logo-tamaris.svg');
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          height: 1.2rem;
+          width: 9rem;
+          vertical-align: unset;
+          z-index: 4;
+          padding: 0;
+          margin: 0;
+        }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+        .error-page {
+          flex-grow: 1;
+          text-align: center;
+          max-width: 50vw;
+          margin: 3rem auto;
+          justify-content: center;
+        }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
+        .error-message, .redirection-message {
+          font-weight: 700;
+          letter-spacing: 0.02rem;
+          transform: scale(1, 0.93);
+          color: #32302e;
+        }
+        .redirection-message a {
+          color: #32302e;
+          text-decoration: underline;
+        }
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
-</html>
+        .rounded-image {
+          border-radius: 50%;
+          width: 20vw;
+          height: 20vw;
+          background-image: url('images/escarpins.gif');
+          background-position: center;
+          background-size: cover;
+          margin: 2rem auto;
+        }
+
+        .products-search-form {
+          display: inline-flex;
+          align-items: center;
+        }
+        .products-search-form input {
+          border: 0;
+          border-top: 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+          box-shadow: none;
+          border-radius: 0;
+          padding: 0;
+          width: max-content;
+          height: 2.2rem;
+        }
+        .products-search-form input::placeholder {
+          font-size: 0.75rem;
+          color: rgba(0, 0, 0, 0.6);
+          font-weight: 400 !important;
+        }
+        .products-search-form input:focus {
+          outline: none;
+          box-shadow: none;
+          border-color: transparent;
+        }
+        .products-search-form label {
+          margin: 0;
+          display: flex;
+          background-image: url('images/search.svg');
+          background-size: cover;
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+
+        .footer {
+          background: white;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 8rem;
+          padding: 0 4rem;
+          color: #32302e;
+          bottom: 0;
+          box-shadow: 0px 9px 9px 7px rgba(0, 0, 0, 0.2);
+          margin-top: 1rem;
+        }
+        .footer-links {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .footer-links a, .footers-link p {
+          color: #32302e;
+          text-decoration: none;
+          display: flex;
+          font-weight: bold;
+        }
+        .footer-links .follow, .social-medias p {
+          transform: scale(0.95,1);
+          font-weight: bold;
+        }
+        .social-medias {
+          display: flex;
+          align-items: baseline;
+        }
+        .mx-1 {
+          margin-right: 0.5rem;
+          margin-left: 0.5rem;
+        }
+
+      </style>
+    </head>
+
+    <body>
+      <div class="navbar navbar-expand-md navbar-light navbar-lewagon">
+        <a href="/" class="navbar-brand"></a>
+      </div>
+
+      <div class="error-page">
+        <div class="error-message">
+          Oh flûte...
+          <br>
+          Notre site est momentanément indisponible!
+        </div>
+        <div class="rounded-image"></div>
+        <div class="redirection-message">
+          Nous vous invitons à réessayer dans quelques instants.
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-links">
+          <p class="follow">Suivez nous sur</p>
+          <div class="social-medias">
+            <p>
+              <a href="https://www.facebook.com/tamaris.saintpaullesdax/" target="_blank">
+                <i class="fab fa-facebook"></i><div class="no-mobile">acebook</div>
+              </a>
+            </p>
+            <p class="mx-1">
+              &
+            </p>
+            <p>
+              <a href="#" target="_blank">
+                <i class="fab fa-instagram"></i><div class="no-mobile">Instagram</div>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+  </html>
