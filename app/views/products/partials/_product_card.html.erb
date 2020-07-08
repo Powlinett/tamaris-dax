@@ -12,9 +12,7 @@
         <div class="product-image">
           <% if product.photos_urls.any? %>
             <%= image_tag resize(product.photos_urls.first, 450, 600), alt: full_model(product), class: 'first-picture' %>
-          <% else %>
-<!--             <%= image_tag 'photo-indisponible.jpg', alt: "Pas d'image disponible" %>
- -->          <% end %>
+          <% end %>
         </div>
         <div class="quick-booking no-mobile">
           <% if product.variants.count == 1 %>
