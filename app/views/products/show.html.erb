@@ -76,20 +76,24 @@
         <%= @product.reference %>
       </p>
     </li>
-    <% @product.product_feature.features_hash.each do |feature, value| %>
-      <li class="feature">
-        <p class="feature-name">
-          <%= feature %>:
-        </p>
-        <p class="feature-value">
-          <%= value %>
-        </p>
-      </li>
+    <% unless @product.product_feature.nil? %>
+      <% @product.product_feature.features_hash.each do |feature, value| %>
+        <li class="feature">
+          <p class="feature-name">
+            <%= feature %>:
+          </p>
+          <p class="feature-value">
+            <%= value %>
+          </p>
+        </li>
+      <% end %>
     <% end %>
   </ul>
-  <p class="long-description">
-    <%= @product.product_feature.description %>
-  </p>
+  <% unless @product.product_feature.nil? %>
+    <p class="long-description">
+      <%= @product.product_feature.description %>
+    </p>
+  <% end %>
 </div>
 
 <%= render 'products/partials/sizes_modal' %>

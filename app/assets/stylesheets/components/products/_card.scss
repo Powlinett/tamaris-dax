@@ -51,7 +51,8 @@ li.product-card-wrapper {
 .product-card-content {
   position: relative;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   height: 100%;
 
   .quick-booking {
